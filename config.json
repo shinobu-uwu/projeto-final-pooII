@@ -1,0 +1,40 @@
+{
+    "tamanho_janela": [
+        1280,
+        720
+    ],
+    "fonte_titulo": [
+        "Helvetica",
+        24
+    ],
+    "tamanho_titulo": [
+        500,
+        100
+    ],
+    "fonte_botoes": [
+        "Helvetica",
+        12
+    ],
+    "tamanho_botoes": [
+        300,
+        35
+    ],
+    "tema": {
+        "BACKGROUND": "#A8C1B4",
+        "TEXT": "black",
+        "INPUT": "#DDE0DE",
+        "SCROLL": "#E3E3E3",
+        "TEXT_INPUT": "black",
+        "BUTTON": [
+            "white",
+            "#6D9F85"
+        ],
+        "PROGRESS": [
+            "#283b5b",
+            "#f0f3f7"
+        ],
+        "BORDER": 1,
+        "SLIDER_DEPTH": 0,
+        "PROGRESS_DEPTH": 0
+    }
+}

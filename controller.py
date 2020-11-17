@@ -15,7 +15,9 @@ class Controller:
                 break
 
             elif event == "jogar":
+                self.__window.fechar()
                 self.selecionar_fase()
+                self.__window.mostra_view()
 
     def selecionar_fase(self):
         window = SelecaoFasesView()
@@ -23,4 +25,8 @@ class Controller:
         while True:
             event, values = window.le_eventos()
             if event == sg.WIN_CLOSED:
+                break
+
+            elif event == "voltar":
+                window.fechar()
                 break

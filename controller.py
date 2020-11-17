@@ -1,5 +1,6 @@
 import PySimpleGUIQt as sg
 from main_menu import MainMenu
+from selecao_fases_view import SelecaoFasesView
 
 
 class Controller:
@@ -14,4 +15,12 @@ class Controller:
                 break
 
             elif event == "jogar":
-                print("funciona")
+                self.selecionar_fase()
+
+    def selecionar_fase(self):
+        window = SelecaoFasesView()
+        window.mostra_view()
+        while True:
+            event, values = window.le_eventos()
+            if event == sg.WIN_CLOSED:
+                break

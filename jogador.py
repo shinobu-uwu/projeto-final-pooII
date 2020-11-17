@@ -1,7 +1,8 @@
 from inventario import Inventario
+from interface_jogador import IJogador
 
 
-class Jogador:
+class Jogador(IJogador):
     def __init__(self):
         self.__morto = False
         self.__inventario = Inventario()

@@ -26,3 +26,28 @@ class IJogador(ABC):
     @property
     def morto(self):
         pass
+
+    @abstractmethod
+    @property
+    def inventario(self):
+        pass
+
+    @abstractmethod
+    @property
+    def velocidade(self):
+        pass
+
+    @abstractmethod
+    @property
+    def item_equipado(self):
+        pass
+
+    @abstractmethod
+    @property
+    def posicao(self):
+        pass
+
+    @abstractmethod
+    @morto.setter
+    def morto(self, morto):
+        pass

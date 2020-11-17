@@ -12,6 +12,10 @@ class ConfigLoader:
         return tuple(self.__config["tamanho_janela"])
 
     @property
+    def posicao_janela(self):
+        return tuple(self.__config["posicao_janela"])
+
+    @property
     def fonte_titulo(self):
         return tuple(self.__config["fonte_titulo"])
 

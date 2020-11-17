@@ -1,7 +1,8 @@
 import PySimpleGUIQt as sg
-from main_menu import MainMenu
-from selecao_fases_view import SelecaoFasesView
-from ajuda_view import AjudaView
+import sys
+from src.views.main_menu_view import MainMenu
+from src.views.selecao_fases_view import SelecaoFasesView
+from src.views.ajuda_view import AjudaView
 
 
 class Controller:

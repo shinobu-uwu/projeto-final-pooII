@@ -1,5 +1,8 @@
-from config_loader import ConfigLoader
+from src.config.config_loader import ConfigLoader
+from PIL import Image, ImageQt
 import PySimpleGUIQt as sg
+import os
+import io
 
 
 class SelecaoFasesView:
@@ -8,10 +11,12 @@ class SelecaoFasesView:
         self.__config_loader = ConfigLoader()
 
     def mostra_view(self):
+        nome_imagens = os.listdir(f"{os.getcwd()}/assets/thumbnail fases")
+        imagens = [self.__get_image_data(f"{os.getcwd()}/assets/thumbnail fases/{nome}") for nome in nome_imagens]
         self.__layout = [
                             [sg.Text("Seleção de fases", size = self.__config_loader.tamanho_titulo, font = self.__config_loader.fonte_titulo, justification = "center")],
                             #Imagens de preview das fases
-                            [sg.Image("fase1.jpg"), sg.Text(), sg.Image("fase1.jpg"), sg.Text(), sg.Image("fase1.jpg")],
+                            [sg.Image(data = imagens[0]), sg.Text(), sg.Image(data = imagens[0]), sg.Text(), sg.Image("fase1.jpg")],
                             [sg.Text()],#Preenchimento
                             [sg.Image("fase1.jpg"), sg.Text(), sg.Image("fase1.jpg"), sg.Text(), sg.Image("fase1.jpg")],
                             [sg.Text()],
@@ -25,3 +30,12 @@ class SelecaoFasesView:
 
     def fechar(self):
         self.__window.close()
+
+    def __get_image_data(self, f, maxsize = (320, 180)):
+        #Converte imagem de outro diretório para um formato que o pysimplegui leia
+        img = Image.open(f)
+        img.thumbnail(maxsize)
+        bio = io.BytesIO()
+        img.save(bio, format = "JPEG")
+        del img
+        return bio.getvalue()

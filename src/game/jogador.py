@@ -1,5 +1,5 @@
-from inventario import Inventario
-from interface_jogador import IJogador
+from src.game.inventario import Inventario
+from src.game.interfaces.interface_jogador import IJogador
 
 
 class Jogador(IJogador):

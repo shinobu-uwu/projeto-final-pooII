@@ -1,7 +1,6 @@
-from config_loader import ConfigLoader
 import json
 import PySimpleGUIQt as sg
-
+from src.config.config_loader import ConfigLoader
 
 
 class MainMenu:

@@ -10,7 +10,7 @@ class IItem(ABC):
     def usar(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def material(self):
         pass

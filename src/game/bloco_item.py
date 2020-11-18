@@ -1,4 +1,4 @@
-from src.game.item import Item
+from item import Item
 
 
 class BlocoItem(Item):

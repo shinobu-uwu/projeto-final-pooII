@@ -1,7 +1,6 @@
 import json
 
 
-#Carrega as configurações necessárias para menus
 class ConfigLoader:
     def __init__(self, config = "config.json"):
         with open(config, 'r') as f:

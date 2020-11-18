@@ -5,7 +5,7 @@ class Pa(ABC,Ferramenta):
 
     @abstractmethod
     def __init__(self):
-        super().__init__()
+        pass
 
     @abstractmethod
     def usar(self):

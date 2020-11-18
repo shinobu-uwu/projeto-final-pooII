@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from game.item import Item
+from item import Item
 
 class Ferramenta(ABC, Item):
     @abstractmethod
@@ -18,6 +18,8 @@ class Ferramenta(ABC, Item):
         return self.__forca
 
     @abstractmethod
-    @property
+    @forca.setter
     def forca(self, forca):
         self.__forca = forca
+
+        

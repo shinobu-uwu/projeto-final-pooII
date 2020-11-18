@@ -3,5 +3,6 @@
     "fonte_titulo": ["Helvetica", 24],
     "tamanho_titulo": [500, 100],
     "fonte_botoes": ["Helvetica", 12],
-    "tamanho_botoes": [300, 35]
+    "tamanho_botoes": [300, 35],
+    "element_justification": "center"
 }

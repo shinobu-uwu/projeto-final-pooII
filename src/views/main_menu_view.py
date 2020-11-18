@@ -19,7 +19,7 @@ class MainMenu:
                             [sg.Button("Sair", size = self.__config_loader.tamanho_botoes, font = self.__config_loader.fonte_botoes, key = "sair")]
                         ]
 
-        self.__window = sg.Window("TBD", self.__layout, element_justification = "center", size = self.__config_loader.tamanho_janela)
+        self.__window = sg.Window("TBD", self.__layout, element_justification = self.__config_loader.element_justification, size = self.__config_loader.tamanho_janela)
         return self.__layout
 
     def le_eventos(self):

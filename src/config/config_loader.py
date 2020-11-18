@@ -29,3 +29,7 @@ class ConfigLoader:
     @property
     def tamanho_botoes(self):
         return tuple(self.__config["tamanho_botoes"])
+
+    @property
+    def element_justification(self):
+        return self.__config["element_justification"]

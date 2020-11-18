@@ -13,7 +13,7 @@ class AjudaView:
                             [sg.Text()],#A ser definido
                             [sg.Button("Voltar", size = self.__config_loader.tamanho_botoes, font = self.__config_loader.fonte_botoes, key = "voltar")]
                         ]
-        self.__window = sg.Window("Ajuda", self.__layout, element_justification = "center", size = self.__config_loader.tamanho_janela)
+        self.__window = sg.Window("Ajuda", self.__layout, element_justification = self.__config_loader.element_justification, size = self.__config_loader.tamanho_janela)
 
     def le_eventos(self):
         return self.__window.read()

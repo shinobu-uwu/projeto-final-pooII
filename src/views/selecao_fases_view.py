@@ -22,7 +22,7 @@ class SelecaoFasesView:
                             [sg.Text()],
                             [sg.Button("Voltar", key = "voltar", size = self.__config_loader.tamanho_botoes, font = self.__config_loader.fonte_botoes)]
                         ]
-        self.__window = sg.Window("Seleção de fases", self.__layout, element_justification = "center", size = self.__config_loader.tamanho_janela)
+        self.__window = sg.Window("Seleção de fases", self.__layout, element_justification = self.__config_loader.element_justification, size = self.__config_loader.tamanho_janela)
         return self.__layout
 
     def le_eventos(self):

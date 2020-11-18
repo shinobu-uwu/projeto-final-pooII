@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.game.interfaces.interface_item import IItem
+from interfaces.interface_item import IItem
 
 
 class Item(IItem):

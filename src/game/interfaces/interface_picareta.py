@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
-from game.ferramenta import Ferramenta
+from src.game.ferramenta import ferramenta 
 
-class Picareta(ABC,Ferramenta):
+class Picareta(Ferramenta, ABC):
 
     @abstractmethod
     def __init__(self):
-        super().__init__()
+        pass
 
     @abstractmethod
     def usar(self):

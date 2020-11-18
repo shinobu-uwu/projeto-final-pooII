@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from game.ferramenta import Ferramenta
 
-class Machado(ABC,Ferramenta):
+class Machado(Ferramenta,ABC):
 
     @abstractmethod
     def __init__(self):

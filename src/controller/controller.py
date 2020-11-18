@@ -1,5 +1,4 @@
 import PySimpleGUIQt as sg
-import sys
 from src.views.main_menu_view import MainMenu
 from src.views.selecao_fases_view import SelecaoFasesView
 from src.views.ajuda_view import AjudaView

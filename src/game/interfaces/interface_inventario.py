@@ -6,17 +6,17 @@ class IInventario(ABC):
     def __init__(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def itens(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def capacidade(self):
         pass
 
-    @abstractmethod
     @itens.setter
+    @abstractmethod
     def itens(self, itens):
         pass

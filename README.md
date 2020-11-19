@@ -11,11 +11,6 @@ cd na pasta clonada
 ``` sh
 cd projeto-final-pooII
 ```
-Fazer o script executável
-
-``` sh
-chmod +x executar.sg
-```
 Executar
 
 ``` sh

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from inventario import Inventario
 
 class IJogador(ABC):
     @abstractmethod
@@ -22,32 +21,32 @@ class IJogador(ABC):
     def mudar_item(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def morto(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def inventario(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def velocidade(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def item_equipado(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def posicao(self):
         pass
 
-    @abstractmethod
     @morto.setter
+    @abstractmethod
     def morto(self, morto):
         pass

@@ -1,4 +1,6 @@
-from interfaces.interface_bloco_cenario import Iblococenario
+from src.game.interfaces.interface_bloco_cenario import Iblococenario
+
+
 class Bloco_cenario(Iblococenario):
     def __init__(self, material:int,dano:float,posicao:list):
         self.__material= material
@@ -19,5 +21,3 @@ class Bloco_cenario(Iblococenario):
     @property
     def posicao(self):
         return self.__posicao
-
-    

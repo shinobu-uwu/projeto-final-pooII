@@ -1,4 +1,6 @@
-from interfaces.interface_cenario import Icenario
+from src.game.interfaces.interface_cenario import Icenario
+
+
 class Cenario(Icenario):
     def __init__(self, fundo, mapa,final:float):
         self.__fundo= fundo

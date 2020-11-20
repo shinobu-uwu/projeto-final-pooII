@@ -2,6 +2,7 @@
 
 ## Executar
 **Utilize apenas o script para iniciar o jogo**
+
 Clonar o repositório
 
 ```sh

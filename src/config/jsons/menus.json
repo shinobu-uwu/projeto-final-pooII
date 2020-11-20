@@ -1,8 +1,8 @@
 {
     "tamanho_janela": [1280, 720],
     "fonte_titulo": ["Helvetica", 24],
-    "tamanho_titulo": [500, 100],
+    "tamanho_titulo": [50, 1],
     "fonte_botoes": ["Helvetica", 12],
-    "tamanho_botoes": [300, 35],
+    "tamanho_botoes": [50, 2],
     "element_justification": "center"
 }

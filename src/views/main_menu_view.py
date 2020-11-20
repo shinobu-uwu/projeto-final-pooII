@@ -1,12 +1,14 @@
 import json
-import PySimpleGUIQt as sg
+import PySimpleGUI as sg
 from src.config.menu_config_loader import MenuConfigLoader
 
 
 class MainMenuView:
     def __init__(self):
         self.__config_loader = MenuConfigLoader()
+        self.__tema = sg.theme("DarkAmber")
         self.__layout = []
+        #self.__window = sg.Window("TBD")
 
     def mostra_view(self):
         self.__layout = [
@@ -27,3 +29,6 @@ class MainMenuView:
 
     def fechar(self):
         self.__window.close()
+
+    def maximiza(self):
+        self.__window.Maximize()

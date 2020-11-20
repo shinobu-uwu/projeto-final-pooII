@@ -1,4 +1,4 @@
-import PySimpleGUIQt as sg
+import PySimpleGUI as sg
 from src.config.menu_config_loader import MenuConfigLoader
 
 

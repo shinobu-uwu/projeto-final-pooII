@@ -1,6 +1,6 @@
 from src.config.menu_config_loader import MenuConfigLoader
 from PIL import Image
-import PySimpleGUIQt as sg
+import PySimpleGUI as sg
 import os
 import io
 
@@ -36,6 +36,6 @@ class SelecaoFasesView:
         img = Image.open(f)
         img.thumbnail(maxsize)
         bio = io.BytesIO()
-        img.save(bio, format = "JPEG")
+        img.save(bio, format = "PNG")
         del img
         return bio.getvalue()

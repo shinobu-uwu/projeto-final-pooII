@@ -1,11 +1,11 @@
 import json
 import PySimpleGUIQt as sg
-from src.config.config_loader import ConfigLoader
+from src.config.menu_config_loader import MenuConfigLoader
 
 
-class MainMenu:
+class MainMenuView:
     def __init__(self):
-        self.__config_loader = ConfigLoader()
+        self.__config_loader = MenuConfigLoader()
         self.__layout = []
 
     def mostra_view(self):

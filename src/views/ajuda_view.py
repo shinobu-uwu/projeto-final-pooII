@@ -1,11 +1,11 @@
 import PySimpleGUIQt as sg
-from src.config.config_loader import ConfigLoader
+from src.config.menu_config_loader import MenuConfigLoader
 
 
 class AjudaView:
     def __init__(self):
         self.__layout = []
-        self.__config_loader = ConfigLoader()
+        self.__config_loader = MenuConfigLoader()
 
     def mostra_view(self):
         self.__layout = [

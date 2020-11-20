@@ -1,12 +1,12 @@
 import PySimpleGUIQt as sg
-from src.views.main_menu_view import MainMenu
+from src.views.main_menu_view import MainMenuView
 from src.views.selecao_fases_view import SelecaoFasesView
 from src.views.ajuda_view import AjudaView
 
 
 class Controller:
     def __init__(self):
-        self.__window = MainMenu()
+        self.__window = MainMenuView()
 
     def comeca(self):
         self.__window.mostra_view()

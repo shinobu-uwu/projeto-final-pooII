@@ -1,4 +1,4 @@
-from src.config.config_loader import ConfigLoader
+from src.config.menu_config_loader import MenuConfigLoader
 from PIL import Image
 import PySimpleGUIQt as sg
 import os
@@ -8,7 +8,7 @@ import io
 class SelecaoFasesView:
     def __init__(self):
         self.__layout = []
-        self.__config_loader = ConfigLoader()
+        self.__config_loader = MenuConfigLoader()
 
     def mostra_view(self):
         nome_imagens = sorted(os.listdir(f"{os.getcwd()}/assets/thumbnail fases"))

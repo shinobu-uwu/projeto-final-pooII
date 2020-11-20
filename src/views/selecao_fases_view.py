@@ -8,21 +8,21 @@ import io
 class SelecaoFasesView:
     def __init__(self):
         self.__layout = []
-        self.__config_loader = MenuConfigLoader()
+        self.__config = MenuConfigLoader()
 
     def mostra_view(self):
-        nome_imagens = sorted(os.listdir(self.__config_loader.diretorio_assets))
-        imagens = [self.__get_image_data(f"{self.__config_loader.diretorio_assets}/{nome}") for nome in nome_imagens]
+        nome_imagens = sorted(os.listdir(self.__config.diretorio_assets))
+        imagens = [self.__get_image_data(f"{self.__config.diretorio_assets}/{nome}") for nome in nome_imagens]
         self.__layout = [
-                            [sg.Text("Seleção de fases", size = self.__config_loader.tamanho_titulo, font = self.__config_loader.fonte_titulo, justification = "center")],
+                            [sg.Text("Seleção de fases", size = self.__config.tamanho_titulo, font = self.__config.fonte_titulo, justification = "center")],
                             #Imagens de preview das fases
                             [sg.Image(data = imagens[i]) for i in range(3)],
                             [sg.Text()],#Preenchimento
                             [sg.Image(data = imagens[j]) for j in range(3, 6)],
                             [sg.Text()],
-                            [sg.Button("Voltar", key = "voltar", size = self.__config_loader.tamanho_botoes, font = self.__config_loader.fonte_botoes)]
+                            [sg.Button("Voltar", key = "voltar", size = self.__config.tamanho_botoes, font = self.__config.fonte_botoes)]
                         ]
-        self.__window = sg.Window("Seleção de fases", self.__layout, element_justification = self.__config_loader.element_justification, size = self.__config_loader.tamanho_janela)
+        self.__window = sg.Window("Seleção de fases", self.__layout, element_justification = self.__config.element_justification, size = self.__config.tamanho_janela)
         return self.__layout
 
     def le_eventos(self):

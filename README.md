@@ -14,5 +14,5 @@ cd projeto-final-pooII
 Executar
 
 ``` sh
-./executar.sh
+python app.py
 ```

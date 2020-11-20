@@ -1,18 +1,20 @@
+import os
 import json
+from src.config.interface_config_loader import IConfigLoader
 
 
-class ConfigLoader:
-    def __init__(self, config = "config.json"):
-        with open(config, 'r') as f:
+class MenuConfigLoader():
+    def __init__(self):
+        self.__path = f"{os.path.abspath(os.path.dirname(__file__))}/jsons/menus.json"
+        self.__load()
+
+    def __load(self):
+        with open(self.__path, 'r') as f:
             self.__config = json.load(f)
 
     @property
     def tamanho_janela(self):
         return tuple(self.__config["tamanho_janela"])
-
-    @property
-    def posicao_janela(self):
-        return tuple(self.__config["posicao_janela"])
 
     @property
     def fonte_titulo(self):

@@ -11,8 +11,8 @@ class SelecaoFasesView:
         self.__config_loader = MenuConfigLoader()
 
     def mostra_view(self):
-        nome_imagens = sorted(os.listdir(f"{os.getcwd()}/assets/thumbnail fases"))
-        imagens = [self.__get_image_data(f"{os.getcwd()}/assets/thumbnail fases/{nome}") for nome in nome_imagens]
+        nome_imagens = sorted(os.listdir(self.__config_loader.diretorio_assets))
+        imagens = [self.__get_image_data(f"{self.__config_loader.diretorio_assets}/{nome}") for nome in nome_imagens]
         self.__layout = [
                             [sg.Text("Seleção de fases", size = self.__config_loader.tamanho_titulo, font = self.__config_loader.fonte_titulo, justification = "center")],
                             #Imagens de preview das fases

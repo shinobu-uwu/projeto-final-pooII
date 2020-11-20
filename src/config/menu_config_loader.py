@@ -35,3 +35,7 @@ class MenuConfigLoader():
     @property
     def element_justification(self):
         return self.__config["element_justification"]
+
+    @property
+    def diretorio_assets(self):
+        return f"{os.path.abspath(os.getenv('PYTHONPATH'))}/assets/thumbnail fases"

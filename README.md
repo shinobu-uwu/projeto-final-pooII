@@ -1,6 +1,7 @@
 # Projeto Final POOII (nome a definir)
 
 ## Executar
+**Utilize apenas o script para iniciar o jogo**
 Clonar o repositório
 
 ```sh

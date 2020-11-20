@@ -8,7 +8,6 @@ class MainMenuView:
         self.__config_loader = MenuConfigLoader()
         self.__tema = sg.theme("DarkAmber")
         self.__layout = []
-        #self.__window = sg.Window("TBD")
 
     def mostra_view(self):
         self.__layout = [

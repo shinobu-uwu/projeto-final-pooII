@@ -1,5 +1,6 @@
 from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
+from src.game.interface.interface_item import IItem
 
 
 class Jogador(IJogador):
@@ -21,6 +22,10 @@ class Jogador(IJogador):
 
     def mudar_item(self, tecla):
         pass
+
+    def adicionar_item(self, item):
+        if isinstance(item, IItem):
+            self.__inventario.itens.append(item)
 
     @property
     def morto(self):

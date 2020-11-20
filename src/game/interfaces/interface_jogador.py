@@ -28,11 +28,6 @@ class IJogador(ABC):
 
     @property
     @abstractmethod
-    def inventario(self):
-        pass
-
-    @property
-    @abstractmethod
     def velocidade(self):
         pass
 

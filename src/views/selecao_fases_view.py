@@ -16,9 +16,9 @@ class SelecaoFasesView:
         self.__layout = [
                             [sg.Text("Seleção de fases", size = self.__config_loader.tamanho_titulo, font = self.__config_loader.fonte_titulo, justification = "center")],
                             #Imagens de preview das fases
-                            [sg.Image(data = imagens[i], key = f"fase{i}") for i in range(3)],
+                            [sg.Image(data = imagens[i]) for i in range(3)],
                             [sg.Text()],#Preenchimento
-                            [sg.Image(data = imagens[j], key = f"fase{j}") for j in range(3, 6)],
+                            [sg.Image(data = imagens[j]) for j in range(3, 6)],
                             [sg.Text()],
                             [sg.Button("Voltar", key = "voltar", size = self.__config_loader.tamanho_botoes, font = self.__config_loader.fonte_botoes)]
                         ]

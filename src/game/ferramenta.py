@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from src.game.item import Item
+from item import Item
 
 class Ferramenta(Item, ABC):
     @abstractmethod
@@ -9,15 +9,13 @@ class Ferramenta(Item, ABC):
 
     @abstractmethod
     def usar(self):
-        #TODO - Lógica de Implementação do Método Usar
+        #Cada subclasse irá sobrescrever esse método
         pass
 
     @property
-    @abstractmethod
     def forca(self):
         return self.__forca
 
     @forca.setter
-    @abstractmethod
     def forca(self, forca):
         self.__forca = forca

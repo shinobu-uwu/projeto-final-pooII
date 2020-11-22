@@ -38,7 +38,7 @@ class MenuConfigLoader():
 
     @property
     def diretorio_assets(self):
-        return f"{os.path.abspath(os.getenv('PYTHONPATH'))}/assets/thumbnail fases"
+        return f"{os.path.abspath(os.getenv('PYTHONPATH'))}/assets/"
 
     @property
     def tema(self):

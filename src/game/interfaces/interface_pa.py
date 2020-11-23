@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from src.game.ferramenta import Ferramenta
 
-class IPa(Ferramenta, ABC):
+class IPa(ABC):
 
     @abstractmethod
     def __init__(self):

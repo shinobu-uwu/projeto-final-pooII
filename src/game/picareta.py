@@ -1,10 +1,10 @@
 from src.game.interfaces.interface_picareta import IPicareta
 from src.game.ferramenta import Ferramenta
 
-class Machado(Ferramenta, IPicareta):
-    def __init__(self):
-        super().__init__(forca,velocidade_ataque)
+class Picareta(Ferramenta, IPicareta):
+    def __init__(self, forca, velocidade_ataque):
+        super().__init__(forca, velocidade_ataque)
 
     def usar(self):
-        #TODO - Implementação da Lógica de Usar
+        print("Picaretada!")
         pass

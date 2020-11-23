@@ -1,33 +1,62 @@
-import json
-import PySimpleGUI as sg
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt5.Qt import QFont, QPixmap
+from PyQt5.QtCore import Qt, pyqtSignal
+import sys
+
 from src.config.menu_config_loader import MenuConfigLoader
 
 
-class MainMenuView:
+class MainMenuView(QWidget):
+    sinal_jogar = pyqtSignal()
+    sinal_ajuda = pyqtSignal()
+
     def __init__(self):
+        super().__init__()
         self.__config = MenuConfigLoader()
-        self.__tema = sg.theme("DarkAmber")
-        self.__layout = []
+        self.__layout = QVBoxLayout()
+        self.mostra_view()
 
     def mostra_view(self):
-        self.__layout = [
-                            [sg.Text("Algum dia saberemos!", size = self.__config.tamanho_titulo, font = self.__config.fonte_titulo, justification = "center")],
-                            [sg.Text()],#Preenchimento entre os elementos, pretendo trocar esse primeiro com a imagem do personagem no futuro
-                            [sg.Button("Jogar", size = self.__config.tamanho_botoes, font = self.__config.fonte_botoes, key = "jogar")],
-                            [sg.Text()],
-                            [sg.Button("Ajuda", size = self.__config.tamanho_botoes, font = self.__config.fonte_botoes, key = "ajuda")],
-                            [sg.Text()],
-                            [sg.Button("Sair", size = self.__config.tamanho_botoes, font = self.__config.fonte_botoes, key = "sair")]
-                        ]
+        #pretendo colocar isso no config loader, de algum jeito...
+        alinhamento_titulo = Qt.AlignHCenter | Qt.AlignTop
+        alinhamento_botao = Qt.AlignHCenter | Qt.AlignBottom
 
-        self.__window = sg.Window("TBD", self.__layout, element_justification = self.__config.element_justification, size = self.__config.tamanho_janela)
+        titulo = QLabel("Algum dia saberemos")
+        titulo.setFont(QFont(self.__config.fonte_titulo, self.__config.tamanho_fonte_titulo))
+        self.__layout.addWidget(titulo, alignment = alinhamento_titulo)
+
+        imagem_central = QLabel()
+        pixmap = QPixmap(self.__config.diretorio_assets + "/menu principal/centro.png")
+        imagem_central.setPixmap(pixmap)
+        imagem_central.setFixedSize(960, 540)
+        self.__layout.addWidget(imagem_central, alignment = Qt.AlignCenter)
+
+        botao_jogar = QPushButton("Jogar")
+        botao_jogar.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
+        botao_jogar.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_jogar.clicked.connect(self.__jogar)
+        self.__layout.addWidget(botao_jogar, alignment = alinhamento_botao)
+
+        botao_ajuda = QPushButton("Ajuda")
+        botao_ajuda.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
+        botao_ajuda.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_ajuda.clicked.connect(self.__ajuda)
+        self.__layout.addWidget(botao_ajuda, alignment = alinhamento_botao)
+
+        botao_sair = QPushButton("Sair")
+        botao_sair.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
+        botao_sair.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_sair.clicked.connect(self.__sair)
+        self.__layout.addWidget(botao_sair, alignment = alinhamento_botao)
+
+        self.setLayout(self.__layout)
         return self.__layout
 
-    def le_eventos(self):
-        return self.__window.Read()
+    def __jogar(self):
+        self.sinal_jogar.emit()
 
-    def fechar(self):
-        self.__window.close()
+    def __ajuda(self):
+        self.sinal_ajuda.emit()
 
-    def maximiza(self):
-        self.__window.Maximize()
+    def __sair(self):
+        sys.exit()

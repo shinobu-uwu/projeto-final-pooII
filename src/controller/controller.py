@@ -1,53 +1,44 @@
-import PySimpleGUI as sg
+import sys
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QPalette, QColor, QImage
+
+from src.views.main_window import MainWindow
 from src.views.main_menu_view import MainMenuView
 from src.views.selecao_fases_view import SelecaoFasesView
 from src.views.ajuda_view import AjudaView
+from src.config.menu_config_loader import MenuConfigLoader
 
 
 class Controller:
     def __init__(self):
-        self.__window = MainMenuView()
+        self.__config = MenuConfigLoader()
+        self.__app = QApplication(sys.argv)
+        self.__window = MainWindow()
+        self.__window.setFixedSize(self.__config.width_janela, self.__config.height_janela)
+        self.__central_widget = MainMenuView()
+        self.set_central_widget()
+
+    def set_central_widget(self):
+        self.__window.setCentralWidget(self.__central_widget)
 
     def comeca(self):
-        self.__window.mostra_view()
-        while True:
-            event, values = self.__window.le_eventos()
-            if event == sg.WIN_CLOSED:
-                break
+        self.__central_widget.sinal_jogar.connect(self.jogar)
+        self.__central_widget.sinal_ajuda.connect(self.ajuda)
+        self.__window.show()
+        sys.exit(self.__app.exec_())
 
-            elif event == "jogar":
-                self.__window.fechar()
-                self.selecionar_fase()
-                self.__window.mostra_view()
-
-            elif event == "ajuda":
-                self.__window.fechar()
-                self.ajuda()
-                self.__window.mostra_view()
-
-            elif event == "sair":
-                break
-
-    def selecionar_fase(self):
-        window = SelecaoFasesView()
-        window.mostra_view()
-        while True:
-            event, values = window.le_eventos()
-            if event == sg.WIN_CLOSED:
-                break
-
-            elif event == "voltar":
-                window.fechar()
-                break
+    def jogar(self):
+        self.__central_widget = SelecaoFasesView()
+        self.set_central_widget()
+        self.__central_widget.sinal_voltar.connect(self.voltar)
 
     def ajuda(self):
-        window = AjudaView()
-        window.mostra_view()
-        while True:
-            event, values = window.le_eventos()
-            if event == sg.WIN_CLOSED:
-                break
+        self.__central_widget = AjudaView()
+        self.__central_widget.sinal_voltar.connect(self.voltar)
+        self.set_central_widget()
 
-            elif event == "voltar":
-                window.fechar()
-                break
+    def voltar(self):
+        self.__central_widget = MainMenuView()
+        self.__central_widget.sinal_jogar.connect(self.jogar)
+        self.__central_widget.sinal_ajuda.connect(self.ajuda)
+        self.set_central_widget()

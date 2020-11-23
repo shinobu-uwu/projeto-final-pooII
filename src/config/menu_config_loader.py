@@ -13,12 +13,20 @@ class MenuConfigLoader():
             self.__config = json.load(f)
 
     @property
-    def tamanho_janela(self):
-        return tuple(self.__config["tamanho_janela"])
+    def width_janela(self):
+        return self.__config["tamanho_janela"]["width"]
+
+    @property
+    def height_janela(self):
+        return self.__config["tamanho_janela"]["height"]
 
     @property
     def fonte_titulo(self):
-        return tuple(self.__config["fonte_titulo"])
+        return self.__config["fonte_titulo"]["fonte"]
+
+    @property
+    def tamanho_fonte_titulo(self):
+        return self.__config["fonte_titulo"]["tamanho"]
 
     @property
     def tamanho_titulo(self):
@@ -26,11 +34,19 @@ class MenuConfigLoader():
 
     @property
     def fonte_botoes(self):
-        return tuple(self.__config["fonte_botoes"])
+        return self.__config["fonte_botoes"]["fonte"]
 
     @property
-    def tamanho_botoes(self):
-        return tuple(self.__config["tamanho_botoes"])
+    def tamanho_fonte_botoes(self):
+        return self.__config["fonte_botoes"]["tamanho"]
+
+    @property
+    def width_botoes(self):
+        return self.__config["tamanho_botoes"]["width"]
+
+    @property
+    def height_botoes(self):
+        return self.__config["tamanho_botoes"]["height"]
 
     @property
     def element_justification(self):
@@ -38,7 +54,7 @@ class MenuConfigLoader():
 
     @property
     def diretorio_assets(self):
-        return f"{os.path.abspath(os.getenv('PYTHONPATH'))}/assets/"
+        return f"{os.path.abspath(os.getenv('PYTHONPATH'))}/assets"
 
     @property
     def tema(self):

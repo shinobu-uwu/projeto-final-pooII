@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from src.game.ferramenta import Ferramenta 
 
-class IPicareta(Ferramenta, ABC):
+class IPicareta(ABC):
 
     @abstractmethod
     def __init__(self):

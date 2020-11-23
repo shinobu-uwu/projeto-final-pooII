@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from src.game.ferramenta import Ferramenta
 
-class IMachado(Ferramenta,ABC):
+class IMachado(ABC):
 
     @abstractmethod
     def __init__(self):

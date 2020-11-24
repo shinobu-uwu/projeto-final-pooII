@@ -1,6 +1,5 @@
 import sys
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtGui import QPalette, QColor, QImage
 
 from src.views.main_window import MainWindow
 from src.views.main_menu_view import MainMenuView
@@ -14,7 +13,6 @@ class Controller:
         self.__config = MenuConfigLoader()
         self.__app = QApplication(sys.argv)
         self.__window = MainWindow()
-        self.__window.setFixedSize(self.__config.width_janela, self.__config.height_janela)
         self.__central_widget = MainMenuView()
         self.set_central_widget()
 

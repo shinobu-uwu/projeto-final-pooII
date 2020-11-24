@@ -1,7 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout
+import os
 from PyQt5.Qt import QFont, QPixmap, pyqtSignal
 from PyQt5.QtCore import Qt
-import os
+from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QVBoxLayout
 
 from src.config.menu_config_loader import MenuConfigLoader
 

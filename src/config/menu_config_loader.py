@@ -1,5 +1,5 @@
-import os
 import json
+import os
 from src.config.interface_config_loader import IConfigLoader
 
 

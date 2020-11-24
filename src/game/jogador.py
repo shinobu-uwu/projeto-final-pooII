@@ -1,15 +1,15 @@
 from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
-from src.game.interface.interface_item import IItem
+from src.game.item import Item
 
 
 class Jogador(IJogador):
-    def __init__(self):
+    def __init__(self, velocidade: float, posicao_inicial: list):
         self.__morto = False
         self.__inventario = Inventario()
-        self.__velocidade = 5#temporário
+        self.__velocidade = velocidade
         self.__item_equipado = 0
-        self.__posicao = [0, 10]#temporário
+        self.__posicao = posicao_inicial
 
     def mover(self, tecla):
         pass
@@ -21,10 +21,10 @@ class Jogador(IJogador):
         pass
 
     def mudar_item(self, tecla):
-        pass
+        self.__item_equipado = tecla
 
-    def adicionar_item(self, item):
-        if isinstance(item, IItem):
+    def adicionar_item(self, item: Item):
+        if isinstance(item, Item):
             self.__inventario.itens.append(item)
 
     @property

@@ -1,5 +1,6 @@
-from src.game.interfaces.interface_pa import IPa
 from src.game.ferramenta import Ferramenta
+from src.game.interfaces.interface_pa import IPa
+
 
 class Pa(Ferramenta, IPa):
     def __init__(self, forca, velocidade_ataque):
@@ -7,4 +8,3 @@ class Pa(Ferramenta, IPa):
 
     def usar(self):
         print("Pázada!")
-        pass

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class IJogador(ABC):
     @abstractmethod
     def __init__(self):

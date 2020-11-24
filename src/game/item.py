@@ -10,7 +10,6 @@ class Item(IItem):
     def usar(self):
         pass
 
-
     @property
     def material(self):
         return self.__material

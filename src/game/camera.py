@@ -1,13 +1,13 @@
-from src.game.interfaces.interface_camera import Icamera
+from src.game.interfaces.interface_camera import ICamera
 
 
-class Camera(Icamera):
-    def __init__(self, velocidade:float,posicao:list):
-        self.__velocidade= velocidade 
+class Camera(ICamera):
+    def __init__(self, velocidade:float, posicao:list):
+        self.__velocidade = velocidade
         self.__posicao = posicao
-    
+
     def mover(self):
-        self.__posicao+=self.__velocidade
+        self.__posicao += self.__velocidade
 
     @property
     def posicao(self):

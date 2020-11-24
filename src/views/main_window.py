@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow
 from PyQt5.Qt import QPixmap, QPainter
 from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QMainWindow
 
 from src.config.menu_config_loader import MenuConfigLoader
 

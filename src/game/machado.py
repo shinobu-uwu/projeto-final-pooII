@@ -1,5 +1,6 @@
-from src.game.interfaces.interface_machado import IMachado
 from src.game.ferramenta import Ferramenta
+from src.game.interfaces.interface_machado import IMachado
+
 
 class Machado(Ferramenta, IMachado):
     def __init__(self, forca, velocidade_ataque):
@@ -7,5 +8,3 @@ class Machado(Ferramenta, IMachado):
 
     def usar(self):
         print("Machada!")
-        pass
-

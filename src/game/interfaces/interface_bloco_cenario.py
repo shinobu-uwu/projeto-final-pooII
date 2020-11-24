@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-class Iblococenario(ABC):
 
+
+class IBlococenario(ABC):
     @abstractmethod
     def __init__(self):
         pass

@@ -1,9 +1,8 @@
 from src.game.interfaces.interface_sistema import ISistema
 
+
 class Sistema (ISistema):
-
     def __init__(self, estado_jogo: str):
-
         self.__estado_jogo = estado_jogo
 
     def selecionar_fase(self):
@@ -16,5 +15,5 @@ class Sistema (ISistema):
         pass
 
     @property
-    def estado_jogo(self, estado_jogo):
+    def estado_jogo(self):
         return self.__estado_jogo

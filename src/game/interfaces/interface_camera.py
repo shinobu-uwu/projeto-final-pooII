@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-class Icamera(ABC):
 
+
+class ICamera(ABC):
     @abstractmethod
     def __init__(self):
         pass

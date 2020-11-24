@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from item import Item
+from src.game.item import Item
+
 
 class Ferramenta(Item, ABC):
     @abstractmethod

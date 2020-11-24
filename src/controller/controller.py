@@ -1,11 +1,11 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 
-from src.views.main_window import MainWindow
-from src.views.main_menu_view import MainMenuView
-from src.views.selecao_fases_view import SelecaoFasesView
-from src.views.ajuda_view import AjudaView
 from src.config.menu_config_loader import MenuConfigLoader
+from src.views.ajuda_view import AjudaView
+from src.views.main_menu_view import MainMenuView
+from src.views.main_window import MainWindow
+from src.views.selecao_fases_view import SelecaoFasesView
 
 
 class Controller:

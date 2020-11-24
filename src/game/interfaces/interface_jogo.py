@@ -1,31 +1,32 @@
 from abc import ABC, abstractmethod
-class IJogo (ABC):
 
+
+class IJogo (ABC):
     @abstractmethod
     def __init__(self):
         pass
     
-    @abstractmethod
     @property
+    @abstractmethod
     def tempo (self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def camera (self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def jogador (self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def cenario (self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def vitoria (self):
         pass

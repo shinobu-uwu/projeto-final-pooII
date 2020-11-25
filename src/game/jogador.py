@@ -1,3 +1,8 @@
+import pygame
+from pygame.locals import *
+
+from src.config.jogador_config_loader import JogadorConfigLoader
+from src.exceptions.tipo_nao_compativel_exception import TipoNaoCompativelException
 from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
 from src.game.item import Item
@@ -5,6 +10,7 @@ from src.game.item import Item
 
 class Jogador(IJogador):
     def __init__(self, velocidade: float, posicao_inicial: list):
+        self.__config = JogadorConfigLoader
         self.__morto = False
         self.__inventario = Inventario()
         self.__velocidade = velocidade
@@ -12,20 +18,43 @@ class Jogador(IJogador):
         self.__posicao = posicao_inicial
 
     def mover(self, tecla):
-        pass
+        if tecla == pygame.K_RIGHT:
+            self.__posicao[0] += self.__velocidade
+        elif tecla == pygame.K_LEFT:
+            if self.__posicao[0] - self.__velocidade >= 0:
+                self.__posicao[0] -= self.__velocidade
+            else:
+                self.__posicao[0] = 0
+        elif tecla == pygame.K_SPACE:
+            self.pular()
+        elif tecla == pygame.K_e:
+            try:
+                self.usar()
+            except AttributeError:
+                print("Sem Item")
+        elif tecla == ord('q'):
+            self.adicionar_item(Picareta(2, 3))
 
     def pular(self):
-        pass
+        #TODO
+        self.__posicao[1] = 3
 
     def usar(self):
-        pass
+        self.__inventario.itens[self.__item_equipado].usar()
+        print("usou!")
 
     def mudar_item(self, tecla):
         self.__item_equipado = tecla
 
     def adicionar_item(self, item: Item):
         if isinstance(item, Item):
-            self.__inventario.itens.append(item)
+            try:
+                i = self.__inventario.itens.index(None)
+                self.__inventario.itens[i] = item
+            except ValueError:
+                print("Inventário cheio")
+        else:
+            raise TipoNaoCompativelException
 
     @property
     def morto(self):

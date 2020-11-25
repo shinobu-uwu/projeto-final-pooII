@@ -3,8 +3,8 @@ from src.game.interfaces.interface_inventario import IInventario
 
 class Inventario(IInventario):
     def __init__(self):
-        self.__itens = []
-        self.__capacidade = 10 #Temporário
+        self.__capacidade = 10 #TBD
+        self.__itens = [None] * 10
 
     @property
     def itens(self):

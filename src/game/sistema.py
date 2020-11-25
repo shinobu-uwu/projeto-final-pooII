@@ -5,12 +5,12 @@ class Sistema (ISistema):
     def __init__(self, estado_jogo: str):
         self.__estado_jogo = estado_jogo
 
-    def selecionar_fase(self):
-        pass
+    def selecionar_fase(self, numero_fase):
+        print(numero_fase)
 
     def abrir_opcoes(self):
         pass
-    
+
     def fechar(self):
         pass
 

@@ -1,14 +1,14 @@
 import json
 import os
-from src.config.interface_config_loader import IConfigLoader
+from src.config.config_loader import ConfigLoader
 
 
-class MenuConfigLoader():
+class MenuConfigLoader(ConfigLoader):
     def __init__(self):
         self.__path = f"{os.path.abspath(os.path.dirname(__file__))}/jsons/menus.json"
-        self.__load()
+        self.load()
 
-    def __load(self):
+    def load(self):
         with open(self.__path, 'r') as f:
             self.__config = json.load(f)
 
@@ -49,13 +49,17 @@ class MenuConfigLoader():
         return self.__config["tamanho_botoes"]["height"]
 
     @property
-    def element_justification(self):
-        return self.__config["element_justification"]
+    def botoes_stylesheet(self):
+        return self.__config["botoes_stylesheet"]
 
     @property
-    def diretorio_assets(self):
-        return f"{os.getenv('PYTHONPATH')}/assets"
+    def fases_stylesheet(self):
+        return self.__config["fases_stylesheet"]
 
     @property
-    def tema(self):
-        return self.__config["tema"]
+    def width_fases(self):
+        return self.__config["tamanho_fases"]["width"]
+
+    @property
+    def height_fases(self):
+        return self.__config["tamanho_fases"]["height"]

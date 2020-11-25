@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 
 from src.config.menu_config_loader import MenuConfigLoader
+from src.game.sistema import Sistema
 from src.views.ajuda_view import AjudaView
 from src.views.main_menu_view import MainMenuView
 from src.views.main_window import MainWindow
@@ -10,6 +11,7 @@ from src.views.selecao_fases_view import SelecaoFasesView
 
 class Controller:
     def __init__(self):
+        self.__sistema = Sistema("Pog")
         self.__config = MenuConfigLoader()
         self.__app = QApplication(sys.argv)
         self.__window = MainWindow()
@@ -29,6 +31,7 @@ class Controller:
         self.__central_widget = SelecaoFasesView()
         self.set_central_widget()
         self.__central_widget.sinal_voltar.connect(self.voltar)
+        self.__central_widget.sinal_fase.connect(self.selecionar_fase)
 
     def ajuda(self):
         self.__central_widget = AjudaView()
@@ -40,3 +43,6 @@ class Controller:
         self.__central_widget.sinal_jogar.connect(self.jogar)
         self.__central_widget.sinal_ajuda.connect(self.ajuda)
         self.set_central_widget()
+
+    def selecionar_fase(self, i):
+        self.__sistema.selecionar_fase(i)

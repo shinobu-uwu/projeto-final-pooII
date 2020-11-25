@@ -6,7 +6,7 @@ class ISistema (ABC):
         pass
 
     @abstractmethod
-    def selecionar_fase(self):
+    def selecionar_fase(self, numero_fase):
         pass
 
     @abstractmethod
@@ -17,7 +17,7 @@ class ISistema (ABC):
     def fechar(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def estado_jogo(self):
         pass

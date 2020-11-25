@@ -10,7 +10,7 @@ from src.game.item import Item
 
 class Jogador(IJogador):
     def __init__(self, velocidade: float, posicao_inicial: list):
-        self.__config = JogadorConfigLoader
+        self.__config = JogadorConfigLoader()
         self.__morto = False
         self.__inventario = Inventario()
         self.__velocidade = velocidade
@@ -32,8 +32,6 @@ class Jogador(IJogador):
                 self.usar()
             except AttributeError:
                 print("Sem Item")
-        elif tecla == ord('q'):
-            self.adicionar_item(Picareta(2, 3))
 
     def pular(self):
         #TODO

@@ -45,7 +45,7 @@ class Jogo (IJogo):
             self.atualizar()
      """
     #temp
-    def atualizar(self):
+    """ def atualizar(self):
         #esse num tem a ver com o indice da animação que ele vai fazer
         #com walk tem 8 sprites e uso 3 frames pra 1 sprite temos 24
         #se esse número for maior que 24 vai dar erro, por isso esse if
@@ -66,7 +66,7 @@ class Jogo (IJogo):
 
         else:
             self.__win.blit(self.__jogador.sprites["idle"][0], (self.__jogador.posicao[0],self.__jogador.posicao[1]))
-            self.__jogador.walk_count = 0
+            self.__jogador.walk_count = 0 """
 
     @property
     def tempo (self):

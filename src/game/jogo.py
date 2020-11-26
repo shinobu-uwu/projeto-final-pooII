@@ -19,7 +19,7 @@ class Jogo (IJogo):
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
-        self.__bg = pygame.image.load("/home/shinobu/Documents/projeto-final-pooii/assets/sprites//bgTESTE.jpg")
+        self.__bg = pygame.image.load("C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites//bgTESTE.jpg")
         rodando = True
         while rodando:
             self.__clock.tick(33)
@@ -27,19 +27,52 @@ class Jogo (IJogo):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     rodando = False
-            if self.__jogador.walk_count + 1 >= 33:
-                self.__jogador.walk_count = 0
-            self.__screen.blit(self.__jogador.sprites["idle"][self.__jogador.walk_count // 3], tuple(self.__jogador.posicao))
-            self.__jogador.walk_count += 1
+            tecla = pygame.key.get_pressed()
+            self.__jogador.mover(tecla)
+            self.atualizar()
             pygame.display.update()
 
     def atualizar(self):
-        if self.__jogador.walk_count + 1 >= 33:
+        if self.__jogador.walk_count + 1 >= 24:
             self.__jogador.walk_count = 0
+
+        if self.__jogador.idle_count + 1 >= 33:
+            self.__jogador.idle_count = 0
+
         if self.__jogador.left:
-            pass
+            #if self.__jogador.last_side == 1:
+                #self.__screen.blit(self.__jogador.sprites["idle"][0], tuple(self.__jogador.posicao))
+
+            self.__screen.blit(self.__jogador.sprites["left"][self.__jogador.walk_count // 3], tuple(self.__jogador.posicao))
+            self.__jogador.walk_count += 1
+            self.__jogador.idle_count = 0
+            self.__jogador.last_side = 0
+
         elif self.__jogador.right:
-            pass
+            #if self.__jogador.last_side == 0:
+                #self.__screen.blit(self.__jogador.sprites["idleM"][0], tuple(self.__jogador.posicao))
+
+            print(self.__jogador.walk_count)
+            self.__screen.blit(self.__jogador.sprites["right"][self.__jogador.walk_count // 3], tuple(self.__jogador.posicao))
+            self.__jogador.walk_count += 1
+            self.__jogador.idle_count = 0
+            self.__jogador.last_side = 1
+
+        else:
+            #idle pra esquerda e idle pra direita
+            if self.__jogador.last_side == 1:
+                #direita
+                self.__screen.blit(self.__jogador.sprites["idle"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
+                self.__jogador.idle_count += 1
+
+            else:
+                #esquerda
+                self.__screen.blit(self.__jogador.sprites["idleM"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
+                self.__jogador.idle_count += 1
+
+            
+
+            
 
     @property
     def tempo (self):

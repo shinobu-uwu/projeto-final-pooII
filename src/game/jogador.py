@@ -23,11 +23,14 @@ class Jogador(IJogador):
         #bools para determinar qual animação o personagem está realizando
         self.__left = False
         self.__right = False
+        #bool para saber a ultima direção que o personagem estava virado - 0 -> esquerda, 1 -> direita
+        self.__last_side = 1
         self.__is_jump = False
 
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
         self.__jump_count = 0
+        self.__idle_count = 0
 
     def mover(self, tecla):
         if tecla[pygame.K_RIGHT]:
@@ -135,3 +138,19 @@ class Jogador(IJogador):
     @property
     def right(self):
         return self.__right
+
+    @property
+    def idle_count(self):
+        return self.__idle_count
+
+    @idle_count.setter
+    def idle_count(self, idle_count):
+        self.__idle_count = idle_count
+
+    @property
+    def last_side(self):
+        return self.__last_side
+
+    @last_side.setter
+    def last_side(self, last_side):
+        self.__last_side = last_side

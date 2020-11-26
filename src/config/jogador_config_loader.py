@@ -18,8 +18,8 @@ class JogadorConfigLoader(ConfigLoader):
     @property
     def diretorio_sprites(self):
         #codigo do path do bings - meu pythonpath tem 2 variáveis
-        #return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
-        return f"{os.getenv('PYTHONPATH')}assets/sprites/"
+        return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
+        #return f"{os.getenv('PYTHONPATH')}assets/sprites/"
 
 
     def recortar_sprites(self):
@@ -34,23 +34,28 @@ class JogadorConfigLoader(ConfigLoader):
         print(PspritesLeft)
 
         #carregos as imagens com o pygame
-        spritesLeft = pygame.image.load(PspritesLeft)
+        #spritesLeft = pygame.image.load(PspritesLeft)
         spritesRight = pygame.image.load(PspritesRight)
         spritesIdle = pygame.image.load(Pspritesidle)
 
         #listas onde armazeno os sprites de cada movimento
-        leftS = ['']*8
+        
         rightS = ['']*8
+        leftS = ['']*8
         idleS = ['']*11
+        idleSM = ['']*11
 
         #dois for's que recortam e populam as listas de sprites
         for i in range(8):
-            leftS[i] = spritesLeft.subsurface(pygame.Rect(self.__tam[0]*i, 0, self.__tam[0], self.__tam[1]))
+            #leftS[i] = spritesLeft.subsurface(pygame.Rect(self.__tam[0]*i, 0, self.__tam[0], self.__tam[1]))
             rightS[i] = spritesRight.subsurface(pygame.Rect(self.__tam[0]*i, 0, self.__tam[0], self.__tam[1]))
+            leftS[i] = pygame.transform.flip(rightS[i],1,0)
 
         for a in range(11):
             idleS[a] = spritesIdle.subsurface(pygame.Rect(self.__tam[0]*a, 0, self.__tam[0], self.__tam[1]))
+            idleSM[a] = pygame.transform.flip(idleS[a],1,0)
+        
 
         #Retorno uma lista composta contendo todos os sprites utilizados
-        dicSprites = {"left": leftS, "right": rightS, "idle": idleS}
+        dicSprites = {"left": leftS, "right": rightS, "idle": idleS, "idleM": idleSM}
         return dicSprites

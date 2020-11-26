@@ -18,40 +18,40 @@ class Jogador(IJogador):
         self.__posicao = posicao_inicial
 
         #lista composta para os sprites
-        self.sprites = self.__config.recortar_sprites()
+        self.__sprites = self.__config.recortar_sprites()
 
         #bools para determinar qual animação o personagem está realizando
-        self.left = False
-        self.right = False
+        self.__left = False
+        self.__right = False
         self.__is_jump = False
 
         #contadores para o pulo e a animação de correr
-        self.walk_count = 0
+        self.__walk_count = 0
         self.__jump_count = 0
 
     def mover(self, tecla):
         if tecla[pygame.K_RIGHT]:
             self.__posicao[0] += self.__velocidade
-            self.right = True
-            self.left = False
+            self.__right = True
+            self.__left = False
 
         elif tecla[pygame.K_LEFT]:
             if self.__posicao[0] - self.__velocidade >= 0:
                 self.__posicao[0] -= self.__velocidade
-                self.left = True
-                self.right = False
+                self.__left = True
+                self.__right = False
             else:
                 self.__posicao[0] = 0
 
         else:
-            self.right = False
-            self.left = False
-            self.walk_count = 0
+            self.__right = False
+            self.__left = False
+            self.__walk_count = 0
 
         if not self.__is_jump:
             if tecla[pygame.K_SPACE]:
-                self.is_jump = True
-                self.walk_count = 0
+                self.__is_jump = True
+                self.__walk_count = 0
 
         else:
             self.pular()
@@ -135,5 +135,3 @@ class Jogador(IJogador):
     @property
     def right(self):
         return self.__right
-
-

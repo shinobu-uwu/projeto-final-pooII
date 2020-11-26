@@ -8,7 +8,7 @@ from src.config.config_loader import ConfigLoader
 class JogadorConfigLoader(ConfigLoader):
     def __init__(self):
         self.__path = f"{os.path.abspath(os.path.dirname(__file__))}/jsons/jogador.json"
-        self.__load()
+        self.load()
         self.__tam = [78,58]
 
     def load(self):
@@ -18,8 +18,8 @@ class JogadorConfigLoader(ConfigLoader):
     @property
     def diretorio_sprites(self):
         #codigo do path do bings - meu pythonpath tem 2 variáveis
-        return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
-       #return f"{os.getenv('PYTHONPATH')}/assets/sprites/"
+        #return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
+        return f"{os.getenv('PYTHONPATH')}assets/sprites/"
 
 
     def recortar_sprites(self):

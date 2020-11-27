@@ -23,7 +23,7 @@ class SelecaoFasesView(QWidget):
         titulo.adicionar_ao_layout(self.__layout)
 
         fases_layout = QGridLayout()
-        nome_imagens = sorted(os.listdir(f"{self.__config.diretorio_assets}/thumbnail fases/"))
+        nome_imagens = sorted(os.listdir(os.path.join(self.__config.diretorio_assets, "thumbnail fases/")))
         botoes = []
         for nome in nome_imagens:
             botao = BotaoFase(nome)

@@ -8,7 +8,7 @@ from src.config.config_loader import ConfigLoader
 
 class JogadorConfigLoader(ConfigLoader):
     def __init__(self):
-        self.__path = f"{os.path.abspath(os.path.dirname(__file__))}/jsons/jogador.json"
+        self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/jogador.json")
         self.load()
         self.__tam = [156,116]
 
@@ -20,20 +20,18 @@ class JogadorConfigLoader(ConfigLoader):
     def diretorio_sprites(self):
         #codigo do path do bings - meu pythonpath tem 2 variáveis
         #return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
-        return f"{os.getenv('PYTHONPATH')}/assets/sprites/"
+        return os.path.join(self.diretorio_assets, "sprites")
 
 
 
     def recortar_sprites(self):
-        dir_sprites = self.diretorio_sprites
-
         #path para as imagens dos sprites
-        PspritesLeft = f"{dir_sprites}runLeft.png"
-        PspritesRight = f"{dir_sprites}runRight.png"
-        Pspritesidle = f"{dir_sprites}idle.png"
-        PspritesAttack = f"{dir_sprites}attack.png"
-        PspritesFall = f"{dir_sprites}fall.png"
-        PspritesJump = f"{dir_sprites}jump.png"
+        PspritesLeft = os.path.join(self.diretorio_sprites, "runLeft.png")
+        PspritesRight = os.path.join(self.diretorio_sprites, "runRight.png")
+        Pspritesidle = os.path.join(self.diretorio_sprites, "idle.png")
+        PspritesAttack = os.path.join(self.diretorio_sprites, "attack.png")
+        PspritesFall = os.path.join(self.diretorio_sprites, "fall.png")
+        PspritesJump = os.path.join(self.diretorio_sprites, "jump.png")
 
         #carregos as imagens com o pygame
         #spritesLeft = pygame.image.load(PspritesLeft)

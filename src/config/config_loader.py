@@ -13,4 +13,4 @@ class ConfigLoader(ABC):
 
     @property
     def diretorio_assets(self):
-        return f"{os.getenv('PYTHONPATH')}/assets"
+        return os.path.join(os.getenv("PYTHONPATH"), "assets")

@@ -1,10 +1,11 @@
+import os
 import pygame
 
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
 from src.game.cenario import Cenario
-from src.game.jogador import Jogador
 from src.game.interfaces.interface_jogo import IJogo
+from src.game.jogador import Jogador
 
 
 class Jogo (IJogo):
@@ -22,7 +23,7 @@ class Jogo (IJogo):
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
-        self.__bg = pygame.image.load(f"{self.__config.diretorio_sprites}/bgTESTE.jpg")
+        self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
         rodando = True
         while rodando:
             self.__clock.tick(33)
@@ -113,7 +114,3 @@ class Jogo (IJogo):
     @property
     def vitoria (self):
         return self.__vitoria
-
-
-jogador = Jogador(8, [3, 3])
-a = Jogo(2, 2, jogador, 2, 2)

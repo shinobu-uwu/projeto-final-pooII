@@ -4,6 +4,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QGridLayout, QVBoxLayout
 
 from src.config.menu_config_loader import MenuConfigLoader
+from src.views.widgets.botao_fase import BotaoFase
+from src.views.widgets.botao_padrao import BotaoPadrao
+from src.views.widgets.titulo_janela import TituloJanela
 
 
 class SelecaoFasesView(QWidget):
@@ -18,20 +21,14 @@ class SelecaoFasesView(QWidget):
         self.mostra_view()
 
     def mostra_view(self):
-        alinhamento_titulo = Qt.AlignHCenter | Qt.AlignTop
-        alinhamento_botao = Qt.AlignHCenter | Qt.AlignBottom
-
-        titulo = QLabel("Selecione a fase")
-        titulo.setFont(QFont(self.__config.fonte_titulo, self.__config.tamanho_fonte_titulo))
-        self.__layout.addWidget(titulo, alignment = alinhamento_titulo)
+        titulo = TituloJanela("Selecione a fase")
+        titulo.adicionar_ao_layout(self.__layout)
 
         fases_layout = QGridLayout()
         nome_imagens = sorted(os.listdir(f"{self.__config.diretorio_assets}/thumbnail fases/"))
         botoes = []
         for nome in nome_imagens:
-            botao = QPushButton()
-            botao.setStyleSheet("QPushButton { background-image: " + f"url({self.__config.diretorio_assets}/thumbnail fases/{nome});" + self.__config.fases_stylesheet)
-            botao.setFixedSize(self.__config.width_fases, self.__config.height_fases)
+            botao = BotaoFase(nome)
             botoes.append(botao)
         fases_layout.addWidget(botoes[0], 0, 0)
         fases_layout.addWidget(botoes[1], 0, 1)
@@ -41,11 +38,9 @@ class SelecaoFasesView(QWidget):
         fases_layout.addWidget(botoes[5], 1, 2)
         self.__layout.addLayout(fases_layout)
 
-        botao_voltar = QPushButton("Voltar")
-        botao_voltar.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
-        botao_voltar.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_voltar = BotaoPadrao("Voltar")
         botao_voltar.clicked.connect(self.__voltar)
-        self.__layout.addWidget(botao_voltar, alignment = alinhamento_botao)
+        botao_voltar.adicionar_ao_layout(self.__layout)
 
         self.setLayout(self.__layout)
         return self.__layout

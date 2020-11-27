@@ -49,12 +49,8 @@ class MenuConfigLoader(ConfigLoader):
         return self.__config["tamanho_botoes"]["height"]
 
     @property
-    def botoes_stylesheet(self):
-        return self.__config["botoes_stylesheet"]
-
-    @property
-    def fases_stylesheet(self):
-        return self.__config["fases_stylesheet"]
+    def stylesheet(self):
+        return self.__config["stylesheet"]
 
     @property
     def width_fases(self):

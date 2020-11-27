@@ -7,8 +7,7 @@
                      "tamanho": 16},
     "tamanho_botoes": {"width": 600,
                        "height": 50},
-    "botoes_stylesheet": "QPushButton { background-color: black; border-style: outset; border-radius: 20px; border-width: 3px; border-color: green; border-radius: 10px; padding: 3px } QPushButton:hover { background-color: red; border-color: lightgreen;} QPushButton:pressed { background-color: darkyellow; border-color: darkgreen; }",
-    "fases_stylesheet": "border-style: outset; border-width: 5px; border-color: green; border-radius: 20px; padding: 6px; } QPushButton:hover { border-color:  #00A200; } QPushButton:pressed { border-color: #007000; }",
+    "stylesheet": "BotaoPadrao { background-color: black; border-style: outset; border-radius: 25px; border-width: 3px; border-color: green; padding: 3px; } BotaoPadrao:hover { background-color: red; border-color: lightgreen; } BotaoPadrao:pressed { background-color: brown; border-color: black; }",
     "tamanho_fases" : {"width": 400,
                        "height": 225}
 }

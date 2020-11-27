@@ -10,7 +10,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.__config = MenuConfigLoader()
         #Configurações da janela
-        self.setStyleSheet(self.__config.botoes_stylesheet)
+        self.setStyleSheet(self.__config.stylesheet)
         self.setFixedSize(self.__config.width_janela, self.__config.height_janela)
         self.setWindowIcon(QIcon(f"{self.__config.diretorio_assets}/icon/icon.png"))
 

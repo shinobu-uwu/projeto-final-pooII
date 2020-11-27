@@ -1,6 +1,5 @@
-from PyQt5.Qt import QFont, pyqtSignal
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QPushButton, QWidget, QLabel, QVBoxLayout
+from PyQt5.Qt import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QVBoxLayout
 
 from src.config.menu_config_loader import MenuConfigLoader
 from src.views.widgets.botao_padrao import BotaoPadrao

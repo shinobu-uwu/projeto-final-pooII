@@ -1,7 +1,6 @@
 import os
-from PyQt5.Qt import QFont, QPixmap, pyqtSignal
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QGridLayout, QVBoxLayout
+from PyQt5.Qt import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QGridLayout, QVBoxLayout
 
 from src.config.menu_config_loader import MenuConfigLoader
 from src.views.widgets.botao_fase import BotaoFase
@@ -17,7 +16,6 @@ class SelecaoFasesView(QWidget):
         super().__init__()
         self.__config = MenuConfigLoader()
         self.__layout = QVBoxLayout()
-        self.__layout.setAlignment(Qt.AlignHCenter)
         self.mostra_view()
 
     def mostra_view(self):

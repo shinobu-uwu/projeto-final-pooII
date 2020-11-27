@@ -1,6 +1,5 @@
 import sys
-from PyQt5.Qt import QFont, QPixmap
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout
 
 from src.views.widgets.botao_padrao import BotaoPadrao

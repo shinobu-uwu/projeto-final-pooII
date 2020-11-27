@@ -1,4 +1,6 @@
 import pygame
+
+from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
 from src.game.cenario import Cenario
 from src.game.jogador import Jogador
@@ -8,6 +10,7 @@ from src.game.interfaces.interface_jogo import IJogo
 class Jogo (IJogo):
     def __init__(self,tempo: float, camera: Camera, jogador: Jogador, cenario: Cenario, vitoria: bool):
         pygame.init()
+        self.__config = JogoConfigLoader()
         self.__camera = camera
         self.__jogador = jogador
         self.__cenario = cenario
@@ -19,7 +22,7 @@ class Jogo (IJogo):
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
-        self.__bg = pygame.image.load("C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites//bgTESTE.jpg")
+        self.__bg = pygame.image.load(f"{self.__config.diretorio_sprites}/bgTESTE.jpg")
         rodando = True
         while rodando:
             self.__clock.tick(33)
@@ -90,12 +93,6 @@ class Jogo (IJogo):
                 #esquerda
                 self.__screen.blit(self.__jogador.sprites["idleM"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
                 self.__jogador.idle_count += 1
-
-        
-
-            
-
-            
 
     @property
     def tempo (self):

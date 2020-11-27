@@ -20,3 +20,7 @@ class JogoConfigLoader(ConfigLoader):
     @property
     def height_janela(self):
         return self.__config["tamanho_janela"]["height"]
+
+    @property
+    def diretorio_sprites(self):
+        return f"{os.getenv('PYTHONPATH')}/assets/sprites"

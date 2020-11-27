@@ -36,6 +36,66 @@ class Jogador(IJogador):
         self.__idle_count = 0
         self.__attack_count = 0
 
+    def atualizar(self, tecla, screen):
+        self.mover(tecla)
+        if self.__walk_count + 1 >= 24:
+            self.__walk_count = 0
+
+        if self.__idle_count + 1 >= 33:
+            self.__idle_count = 0
+
+        if self.__is_attack:
+            if self.__last_side == 1:
+                screen.blit(self.__sprites["attack"][self.__attack_count //4], tuple(self.__posicao))
+                self.__attack_count += 1
+
+            else:
+                screen.blit(self.__sprites["attackM"][self.__attack_count //4], tuple(self.__posicao))
+                self.__attack_count += 1
+
+        elif not self.__is_fall and self.__is_jump:
+            if self.__last_side == 1:
+                screen.blit(self.__sprites["jump"], tuple(self.__posicao))
+            else:
+                screen.blit(self.__sprites["jumpM"], tuple(self.__posicao))
+
+        elif self.__is_fall:
+            if self.__last_side == 1:
+                screen.blit(self.__sprites["fall"], tuple(self.__posicao))
+            else:
+                screen.blit(self.__sprites["fallM"], tuple(self.__posicao))
+
+        elif self.__left:
+            #if self.__last_side == 1:
+                #screen.blit(self.__sprites["idle"][0], tuple(self.__posicao))
+
+            screen.blit(self.__sprites["left"][self.__walk_count // 3], tuple(self.__posicao))
+            self.__walk_count += 1
+            self.__idle_count = 0
+            self.__last_side = 0
+
+        elif self.__right:
+            #if self.__last_side == 0:
+                #screen.blit(self.__sprites["idleM"][0], tuple(self.__posicao))
+
+            print(self.__walk_count)
+            screen.blit(self.__sprites["right"][self.__walk_count // 3], tuple(self.__posicao))
+            self.__walk_count += 1
+            self.__idle_count = 0
+            self.__last_side = 1
+
+        elif self.__is_idle == True and self.__is_attack == False:
+            #idle pra esquerda e idle pra direita
+            if self.__last_side == 1:
+                #direita
+                screen.blit(self.__sprites["idle"][self.__idle_count // 3], tuple(self.__posicao))
+                self.__idle_count += 1
+
+            else:
+                #esquerda
+                screen.blit(self.__sprites["idleM"][self.__idle_count // 3], tuple(self.__posicao))
+                self.__idle_count += 1
+
     def mover(self, tecla):
         if tecla[pygame.K_RIGHT]:
             self.__posicao[0] += self.__velocidade

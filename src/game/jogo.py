@@ -32,68 +32,13 @@ class Jogo (IJogo):
                 if event.type == pygame.QUIT:
                     rodando = False
             tecla = pygame.key.get_pressed()
-            self.__jogador.mover(tecla)
+            self.__jogador.atualizar(tecla, self.__screen)
             self.atualizar()
             pygame.display.update()
 
     def atualizar(self):
-        if self.__jogador.walk_count + 1 >= 24:
-            self.__jogador.walk_count = 0
-
-        if self.__jogador.idle_count + 1 >= 33:
-            self.__jogador.idle_count = 0
-
-        if self.__jogador.is_attack:
-            if self.__jogador.last_side == 1:
-                self.__screen.blit(self.__jogador.sprites["attack"][self.__jogador.attack_count //4], tuple(self.__jogador.posicao))
-                self.__jogador.attack_count += 1
-
-            else:
-                self.__screen.blit(self.__jogador.sprites["attackM"][self.__jogador.attack_count //4], tuple(self.__jogador.posicao))
-                self.__jogador.attack_count += 1
-
-        elif not self.__jogador.is_fall and self.__jogador.is_jump:
-            if self.jogador.last_side == 1:
-                self.__screen.blit(self.__jogador.sprites["jump"], tuple(self.__jogador.posicao))
-            else:
-                self.__screen.blit(self.__jogador.sprites["jumpM"], tuple(self.__jogador.posicao))
-
-        elif self.__jogador.is_fall:
-            if self.__jogador.last_side == 1:
-                self.__screen.blit(self.__jogador.sprites["fall"], tuple(self.__jogador.posicao))
-            else:
-                self.__screen.blit(self.__jogador.sprites["fallM"], tuple(self.__jogador.posicao))
-
-        elif self.__jogador.left:
-            #if self.__jogador.last_side == 1:
-                #self.__screen.blit(self.__jogador.sprites["idle"][0], tuple(self.__jogador.posicao))
-
-            self.__screen.blit(self.__jogador.sprites["left"][self.__jogador.walk_count // 3], tuple(self.__jogador.posicao))
-            self.__jogador.walk_count += 1
-            self.__jogador.idle_count = 0
-            self.__jogador.last_side = 0
-
-        elif self.__jogador.right:
-            #if self.__jogador.last_side == 0:
-                #self.__screen.blit(self.__jogador.sprites["idleM"][0], tuple(self.__jogador.posicao))
-
-            print(self.__jogador.walk_count)
-            self.__screen.blit(self.__jogador.sprites["right"][self.__jogador.walk_count // 3], tuple(self.__jogador.posicao))
-            self.__jogador.walk_count += 1
-            self.__jogador.idle_count = 0
-            self.__jogador.last_side = 1
-
-        elif self.__jogador.is_idle == True and self.__jogador.is_attack == False:
-            #idle pra esquerda e idle pra direita
-            if self.__jogador.last_side == 1:
-                #direita
-                self.__screen.blit(self.__jogador.sprites["idle"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
-                self.__jogador.idle_count += 1
-
-            else:
-                #esquerda
-                self.__screen.blit(self.__jogador.sprites["idleM"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
-                self.__jogador.idle_count += 1
+        #TODO colisão
+        pass
 
     @property
     def tempo (self):

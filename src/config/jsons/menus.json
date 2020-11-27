@@ -2,7 +2,7 @@
     "tamanho_janela": {"width": 1280,
                        "height": 720},
     "fonte_titulo": {"fonte": "ThaleahFat",
-                     "tamanho": 48},
+                     "tamanho": 64},
     "fonte_botoes": {"fonte": "ThaleahFat",
                      "tamanho": 16},
     "tamanho_botoes": {"width": 600,

@@ -26,11 +26,15 @@ class Jogador(IJogador):
         #bool para saber a ultima direção que o personagem estava virado - 0 -> esquerda, 1 -> direita
         self.__last_side = 1
         self.__is_jump = False
+        self.__is_attack = False
+        self.__is_idle = True
+        self.__is_fall = False
 
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
         self.__jump_count = 0
         self.__idle_count = 0
+        self.__attack_count = 0
 
     def mover(self, tecla):
         if tecla[pygame.K_RIGHT]:
@@ -49,38 +53,58 @@ class Jogador(IJogador):
         else:
             self.__right = False
             self.__left = False
+            self.__is_idle = True
             self.__walk_count = 0
 
         if not self.__is_jump:
             if tecla[pygame.K_SPACE]:
                 self.__is_jump = True
+                self.__is_idle = False
                 self.__walk_count = 0
 
         else:
             self.pular()
                 
-        if tecla[pygame.K_e]:
-            try:
-                self.usar()
-            except AttributeError:
-                print("Sem Item")
+        if not self.__is_attack:
+            if tecla[pygame.K_e]:
+                self.__is_attack = True
+                self.__is_idle = False
+    
+        else:
+            self.usar()
 
     def pular(self):
         if self.__jump_count >= -10:
             neg = 1
             if self.__jump_count < 0:
                 neg = -1
+                self.__is_fall = True
 
             self.__posicao[1] -= (self.__jump_count**2) * neg
+            print(self.__jump_count)
             self.__jump_count -= 1
         else:
             self.__is_jump = False
+            self.__is_fall = False
             self.__jump_count = 10
         #self.__posicao[1] = 3
 
     def usar(self):
-        self.__inventario.itens[self.__item_equipado].usar()
-        print("usou!")
+        if self.__attack_count >= 11:
+            self.__attack_count = 0
+            self.__is_attack = False
+            self.__is_idle = True
+
+        elif self.__attack_count == 0:
+            try:
+                self.__inventario.itens[self.__item_equipado].usar()
+                print("usou!")
+            except AttributeError:
+                print("Sem Item")
+                self.__is_attack = False
+                self.__attack_count = 0
+        else:
+            self.__attack_count += 1
 
     def mudar_item(self, tecla):
         self.__item_equipado = tecla
@@ -154,3 +178,43 @@ class Jogador(IJogador):
     @last_side.setter
     def last_side(self, last_side):
         self.__last_side = last_side
+
+    @property
+    def is_attack(self):
+        return self.__is_attack
+
+    @is_attack.setter
+    def is_attack(self, is_attack):
+        self.__is_attack = is_attack
+
+    @property
+    def attack_count(self):
+        return self.__attack_count
+
+    @attack_count.setter
+    def attack_count(self, attack_count):
+        self.__attack_count = attack_count
+
+    @property
+    def is_idle(self):
+        return self.__is_idle
+
+    @is_idle.setter
+    def is_idle(self, is_idle):
+        self.__is_idle = is_idle
+
+    @property
+    def is_fall(self):
+        return self.__is_fall
+
+    @is_fall.setter
+    def is_fall(self, is_fall):
+        self.__is_fall = is_fall
+
+    @property
+    def is_jump(self):
+        return self.__is_jump
+
+    @is_jump.setter
+    def is_jump(self, is_jump):
+        self.__is_jump = is_jump

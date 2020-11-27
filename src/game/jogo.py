@@ -39,7 +39,28 @@ class Jogo (IJogo):
         if self.__jogador.idle_count + 1 >= 33:
             self.__jogador.idle_count = 0
 
-        if self.__jogador.left:
+        if self.__jogador.is_attack:
+            if self.__jogador.last_side == 1:
+                self.__screen.blit(self.__jogador.sprites["attack"][self.__jogador.attack_count //4], tuple(self.__jogador.posicao))
+                self.__jogador.attack_count += 1
+
+            else:
+                self.__screen.blit(self.__jogador.sprites["attackM"][self.__jogador.attack_count //4], tuple(self.__jogador.posicao))
+                self.__jogador.attack_count += 1
+
+        elif not self.__jogador.is_fall and self.__jogador.is_jump:
+            if self.jogador.last_side == 1:
+                self.__screen.blit(self.__jogador.sprites["jump"], tuple(self.__jogador.posicao))
+            else:
+                self.__screen.blit(self.__jogador.sprites["jumpM"], tuple(self.__jogador.posicao))
+
+        elif self.__jogador.is_fall:
+            if self.__jogador.last_side == 1:
+                self.__screen.blit(self.__jogador.sprites["fall"], tuple(self.__jogador.posicao))
+            else:
+                self.__screen.blit(self.__jogador.sprites["fallM"], tuple(self.__jogador.posicao))
+
+        elif self.__jogador.left:
             #if self.__jogador.last_side == 1:
                 #self.__screen.blit(self.__jogador.sprites["idle"][0], tuple(self.__jogador.posicao))
 
@@ -58,7 +79,7 @@ class Jogo (IJogo):
             self.__jogador.idle_count = 0
             self.__jogador.last_side = 1
 
-        else:
+        elif self.__jogador.is_idle == True and self.__jogador.is_attack == False:
             #idle pra esquerda e idle pra direita
             if self.__jogador.last_side == 1:
                 #direita
@@ -69,6 +90,8 @@ class Jogo (IJogo):
                 #esquerda
                 self.__screen.blit(self.__jogador.sprites["idleM"][self.__jogador.idle_count // 3], tuple(self.__jogador.posicao))
                 self.__jogador.idle_count += 1
+
+        
 
             
 
@@ -93,5 +116,7 @@ class Jogo (IJogo):
     @property
     def vitoria (self):
         return self.__vitoria
-jogador = Jogador(2, [3, 3])
+
+
+jogador = Jogador(8, [3, 3])
 a = Jogo(2, 2, jogador, 2, 2)

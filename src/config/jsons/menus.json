@@ -1,14 +1,14 @@
 {
     "tamanho_janela": {"width": 1280,
                        "height": 720},
-    "fonte_titulo": {"fonte": "Helvetica",
-                     "tamanho": 24},
-    "fonte_botoes": {"fonte": "Helvetica",
-                     "tamanho": 12},
+    "fonte_titulo": {"fonte": "ThaleahFat",
+                     "tamanho": 48},
+    "fonte_botoes": {"fonte": "ThaleahFat",
+                     "tamanho": 16},
     "tamanho_botoes": {"width": 600,
-                       "height": 40},
-    "botoes_stylesheet": "background-color: grey; border-style: outset; border-width: 3px; border-color: black; border-radius: 10px; padding: 3px",
-    "fases_stylesheet": "border-style: outset; border-width: 5px; border-color: green; border-radius: 20px; padding: 6px;",
+                       "height": 50},
+    "botoes_stylesheet": "QPushButton { background-color: black; border-style: outset; border-radius: 20px; border-width: 3px; border-color: green; border-radius: 10px; padding: 3px } QPushButton:hover { background-color: red; border-color: lightgreen;} QPushButton:pressed { background-color: darkyellow; border-color: darkgreen; }",
+    "fases_stylesheet": "border-style: outset; border-width: 5px; border-color: green; border-radius: 20px; padding: 6px; } QPushButton:hover { border-color:  #00A200; } QPushButton:pressed { border-color: #007000; }",
     "tamanho_fases" : {"width": 400,
                        "height": 225}
 }

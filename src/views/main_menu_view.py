@@ -1,9 +1,11 @@
 import sys
 from PyQt5.Qt import QFont, QPixmap
 from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import QWidget, QVBoxLayout
 
-from src.config.menu_config_loader import MenuConfigLoader
+from src.views.widgets.botao_padrao import BotaoPadrao
+from src.views.widgets.imagem_central import ImagemCentral
+from src.views.widgets.titulo_janela import TituloJanela
 
 
 class MainMenuView(QWidget):
@@ -12,42 +14,27 @@ class MainMenuView(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.__config = MenuConfigLoader()
         self.__layout = QVBoxLayout()
         self.mostra_view()
 
     def mostra_view(self):
-        #pretendo colocar isso no config loader, de algum jeito...
-        alinhamento_titulo = Qt.AlignHCenter | Qt.AlignTop
-        alinhamento_botao = Qt.AlignHCenter | Qt.AlignBottom
+        titulo = TituloJanela("Blockfiesta!")
+        titulo.adicionar_ao_layout(self.__layout)
 
-        titulo = QLabel("Algum dia saberemos")
-        titulo.setFont(QFont(self.__config.fonte_titulo, self.__config.tamanho_fonte_titulo))
-        self.__layout.addWidget(titulo, alignment = alinhamento_titulo)
+        imagem_central = ImagemCentral()
+        imagem_central.adicionar_ao_layout(self.__layout)
 
-        imagem_central = QLabel()
-        pixmap = QPixmap(self.__config.diretorio_assets + "/menu principal/centro.png")
-        imagem_central.setPixmap(pixmap)
-        imagem_central.setFixedSize(960, 540)
-        self.__layout.addWidget(imagem_central, alignment = Qt.AlignCenter)
-
-        botao_jogar = QPushButton("Jogar")
-        botao_jogar.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
-        botao_jogar.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_jogar = BotaoPadrao("Jogar")
         botao_jogar.clicked.connect(self.__jogar)
-        self.__layout.addWidget(botao_jogar, alignment = alinhamento_botao)
+        botao_jogar.adicionar_ao_layout(self.__layout)
 
-        botao_ajuda = QPushButton("Ajuda")
-        botao_ajuda.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
-        botao_ajuda.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_ajuda = BotaoPadrao("Ajuda")
         botao_ajuda.clicked.connect(self.__ajuda)
-        self.__layout.addWidget(botao_ajuda, alignment = alinhamento_botao)
+        botao_ajuda.adicionar_ao_layout(self.__layout)
 
-        botao_sair = QPushButton("Sair")
-        botao_sair.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
-        botao_sair.setFixedSize(self.__config.width_botoes, self.__config.height_botoes)
+        botao_sair = BotaoPadrao("Sair")
         botao_sair.clicked.connect(self.__sair)
-        self.__layout.addWidget(botao_sair, alignment = alinhamento_botao)
+        botao_sair.adicionar_ao_layout(self.__layout)
 
         self.setLayout(self.__layout)
         return self.__layout

@@ -59,6 +59,10 @@ class JogadorConfigLoader(ConfigLoader):
         sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(76, 0, 58, 58)), (100, 100)))
         sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(129, 0, 53, 53)), (100, 100)))
 
+        sprites_attack_invertido.append(flip(sprites_attack[0],1,0))
+        sprites_attack_invertido.append(flip(sprites_attack[1],1,0))
+        sprites_attack_invertido.append(flip(sprites_attack[2],1,0))
+
         return {"left": sprites_run_left, "right": sprites_run_right, "idle": sprites_idle, "idleM": sprites_idle_invertido,
                 "attack": sprites_attack, "attackM": sprites_attack_invertido, "jump": sprite_pulo, "jumpM": sprite_pulo_invertido,
                 "fall": sprite_queda, "fallM": sprite_queda_invertido}

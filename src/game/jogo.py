@@ -31,9 +31,17 @@ class Jogo (IJogo):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     rodando = False
+            self.__cenario.atualizar(self.__screen)
+            if self.__jogador.hitbox.collidelist(self.__cenario.hitbox_blocos) != -1:
+                print("colidindo!!")
+
             tecla = pygame.key.get_pressed()
             self.__jogador.atualizar(tecla, self.__screen)
             self.atualizar()
+            # self.__screen.blit(self.__jogador.sprites["attack"][0], (400, 500))
+            # self.__screen.blit(self.__jogador.sprites["attack"][1], (600, 500))
+            # self.__screen.blit(self.__jogador.sprites["attack"][2], (800, 500))
+            # self.__screen.blit(self.__jogador.sprites["idle"][0], (1000, 500))
             pygame.display.update()
 
     def atualizar(self):

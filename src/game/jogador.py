@@ -29,12 +29,15 @@ class Jogador(IJogador):
         self.__is_attack = False
         self.__is_idle = True
         self.__is_fall = False
+        self.__pode_mover = True
 
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
         self.__jump_count = 0
         self.__idle_count = 0
         self.__attack_count = 0
+        self.__tamanho_hitbox = (self.__config.tamanho[0], self.__config.tamanho[1])
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
 
     def atualizar(self, tecla, screen):
         self.mover(tecla)
@@ -96,7 +99,13 @@ class Jogador(IJogador):
                 screen.blit(self.__sprites["idleM"][self.__idle_count // 3], tuple(self.__posicao))
                 self.__idle_count += 1
 
+        self.__hitbox.x = self.__posicao[0]
+        self.__hitbox.y = self.__posicao[1]
+        pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
+
     def mover(self, tecla):
+        if not self.__pode_mover:
+            return
         if tecla[pygame.K_RIGHT]:
             self.__posicao[0] += self.__velocidade
             self.__right = True
@@ -278,3 +287,19 @@ class Jogador(IJogador):
     @is_jump.setter
     def is_jump(self, is_jump):
         self.__is_jump = is_jump
+
+    @property
+    def pode_mover(self):
+        return self.__pode_mover
+
+    @pode_mover.setter
+    def pode_mover(self, pode_mover):
+        self.__pode_mover = pode_mover
+
+    @property
+    def tamanho_hitbox(self):
+        return self.__tamanho_hitbox
+
+    @property
+    def hitbox(self):
+        return self.__hitbox

@@ -6,6 +6,7 @@ from src.exceptions.tipo_nao_compativel_exception import TipoNaoCompativelExcept
 from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
 from src.game.item import Item
+from src.game.bloco_cenario import BlocoCenario
 
 
 class Jogador(IJogador):
@@ -16,6 +17,7 @@ class Jogador(IJogador):
         self.__velocidade = velocidade
         self.__item_equipado = 0
         self.__posicao = posicao_inicial
+
 
         #lista composta para os sprites
         self.__sprites = self.__config.recortar_sprites()
@@ -117,6 +119,7 @@ class Jogador(IJogador):
 
         self.__hitbox.x = self.__posicao[0]
         self.__hitbox.y = self.__posicao[1]
+        self.mudar_item(tecla)
         pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
     def mover(self, tecla):
@@ -126,6 +129,8 @@ class Jogador(IJogador):
             self.__posicao[0] += self.__velocidade
             self.__right = True
             self.__left = False
+            if self.__posicao[0]>1200:
+                self.__posicao[0]=1200
 
         elif tecla[pygame.K_LEFT]:
             if self.__posicao[0] - self.__velocidade >= 0:
@@ -175,24 +180,41 @@ class Jogador(IJogador):
         #self.__posicao[1] = 3
 
     def usar(self):
-        if self.__attack_count >= 11:
-            self.__attack_count = 0
-            self.__is_attack = False
-            self.__is_idle = True
-
-        elif self.__attack_count == 0:
-            try:
-                self.__inventario.itens[self.__item_equipado].usar()
-                print("usou!")
-            except AttributeError:
-                print("Sem Item")
-                self.__is_attack = False
+        
+        #if self.__item_equipado>=3:
+            #criar bloco
+            #pass
+        
+            if self.__attack_count >= 11:
                 self.__attack_count = 0
-        else:
-            self.__attack_count += 1
+                self.__is_attack = False
+                self.__is_idle = True
+
+            elif self.__attack_count == 0:
+                try:
+                    self.__inventario.itens[self.__item_equipado].usar()
+                    print("usou!")
+                except AttributeError:
+                    print("Sem Item")
+                    self.__is_attack = False
+                    self.__attack_count = 0
+            else:
+                self.__attack_count += 1
 
     def mudar_item(self, tecla):
-        self.__item_equipado = tecla
+        if tecla[pygame.K_1]:
+            self.__item_equipado = 0
+        elif tecla[pygame.K_2]:
+            self.__item_equipado = 1
+        elif tecla[pygame.K_3]:
+            self.__item_equipado = 2
+        elif tecla[pygame.K_4]:
+            self.__item_equipado = 3
+        elif tecla[pygame.K_5]:
+            self.__item_equipado = 4
+        elif tecla[pygame.K_6]:
+            self.__item_equipado = 5
+
 
     def adicionar_item(self, item: Item):
         if isinstance(item, Item):

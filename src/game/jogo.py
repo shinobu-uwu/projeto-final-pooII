@@ -6,6 +6,7 @@ from src.game.camera import Camera
 from src.game.cenario import Cenario
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
+from src.game.hud import HUD
 
 
 class Jogo (IJogo):
@@ -18,7 +19,12 @@ class Jogo (IJogo):
         self.__tempo = tempo
         self.__vitoria = vitoria
         self.__clock = pygame.time.Clock()
+        self.__hud=HUD(self.__jogador)
         self.inicia_loop()
+
+    
+
+
 
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
@@ -35,9 +41,12 @@ class Jogo (IJogo):
             if self.__jogador.hitbox.collidelist(self.__cenario.hitbox_blocos) != -1:
                 print("colidindo!!")
 
+
             tecla = pygame.key.get_pressed()
             self.__jogador.atualizar(tecla, self.__screen)
+            self.__hud.atualizar(self.__screen,self.__clock)
             self.atualizar()
+            
             # self.__screen.blit(self.__jogador.sprites["attack"][0], (400, 500))
             # self.__screen.blit(self.__jogador.sprites["attack"][1], (600, 500))
             # self.__screen.blit(self.__jogador.sprites["attack"][2], (800, 500))

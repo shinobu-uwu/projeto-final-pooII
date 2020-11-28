@@ -68,9 +68,3 @@ class Jogo (IJogo):
     def vitoria (self):
         return self.__vitoria
 
-"""Testing
-jog = Jogador(5,[20,20])
-
-camera = Camera(5,[20,20])
-cen = Cenario("","",10)
-jogo = Jogo(10,camera,jog,cen,0)"""

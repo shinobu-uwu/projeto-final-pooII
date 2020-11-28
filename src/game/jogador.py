@@ -58,15 +58,31 @@ class Jogador(IJogador):
 
         elif not self.__is_fall and self.__is_jump:
             if self.__last_side == 1:
-                screen.blit(self.__sprites["jump"], tuple(self.__posicao))
+                if self.left:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jumpM"], tuple(self.__posicao))
+                else:
+                    screen.blit(self.__sprites["jump"], tuple(self.__posicao))
             else:
-                screen.blit(self.__sprites["jumpM"], tuple(self.__posicao))
+                if self.right:
+                    self.__last_side = 1
+                    screen.blit(self.__sprites["jump"], tuple(self.__posicao))
+                else:
+                    screen.blit(self.__sprites["jumpM"], tuple(self.__posicao))
 
         elif self.__is_fall:
             if self.__last_side == 1:
-                screen.blit(self.__sprites["fall"], tuple(self.__posicao))
+                if self.left:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jumpM"], tuple(self.__posicao))
+                else:
+                    screen.blit(self.__sprites["fall"], tuple(self.__posicao))
             else:
-                screen.blit(self.__sprites["fallM"], tuple(self.__posicao))
+                if self.right:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jump"], tuple(self.__posicao))
+                else:
+                    screen.blit(self.__sprites["fallM"], tuple(self.__posicao))
 
         elif self.__left:
             #if self.__last_side == 1:

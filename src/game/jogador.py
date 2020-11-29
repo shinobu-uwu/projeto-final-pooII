@@ -171,24 +171,19 @@ class Jogador(IJogador):
                 self.__is_fall = False
 
     def usar(self):
-        
-        #if self.__item_equipado>=3:
-            #criar bloco
-            #pass
-        
-            if self.__attack_count >= 11:
-                self.__attack_count = 0
-                self.__is_attack = False
-                self.__is_idle = True
+        if self.__attack_count >= 11:
+            self.__attack_count = 0
+            self.__is_attack = False
+            self.__is_idle = True
 
-            elif self.__attack_count == 0:
-                try:
-                    self.__inventario.itens[self.__item_equipado].usar()
-                    print("usou!")
-                except AttributeError:
-                    print("Sem Item")
-                    self.__is_attack = False
-                    self.__attack_count = 0
+        elif self.__attack_count == 0:
+            try:
+                self.__inventario.itens[self.__item_equipado].usar()
+                print("usou!")
+            except AttributeError:
+                print("Sem Item")
+                self.__is_attack = False
+                self.__attack_count = 0
             else:
                 self.__attack_count += 1
 

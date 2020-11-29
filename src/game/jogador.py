@@ -53,12 +53,22 @@ class Jogador(IJogador):
 
         if self.__is_attack:
             if self.__last_side == 1:
-                screen.blit(self.__sprites["attack"][self.__attack_count //4], tuple(self.__posicao))
-                self.__attack_count += 1
+                if self.__left:
+                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], tuple(self.__posicao))
+                    self.__attack_count += 1
+                    self.__last_side = 0
+                else:    
+                    screen.blit(self.__sprites["attack"][self.__attack_count //4], tuple(self.__posicao))
+                    self.__attack_count += 1
 
             else:
-                screen.blit(self.__sprites["attackM"][self.__attack_count //4], tuple(self.__posicao))
-                self.__attack_count += 1
+                if self.__right:
+                    screen.blit(self.__sprites["attack"][self.__attack_count //4], tuple(self.__posicao))
+                    self.__last_side = 1
+                    self.__attack_count += 1
+                else:
+                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], tuple(self.__posicao))
+                    self.__attack_count += 1
 
         elif not self.__is_fall and self.__is_jump:
             if self.__last_side == 1:
@@ -113,7 +123,7 @@ class Jogador(IJogador):
                 self.__idle_count += 1
 
         if self.__right:
-            self.__hitbox.x = self.__posicao[0]
+            self.__hitbox.x = self.__posicao[0] + 32
             self.__hitbox.y = self.__posicao[1] + 36
         else:
             self.__hitbox.x = self.__posicao[0] + 32

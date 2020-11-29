@@ -66,3 +66,15 @@ class JogadorConfigLoader(ConfigLoader):
         return {"left": sprites_run_left, "right": sprites_run_right, "idle": sprites_idle, "idleM": sprites_idle_invertido,
                 "attack": sprites_attack, "attackM": sprites_attack_invertido, "jump": sprite_pulo, "jumpM": sprite_pulo_invertido,
                 "fall": sprite_queda, "fallM": sprite_queda_invertido}
+
+    @property
+    def massa(self):
+        return self.__config["massa"]
+
+    @property
+    def tamanho_pulo(self):
+        return self.__config["massa"]
+
+    @property
+    def velocidade(self):
+        return self.__config["velocidade"]

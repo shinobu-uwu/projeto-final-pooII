@@ -1,3 +1,5 @@
 {
-
+    "massa": 5,
+    "tamanho_pulo": 10,
+    "velocidade": 8
 }

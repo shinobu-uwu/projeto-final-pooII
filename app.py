@@ -12,7 +12,7 @@ from src.game.jogador import Jogador
 bloco = BlocoCenario(2, 3, [640, 360])
 cenario = Cenario(1, [bloco], 300)
 
-jogador = Jogador(8, [0, 0])
+jogador = Jogador([0, 600])
 jogo = Jogo(2, 3, jogador, cenario, True)
 
 #a = Controller()

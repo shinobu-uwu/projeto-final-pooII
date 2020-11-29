@@ -10,13 +10,15 @@ from src.game.bloco_cenario import BlocoCenario
 
 
 class Jogador(IJogador):
-    def __init__(self, velocidade: float, posicao_inicial: list):
+    def __init__(self, posicao_inicial: list):
         self.__config = JogadorConfigLoader()
         self.__morto = False
         self.__inventario = Inventario()
-        self.__velocidade = velocidade
+        self.__velocidade = self.__config.velocidade
         self.__item_equipado = 0
         self.__posicao = posicao_inicial
+        self.__massa = self.__config.massa
+        self.__tamanho_pulo = self.__config.tamanho_pulo
 
         #dicionário para os sprites
         self.__sprites = self.__config.recortar_sprites()
@@ -35,7 +37,7 @@ class Jogador(IJogador):
 
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
-        self.__jump_count = 0
+        self.__jump_count = self.__tamanho_pulo
         self.__idle_count = 0
         self.__attack_count = 0
         self.__tamanho_hitbox = (self.__config.tamanho[0], self.__config.tamanho[1])
@@ -87,9 +89,6 @@ class Jogador(IJogador):
                     screen.blit(self.__sprites["fallM"], tuple(self.__posicao))
 
         elif self.__left:
-            #if self.__last_side == 1:
-                #screen.blit(self.__sprites["idle"][0], tuple(self.__posicao))
-
             screen.blit(self.__sprites["left"][self.__walk_count // 3], tuple(self.__posicao))
             self.__walk_count += 1
             self.__idle_count = 0
@@ -158,19 +157,18 @@ class Jogador(IJogador):
             self.usar()
 
     def pular(self):
-        if self.__jump_count >= -10:
-            neg = 1
-            if self.__jump_count < 0:
-                neg = -1
-                self.__is_fall = True
-
-            self.__posicao[1] -= (self.__jump_count**2) * neg
-            print(self.__jump_count)
+        if self.__is_jump:
+            forca = (self.__massa * self.__jump_count ** 2) / 2
+            self.__posicao[1] -= forca
             self.__jump_count -= 1
-        else:
-            self.__is_jump = False
-            self.__is_fall = False
-            self.__jump_count = 10
+            if self.__jump_count == 0:
+                self.__massa = -self.__massa
+                self.__is_fall = True
+            if self.__jump_count < -self.__tamanho_pulo:
+                self.__is_jump = False
+                self.__massa = self.__config.massa
+                self.__jump_count = self.__tamanho_pulo
+                self.__is_fall = False
 
     def usar(self):
         

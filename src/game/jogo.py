@@ -22,10 +22,6 @@ class Jogo (IJogo):
         self.__hud=HUD(self.__jogador)
         self.inicia_loop()
 
-    
-
-
-
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
@@ -38,19 +34,34 @@ class Jogo (IJogo):
                 if event.type == pygame.QUIT:
                     rodando = False
             self.__cenario.atualizar(self.__screen)
-            if self.__jogador.hitbox.collidelist(self.__cenario.hitbox_blocos) != -1:
-                print("colidindo!!")
+            #Checar colisões
+            for bloco in self.__cenario.mapa:
+                #Checa se a direita do personagem colide com a esquerda de um bloco
+                if self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] >= bloco.hitbox[0] and\
+                    self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] <= bloco.hitbox[0] + bloco.tamanho_hitbox[0]:
+                    if self.__jogador.hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1] and self.__jogador.hitbox[1] >= bloco.hitbox[1]:
+                        self.__jogador.pode_mover_direita = False
+                        self.__jogador.pode_mover_esquerda = True
+                    #reset
+                    else:
+                        self.__jogador.pode_mover_direita = True
+                        self.__jogador.pode_mover_esquerda = True
+                #Checa se a esquerda do personagem colide com a direita de um bloco
+                if self.__jogador.hitbox[0] >= bloco.hitbox[0] and self.__jogador.hitbox[0] <= bloco.hitbox[0] + bloco.tamanho_hitbox[0]:
+                    if self.__jogador.hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1] and self.__jogador.hitbox[1] >= bloco.hitbox[1]:
+                        self.__jogador.pode_mover_direita = True
+                        self.__jogador.pode_mover_esquerda = False
+                    
+                    else:
+                        self.__jogador.pode_mover_direita = True
+                        self.__jogador.pode_mover_esquerda = True
 
-
+                #TODO colisão vertical
+                
             tecla = pygame.key.get_pressed()
             self.__jogador.atualizar(tecla, self.__screen)
             self.__hud.atualizar(self.__screen,self.__clock)
             self.atualizar()
-            
-            # self.__screen.blit(self.__jogador.sprites["attack"][0], (400, 500))
-            # self.__screen.blit(self.__jogador.sprites["attack"][1], (600, 500))
-            # self.__screen.blit(self.__jogador.sprites["attack"][2], (800, 500))
-            # self.__screen.blit(self.__jogador.sprites["idle"][0], (1000, 500))
             pygame.display.update()
 
     def atualizar(self):

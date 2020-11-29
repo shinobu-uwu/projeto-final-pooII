@@ -18,8 +18,7 @@ class Jogador(IJogador):
         self.__item_equipado = 0
         self.__posicao = posicao_inicial
 
-
-        #lista composta para os sprites
+        #dicionário para os sprites
         self.__sprites = self.__config.recortar_sprites()
 
         #bools para determinar qual animação o personagem está realizando
@@ -31,7 +30,8 @@ class Jogador(IJogador):
         self.__is_attack = False
         self.__is_idle = True
         self.__is_fall = False
-        self.__pode_mover = True
+        self.__pode_mover_direita = True
+        self.__pode_mover_esquerda = True
 
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
@@ -96,10 +96,6 @@ class Jogador(IJogador):
             self.__last_side = 0
 
         elif self.__right:
-            #if self.__last_side == 0:
-                #screen.blit(self.__sprites["idleM"][0], tuple(self.__posicao))
-
-            print(self.__walk_count)
             screen.blit(self.__sprites["right"][self.__walk_count // 3], tuple(self.__posicao))
             self.__walk_count += 1
             self.__idle_count = 0
@@ -123,16 +119,14 @@ class Jogador(IJogador):
         pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
     def mover(self, tecla):
-        if not self.__pode_mover:
-            return
-        if tecla[pygame.K_RIGHT]:
+        if tecla[pygame.K_RIGHT] and self.__pode_mover_direita:
             self.__posicao[0] += self.__velocidade
             self.__right = True
             self.__left = False
             if self.__posicao[0]>1200:
                 self.__posicao[0]=1200
 
-        elif tecla[pygame.K_LEFT]:
+        elif tecla[pygame.K_LEFT] and self.__pode_mover_esquerda:
             if self.__posicao[0] - self.__velocidade >= 0:
                 self.__posicao[0] -= self.__velocidade
                 self.__left = True
@@ -177,7 +171,6 @@ class Jogador(IJogador):
             self.__is_jump = False
             self.__is_fall = False
             self.__jump_count = 10
-        #self.__posicao[1] = 3
 
     def usar(self):
         
@@ -327,12 +320,20 @@ class Jogador(IJogador):
         self.__is_jump = is_jump
 
     @property
-    def pode_mover(self):
-        return self.__pode_mover
+    def pode_mover_direita(self):
+        return self.__pode_mover_direita
 
-    @pode_mover.setter
-    def pode_mover(self, pode_mover):
-        self.__pode_mover = pode_mover
+    @pode_mover_direita.setter
+    def pode_mover_direita(self, pode_mover_direita):
+        self.__pode_mover_direita = pode_mover_direita
+
+    @property
+    def pode_mover_esquerda(self):
+        return self.__pode_mover_esquerda
+
+    @pode_mover_esquerda.setter
+    def pode_mover_esquerda(self, pode_mover_esquerda):
+        self.__pode_mover_esquerda = pode_mover_esquerda
 
     @property
     def tamanho_hitbox(self):
@@ -341,3 +342,7 @@ class Jogador(IJogador):
     @property
     def hitbox(self):
         return self.__hitbox
+
+    @posicao.setter
+    def posicao(self, posicao):
+        self.__posicao = posicao

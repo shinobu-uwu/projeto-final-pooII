@@ -40,8 +40,8 @@ class Jogador(IJogador):
         self.__jump_count = self.__tamanho_pulo
         self.__idle_count = 0
         self.__attack_count = 0
-        self.__tamanho_hitbox = (self.__config.tamanho[0], self.__config.tamanho[1])
-        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
+        self.__tamanho_hitbox = (self.__config.tamanho[0]/2, self.__config.tamanho[1]/2)
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1] + 18, self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
 
     def atualizar(self, tecla, screen):
         self.mover(tecla)
@@ -112,8 +112,14 @@ class Jogador(IJogador):
                 screen.blit(self.__sprites["idleM"][self.__idle_count // 3], tuple(self.__posicao))
                 self.__idle_count += 1
 
-        self.__hitbox.x = self.__posicao[0]
-        self.__hitbox.y = self.__posicao[1]
+        if self.__right:
+            self.__hitbox.x = self.__posicao[0]
+            self.__hitbox.y = self.__posicao[1] + 36
+        else:
+            self.__hitbox.x = self.__posicao[0] + 32
+            self.__hitbox.y = self.__posicao[1] + 36
+        
+
         self.mudar_item(tecla)
         pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
@@ -122,12 +128,14 @@ class Jogador(IJogador):
             self.__posicao[0] += self.__velocidade
             self.__right = True
             self.__left = False
+            self.__hitbox.x = self.__posicao[0]
             if self.__posicao[0]>1200:
                 self.__posicao[0]=1200
 
         elif tecla[pygame.K_LEFT] and self.__pode_mover_esquerda:
             if self.__posicao[0] - self.__velocidade >= 0:
                 self.__posicao[0] -= self.__velocidade
+                self.__hitbox.x = self.__posicao[0]
                 self.__left = True
                 self.__right = False
             else:

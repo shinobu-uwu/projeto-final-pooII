@@ -10,7 +10,7 @@ class JogadorConfigLoader(ConfigLoader):
     def __init__(self):
         self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/jogador.json")
         self.load()
-        self.__tamanho_original = [37, 28]
+        self.__tamanho_original = [37*2, 28*2]
 
     def load(self):
         with open(self.__path, 'r') as f:
@@ -24,14 +24,15 @@ class JogadorConfigLoader(ConfigLoader):
     def diretorio_sprites(self):
         #codigo do path do bings - meu pythonpath tem 2 variáveis
         #return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
-        return os.path.join(self.diretorio_assets, "sprites")
+        return os.path.join(self.diretorio_assets, "sprites/original/")
 
 
 
     def recortar_sprites(self):
         sprite_idle = pygame.image.load(os.path.join(self.diretorio_sprites, "idle.png"))
-        sprite_run_left = pygame.image.load(os.path.join(self.diretorio_sprites, "runLeft.png"))
+        #sprite_run_left = pygame.image.load(os.path.join(self.diretorio_sprites, "runLeft.png"))
         sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "runRight.png"))
+        #sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
         sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
         sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "jump.png")), self.tamanho)
         sprite_pulo_invertido = flip(sprite_pulo, 1, 0)
@@ -51,13 +52,16 @@ class JogadorConfigLoader(ConfigLoader):
             sprites_idle_invertido.append(flip(sprites_idle[i], 1, 0))
 
         for j in range(8):
-            sprites_run_left.append(scale(sprite_run_left.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
+            #sprites_run_left.append(scale(sprite_run_left.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
             sprites_run_right.append(scale(sprite_run_right.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
+            sprites_run_left.append(flip(sprites_run_right[j], 1, 0))    
 
+        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(0, 0, 58, 58)), (100, 100)))
+        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(76, 0, 58, 58)), (100, 100)))
+        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(129, 0, 53, 53)), (100, 100)))
 
-        sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(0, 0, 58, 58)), (100, 100)))
-        sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(76, 0, 58, 58)), (100, 100)))
-        sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(129, 0, 53, 53)), (100, 100)))
+        for k in range(3):
+            sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(78*k, 0, self.__tamanho_original[0], self.__tamanho_original[1])),self.tamanho))
 
         sprites_attack_invertido.append(flip(sprites_attack[0],1,0))
         sprites_attack_invertido.append(flip(sprites_attack[1],1,0))

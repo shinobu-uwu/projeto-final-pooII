@@ -9,7 +9,7 @@ from src.game.jogo import Jogo
 from src.game.jogador import Jogador
 
 
-bloco = BlocoCenario(2, 3, [640, 360])
+bloco = BlocoCenario(2, 3, [640, 390])
 cenario = Cenario(1, [bloco], 300)
 
 jogador = Jogador([1200, 360])

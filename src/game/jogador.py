@@ -41,7 +41,7 @@ class Jogador(IJogador):
         self.__idle_count = 0
         self.__attack_count = 0
         self.__tamanho_hitbox = (self.__config.tamanho[0]/2, self.__config.tamanho[1]/2)
-        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1] + 18, self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1] + 15, self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
 
     def atualizar(self, tecla, screen):
         self.mover(tecla)
@@ -122,11 +122,11 @@ class Jogador(IJogador):
                 screen.blit(self.__sprites["idleM"][self.__idle_count // 3], tuple(self.__posicao))
                 self.__idle_count += 1
 
-        if self.__right:
+        if self.__right or self.__last_side == 1:
             self.__hitbox.x = self.__posicao[0] + 32
             self.__hitbox.y = self.__posicao[1] + 36
         else:
-            self.__hitbox.x = self.__posicao[0] + 32
+            self.__hitbox.x = self.__posicao[0] + 50
             self.__hitbox.y = self.__posicao[1] + 36
         
 

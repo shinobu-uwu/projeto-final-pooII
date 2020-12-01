@@ -42,6 +42,13 @@ class Jogo (IJogo):
             pygame.display.update()
 
     def checar_colisoes(self):
+        
+        """Vamo lá, o negócio das colisões é o seguinte, ele tá certa, o problema
+            é que como ele tá em um for, ele tá checando todos, mas a colisão só funciona
+            com o primeiro da lista. Acho realmente mais facil fazer com o pymunk e dar uma
+            suavidade tbm no movimento dele, e a parte de quebrar os blocos é bem dboa"""
+
+
         for bloco in self.__cenario.mapa:
             #Checa se a direita do personagem colide com a esquerda de um bloco
             if self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] >= bloco.hitbox[0] and\
@@ -52,6 +59,14 @@ class Jogo (IJogo):
                 self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1]:
                     self.__jogador.pode_mover_direita = False
                     self.__jogador.pode_mover_esquerda = True
+                    
+                    #quebrar para a direita
+                    if self.jogador.is_attack and self.jogador.last_side == 1:
+                        self.__cenario.mapa.remove(bloco)
+                        self.__jogador.pode_mover_direita = True
+                        self.__jogador.pode_mover_esquerda = True
+                        break
+
                 #reset
                 else:
                     self.__jogador.pode_mover_direita = True
@@ -63,6 +78,14 @@ class Jogo (IJogo):
                 self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1]:
                     self.__jogador.pode_mover_esquerda = True
                     self.__jogador.pode_mover_esquerda = False
+
+                    #quebrar para a esquerda
+                    if self.jogador.is_attack and self.jogador.last_side == 0:
+                        self.__cenario.mapa.remove(bloco)
+                        self.__jogador.pode_mover_direita = True
+                        self.__jogador.pode_mover_esquerda = True
+                        break
+
                 #reset
                 else:
                     self.__jogador.pode_mover_direita = True

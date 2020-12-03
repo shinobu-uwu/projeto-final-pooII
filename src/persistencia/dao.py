@@ -14,23 +14,33 @@ class DAO:
         f = open(self.__datasource, 'w')
         json.dump(self.__cache, f, indent = 4)
 
-    def __load(self):
+   def __load(self):
         try:
             f = open(self.__datasource, 'r')
         except FileNotFoundError:
-            self.__dump()
+           self.__dump()
             self.__load()
         else:
             self.__cache = json.load(f)
 
     def add(self, score: Score):
         if isinstance(score, Score):
-            if score.jogador in self.__cache.keys():
-                self.__cache[score.jogador].append(score.to_dict())
-            else:
-                self.__cache[score.jogador] = []
-                self.__cache[score.jogador].append(score.to_dict())
-            self.__dump()
+            if score.jogador not in self.__cache.keys():
+               self.__cache[score.jogador] = {}
+                for i in range(1, 7):
+                    self.__cache[score.jogador][f"fase{i}"] = []
+            self.__cache[score.jogador][f"fase{score.fase}"].append(score.to_dict())
+           self.__dump()
+
+    def melhor_tempo_fase(self, fase):
+       #pode ser qualquer número inicial, desde que ele seja suficientemente grande
+       minimo = 100000
+        for key in self.__cache.keys():
+            candidato_a_minimo = min(self.__cache[key][f"fase{fase}"])
+            if candidato_a_minimo < minimo:
+               jogador = key
+                minimo = candidato_a_minimo
+        return Score(minimo, fase, jogador)
 
     @property
     def cache(self):

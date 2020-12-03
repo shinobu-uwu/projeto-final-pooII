@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication
 
 from src.config.menu_config_loader import MenuConfigLoader
 from src.game.sistema import Sistema
+from src.persistencia.dao import DAO
 from src.views.ajuda_view import AjudaView
 from src.views.leaderboard_view import LeaderboardView
 from src.views.main_menu_view import MainMenuView
@@ -14,6 +15,7 @@ class Controller:
     def __init__(self):
         self.__sistema = Sistema("Pog")
         self.__config = MenuConfigLoader()
+        self.__dao = DAO()
         self.__app = QApplication(sys.argv)
         self.__window = MainWindow()
         self.__central_widget = MainMenuView()
@@ -36,6 +38,7 @@ class Controller:
         self.__central_widget.sinal_fase.connect(self.selecionar_fase)
 
     def leaderboard(self):
+        scores = self.__dao.get_all_highscores()
         self.__central_widget = LeaderboardView()
         self.set_central_widget()
         self.__central_widget.sinal_voltar.connect(self.voltar)

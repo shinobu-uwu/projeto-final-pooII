@@ -5,13 +5,14 @@ class Score:
         self.__tempo = tempo
         self.__fase = fase
         self.__jogador = jogador
-        self.__data = datetime.datetime.now()
-
 
     def to_dict(self):
-        score = {"tempo": str(self.__tempo), "fase": str(self.__fase), "data": str(self.__data)}
-        return score
+        return self.__tempo
 
     @property
     def jogador(self):
         return self.__jogador
+
+    @property
+    def fase(self):
+        return self.__fase

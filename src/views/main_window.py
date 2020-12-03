@@ -13,7 +13,7 @@ class MainWindow(QMainWindow):
         #Configurações da janela
         self.setStyleSheet(self.__config.stylesheet)
         self.setFixedSize(self.__config.width_janela, self.__config.height_janela)
-        self.setWindowIcon(QIcon(f"{self.__config.diretorio_assets}/icon/icon.png"))
+        self.setWindowIcon(QIcon(os.path.join(self.__config.diretorio_assets, "icon/icon.png")))
 
     #Reescrever o paintEvent da classe QMainWindow, para a
     #janela ser criada com o fundo que queremos

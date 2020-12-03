@@ -9,5 +9,7 @@
                        "height": 50},
     "stylesheet": "BotaoPadrao { background-color: black; border-style: outset; border-radius: 25px; border-width: 3px; border-color: green; padding: 3px; } BotaoPadrao:hover { background-color: red; border-color: lightgreen; } BotaoPadrao:pressed { background-color: brown; border-color: black; }",
     "tamanho_fases" : {"width": 400,
-                       "height": 225}
+                       "height": 225},
+    "tamanho_leaderboard": {"width": 400,
+                            "height": 400}
 }

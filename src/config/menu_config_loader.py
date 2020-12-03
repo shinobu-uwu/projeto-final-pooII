@@ -1,9 +1,11 @@
 import json
 import os
+
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class MenuConfigLoader(ConfigLoader):
+class MenuConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = f"{os.path.abspath(os.path.dirname(__file__))}/jsons/menus.json"
         self.load()
@@ -59,3 +61,11 @@ class MenuConfigLoader(ConfigLoader):
     @property
     def height_fases(self):
         return self.__config["tamanho_fases"]["height"]
+
+    @property
+    def width_leaderboard(self):
+        return self.__config["tamanho_leaderboard"]["width"]
+
+    @property
+    def height_leaderboard(self):
+        return self.__config["tamanho_leaderboard"]["height"]

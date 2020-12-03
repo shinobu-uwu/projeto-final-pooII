@@ -15,8 +15,8 @@ bloco3 = BlocoCenario(2, 3, [740, 390])
 cenario = Cenario(1, [bloco3,bloco], 300)
 #cenario = Cenario(1, [bloco], 300)
 
-jogador = Jogador([300, 360])
-jogo = Jogo(2, 3, jogador, cenario, True)
+#jogador = Jogador([300, 360])
+#jogo = Jogo(2, 3, jogador, cenario, True)
 
-#a = Controller()
-#a.comeca()
+a = Controller()
+a.comeca()

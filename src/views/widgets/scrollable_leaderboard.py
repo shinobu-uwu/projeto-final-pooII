@@ -1,3 +1,4 @@
+from PyQt5.Qt import QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QListWidget
 
@@ -11,6 +12,7 @@ class ScrollableLeaderboard(QListWidget):
         for item in itens:
             self.addItem(item)
         self.setFixedSize(self.__config.width_leaderboard, self.__config.height_leaderboard)
+        self.setFont(QFont(self.__config.fonte_leaderboard, self.__config.tamanho_fonte_leaderboard))
 
     def adicionar_item(self, item):
         self.addItem(item)

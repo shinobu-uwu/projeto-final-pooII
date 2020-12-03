@@ -15,7 +15,7 @@ class LeaderboardView(QWidget):
         self.mostra_view()
 
     def mostra_view(self):
-        titulo = TituloJanela("Melhores jogador")
+        titulo = TituloJanela("Melhores jogadores")
         titulo.adicionar_ao_layout(self.__layout)
 
         leaderboard = ScrollableLeaderboard(["Pog"])

@@ -69,3 +69,11 @@ class MenuConfigLoader(ConfigLoader, Singleton):
     @property
     def height_leaderboard(self):
         return self.__config["tamanho_leaderboard"]["height"]
+
+    @property
+    def fonte_leaderboard(self):
+        return self.__config["fonte_leaderboard"]["fonte"]
+
+    @property
+    def tamanho_fonte_leaderboard(self):
+        return self.__config["fonte_leaderboard"]["tamanho"]

@@ -34,7 +34,7 @@ class DAO:
 
     def melhor_tempo_fase(self, fase):
        #pode ser qualquer número inicial, desde que ele seja suficientemente grande
-       minimo = 100000
+        minimo = 100000
         for key in self.__cache.keys():
             candidato_a_minimo = min(self.__cache[key][f"fase{fase}"])
             if candidato_a_minimo < minimo:

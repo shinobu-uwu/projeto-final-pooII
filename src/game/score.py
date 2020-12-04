@@ -1,5 +1,6 @@
 import datetime
 
+
 class Score:
     def __init__(self, tempo, fase, jogador):
         self.__tempo = tempo
@@ -16,3 +17,7 @@ class Score:
     @property
     def fase(self):
         return self.__fase
+
+    @property
+    def tempo(self):
+        return self.__tempo

@@ -9,8 +9,9 @@ from src.views.widgets.titulo_janela import TituloJanela
 class LeaderboardView(QWidget):
     sinal_voltar = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, itens):
         super().__init__()
+        self.__itens = itens
         self.__layout = QVBoxLayout()
         self.mostra_view()
 
@@ -18,8 +19,7 @@ class LeaderboardView(QWidget):
         titulo = TituloJanela("Melhores jogadores")
         titulo.adicionar_ao_layout(self.__layout)
 
-        leaderboard = ScrollableLeaderboard(["Pog"])
-        leaderboard.adicionar_item("Kappa")
+        leaderboard = ScrollableLeaderboard(self.__itens)
         leaderboard.adicionar_ao_layout(self.__layout)
 
         botao_voltar = BotaoPadrao("Voltar")

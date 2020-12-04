@@ -1,3 +1,4 @@
+from PyQt5.QtCore import right
 import pygame
 from pygame.locals import *
 
@@ -15,6 +16,11 @@ class Jogador(IJogador):
         self.__morto = False
         self.__inventario = Inventario()
         self.__velocidade = self.__config.velocidade
+
+        #teste
+        self.__lista_velocidade = [0, 0]
+        self.__momentum = [0,0]
+
         self.__item_equipado = 0
         self.__posicao = posicao_inicial
         self.__massa = self.__config.massa
@@ -35,13 +41,17 @@ class Jogador(IJogador):
         self.__pode_mover_direita = True
         self.__pode_mover_esquerda = True
 
+        #test
+        self.__teste_velocidade = [0,0]
+        self.__teste_movimento = [0,0]
+
         #contadores para o pulo e a animação de correr
         self.__walk_count = 0
         self.__jump_count = self.__tamanho_pulo
         self.__idle_count = 0
         self.__attack_count = 0
         self.__tamanho_hitbox = (self.__config.tamanho[0]/2, self.__config.tamanho[1]/2)
-        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1] + 15, self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0] - 30, self.__tamanho_hitbox[1])
 
     def atualizar(self, tecla, screen):
         self.mover(tecla)
@@ -133,6 +143,122 @@ class Jogador(IJogador):
         self.mudar_item(tecla)
         pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
+    def atualizar_teste(self, screen):
+        #O Segredo é sempre ajustar o sprite e NÃO o hitbox
+
+        #posicao ajustada dos nosso sprites
+        pos = self.__hitbox.x - 35
+
+        #Em alguns blits será possível ver que subtraimos mais 30, isso acontece pelo sprite virado ter que ser ajustado de novo
+
+        if self.__walk_count + 1 >= 24:
+            self.__walk_count = 0
+
+        if self.__idle_count + 1 >= 33:
+            self.__idle_count = 0
+
+        if self.__is_attack:
+            if self.__last_side == 1:
+                if self.__left:
+                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
+                    self.__attack_count += 1
+                    self.__last_side = 0
+                else:    
+                    screen.blit(self.__sprites["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
+                    self.__attack_count += 1
+
+            else:
+                if self.__right:
+                    screen.blit(self.__sprites["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
+                    self.__last_side = 1
+                    self.__attack_count += 1
+                else:
+                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
+                    self.__attack_count += 1
+
+        elif not self.__is_fall and self.__is_jump:
+            if self.__last_side == 1:
+                if self.left:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+                else:
+                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+            else:
+                if self.right:
+                    self.__last_side = 1
+                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+                else:
+                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+
+        elif self.__is_fall:
+            if self.__last_side == 1:
+                if self.left:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+                else:
+                    screen.blit(self.__sprites["fall"],(pos, self.__hitbox.y - 30))
+            else:
+                if self.right:
+                    self.__last_side = 0
+                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+                else:
+                    screen.blit(self.__sprites["fallM"], (pos - 30, self.__hitbox.y - 30))
+
+        elif self.__left:
+            screen.blit(self.__sprites["left"][self.__walk_count // 3], (pos - 30, self.__hitbox.y - 30))
+            self.__walk_count += 1
+            self.__idle_count = 0
+            self.__last_side = 0
+
+        elif self.__right:
+            screen.blit(self.__sprites["right"][self.__walk_count // 3], (pos, self.__hitbox.y - 30))
+            self.__walk_count += 1
+            self.__idle_count = 0
+            self.__last_side = 1
+
+        elif self.__is_idle == True and self.__is_attack == False:
+            #idle pra esquerda e idle pra direita
+            if self.__last_side == 1:
+                #direita
+                screen.blit(self.__sprites["idle"][self.__idle_count // 3], (pos, self.__hitbox.y - 30))
+                self.__idle_count += 1
+
+            else:
+                #esquerda
+                screen.blit(self.__sprites["idleM"][self.__idle_count // 3], (pos - 30, self.__hitbox.y - 30))
+                self.__idle_count += 1
+
+        """ if self.__right or self.__last_side == 1:
+            self.__hitbox.x += 32
+            self.__hitbox.y += 36
+        else:
+            self.__hitbox.x += 50
+            self.__hitbox.y += 36 """
+        
+
+        #self.mudar_item(tecla)
+        pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
+
+
+    """ def mover_teste(self,tecla):
+
+        self.__lista_velocidade[0] = 0
+        self.__lista_velocidade[1] = 0
+
+        if self.__right:
+            self.__lista_velocidade[0] += 2
+        
+        elif self.__left:
+            self.__lista_velocidade[0] -= 2
+
+        self.__lista_velocidade[1] += self.__momentum[1]
+
+        self.__momentum[1] += 3
+
+        if self.__momentum[1] > 3:
+            self.__momentum[1] = 3 """
+
+
     def mover(self, tecla):
         if tecla[pygame.K_RIGHT] and self.__pode_mover_direita:
             self.__posicao[0] += self.__velocidade
@@ -144,8 +270,8 @@ class Jogador(IJogador):
 
         elif tecla[pygame.K_LEFT] and self.__pode_mover_esquerda:
             if self.__posicao[0] - self.__velocidade >= 0:
-                self.__posicao[0] -= self.__velocidade
-                self.__hitbox.x = self.__posicao[0]
+                """ self.__posicao[0] -= self.__velocidade
+                self.__hitbox.x = self.__posicao[0] """
                 self.__left = True
                 self.__right = False
             else:
@@ -170,6 +296,61 @@ class Jogador(IJogador):
             if tecla[pygame.K_e]:
                 self.__is_attack = True
                 self.__is_idle = False
+    
+        else:
+            self.usar()
+
+    def pular(self):
+        if self.__is_jump:
+            forca = (self.__massa * self.__jump_count ** 2) / 2
+            self.__posicao[1] -= forca
+            self.__jump_count -= 1
+            if self.__jump_count == 0:
+                self.__massa = -self.__massa
+                self.__is_fall = True
+            if self.__jump_count < -self.__tamanho_pulo:
+                self.__is_jump = False
+                self.__massa = self.__config.massa
+                self.__jump_count = self.__tamanho_pulo
+                self.__is_fall = False
+
+    def mover_teste(self):
+        if self.__right:
+            """ self.__posicao[0] += self.__velocidade
+            self.__right = True
+            self.__left = False
+            self.__hitbox.x = self.__posicao[0]
+            if self.__posicao[0]>1200:
+                self.__posicao[0]=1200 """
+
+        elif self.__left:
+            """ if self.__posicao[0] - self.__velocidade >= 0:
+                self.__posicao[0] -= self.__velocidade
+                self.__hitbox.x = self.__posicao[0]
+                self.__left = True
+                self.__right = False
+            else:
+                self.__posicao[0] = 0 """
+
+        else:
+            self.__right = False
+            self.__left = False
+            self.__is_idle = True
+            self.__walk_count = 0
+
+        if not self.__is_jump:
+            """ if tecla[pygame.K_SPACE]:
+                self.__is_jump = True
+                self.__is_idle = False
+                self.__walk_count = 0 """
+
+        else:
+            self.pular()
+                
+        if not self.__is_attack:
+            """ if tecla[pygame.K_e]:
+                self.__is_attack = True
+                self.__is_idle = False """
     
         else:
             self.usar()
@@ -270,9 +451,17 @@ class Jogador(IJogador):
     def left(self):
         return self.__left
 
+    @left.setter
+    def left(self, left):
+        self.__left = left
+
     @property
     def right(self):
         return self.__right
+
+    @right.setter
+    def right(self, right):
+        self.__right = right
 
     @property
     def idle_count(self):
@@ -357,3 +546,35 @@ class Jogador(IJogador):
     @posicao.setter
     def posicao(self, posicao):
         self.__posicao = posicao
+
+    @property 
+    def lista_velocidade(self):
+        return self.__lista_velocidade
+
+    @lista_velocidade.setter
+    def lista_velocidade(self, lista_velocidade):
+        self.__lista_velocidade = lista_velocidade
+
+    @property
+    def momentum(self):
+        return self.__momentum
+
+    @momentum.setter
+    def momentum(self, momentum):
+        self.__momentum = momentum
+
+    @property
+    def teste_velocidade(self):
+        return self.__teste_velocidade
+
+    @teste_velocidade.setter
+    def teste_velocidade(self, velocidade_y):
+        self.__teste_velocidade = velocidade_y
+
+    @property
+    def teste_movimento(self):
+        return self.__teste_movimento
+
+    @teste_movimento.setter
+    def teste_movimento(self, teste_movimento):
+        self.__teste_movimento = teste_movimento

@@ -33,7 +33,7 @@ class JogadorConfigLoader(ConfigLoader):
         #sprite_run_left = pygame.image.load(os.path.join(self.diretorio_sprites, "runLeft.png"))
         sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "runRight.png"))
         #sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
-        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
+        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack-pra-baixo-2.png"))
         sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "jump.png")), self.tamanho)
         sprite_pulo_invertido = flip(sprite_pulo, 1, 0)
         sprite_queda = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "fall.png")), self.tamanho)

@@ -11,6 +11,15 @@ class Cenario(ICenario):
 
         self.__hitbox_blocos = [bloco.hitbox for bloco in self.__mapa]
 
+    def quebrar(self, bloco):
+        if bloco.vida == bloco.dano:
+            self.__mapa.remove(bloco)
+            return True
+        else:
+            bloco.vida -= bloco.dano
+            bloco.atualizar()
+            return False
+
     def atualizar(self, screen):
         for bloco in self.__mapa:
             screen.blit(bloco.sprite, tuple(bloco.posicao))

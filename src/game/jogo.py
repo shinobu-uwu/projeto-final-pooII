@@ -1,5 +1,6 @@
 import os
 import pygame
+from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE
 
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
@@ -18,9 +19,10 @@ class Jogo (IJogo):
         self.__cenario = cenario
         self.__tempo = tempo
         self.__vitoria = vitoria
+        self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
         self.__clock = pygame.time.Clock()
         self.__hud=HUD(self.__jogador)
-        self.inicia_loop()
+        self.inicia_loop_teste()
 
     def inicia_loop(self):
         pygame.display.set_caption("Blockfiesta!")
@@ -33,6 +35,7 @@ class Jogo (IJogo):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     rodando = False
+
             self.__cenario.atualizar(self.__screen)
             self.checar_colisoes()
             tecla = pygame.key.get_pressed()
@@ -41,18 +44,130 @@ class Jogo (IJogo):
             self.atualizar()
             pygame.display.update()
 
+    def inicia_loop_teste(self):
+        pygame.display.set_caption("Blockfiesta!")
+        self.__screen = pygame.display.set_mode((1280, 720))
+        self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
+        rodando = True
+        while rodando:
+            self.__clock.tick(33)
+            self.__screen.blit(self.__bg, (0, 0))
+
+            self.jogador.teste_movimento = [0,0]
+            self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
+
+            if self.jogador.right == True:
+                self.jogador.teste_movimento[0] += 5
+            if self.jogador.left == True:
+                self.jogador.teste_movimento[0] -= 5
+
+            self.jogador.teste_movimento[1] += self.jogador.momentum[1]
+            self.jogador.momentum[1] += 6
+
+            if self.jogador.momentum[1] > 36:
+                self.jogador.momentum[1] = 36
+
+            if self.jogador.momentum[1] > 0:
+                self.jogador.is_jump = False
+                self.jogador.is_idle = True
+
+            self.mover_teste()
+
+            if self.__tipos_colisao["bottom"]:
+                self.jogador.momentum[1] = 1
+
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    rodando = False
+
+                if event.type == KEYDOWN:
+                    if event.key == K_RIGHT:
+                        self.jogador.right = True
+                        self.jogador.left = False
+                    if event.key == K_LEFT:
+                        self.jogador.left = True
+                        self.jogador.right = False
+                    if event.key == K_SPACE:
+                        if self.__tipos_colisao["bottom"]:
+                            self.jogador.momentum[1] = -36
+                            self.jogador.is_jump = True
+                            self.jogador.is_idle = False
+
+                if event.type == KEYUP:
+                    if event.key == K_RIGHT:
+                        self.jogador.right = False
+                    if event.key == K_LEFT:
+                        self.jogador.left = False
+
+                if not self.jogador.right and not self.jogador.left:
+                    self.jogador.__is_idle = True
+                    
+            self.__jogador.atualizar_teste(self.__screen)
+            self.__cenario.atualizar(self.__screen)
+            
+            """self.atualizar() """
+            self.__hud.atualizar(self.__screen,self.__clock)
+            pygame.display.update()
+
+    def mover_teste(self):
+        
+        
+        #print(f"POS PLAYER: {self.jogador.hitbox.x} - PRE SOMA")
+
+        #Mover e Testar o x
+        self.jogador.hitbox.x += self.jogador.teste_movimento[0]
+        self.jogador.posicao[0] += self.jogador.teste_movimento[0]
+        lista_colisao = self.checar_colisoes_teste()
+
+        for bloco in lista_colisao:
+            #print(f"POS BLOCOR:{bloco.hitbox.x} - POS SOMA")
+            #print(f"POS PLAYER:{bloco.hitbox.x} - POS SOMA")
+            if self.jogador.teste_movimento[0] > 0:
+                self.jogador.hitbox.right = bloco.hitbox.left
+                self.__tipos_colisao["right"] = True
+            
+            elif self.jogador.teste_movimento[0] < 0:
+                self.jogador.hitbox.left = bloco.hitbox.right
+                self.__tipos_colisao["left"] = True
+
+        
+                
+        #Mover e Testar o y
+        self.jogador.hitbox.y += self.jogador.teste_movimento[1]
+        self.jogador.posicao[1] += self.jogador.teste_movimento[1]
+        lista_colisao = self.checar_colisoes_teste()
+
+        for bloco in lista_colisao:
+            if self.jogador.teste_movimento[1] >  0:
+                self.jogador.hitbox.bottom = bloco.hitbox.top
+                self.__tipos_colisao["bottom"] = True
+
+            elif self.jogador.teste_movimento[1] <  0:
+                self.jogador.hitbox.bottom = bloco.hitbox.top
+                self.__tipos_colisao["top"] = True
+
+        print(self.__tipos_colisao)
+
+
+    def checar_colisoes_teste(self):
+        lista_colisao = []
+        for bloco in self.__cenario.mapa:
+            if self.jogador.hitbox.colliderect(bloco.hitbox):
+                #print(bloco.hitbox.x)
+                #print(self.jogador.hitbox.x)
+                lista_colisao.append(bloco)
+
+        return lista_colisao
+
     def checar_colisoes(self):
         
-        """Vamo lá, o negócio das colisões é o seguinte, ele tá certa, o problema
-            é que como ele tá em um for, ele tá checando todos, mas a colisão só funciona
-            com o primeiro da lista. Acho realmente mais facil fazer com o pymunk e dar uma
-            suavidade tbm no movimento dele, e a parte de quebrar os blocos é bem dboa"""
-
-
         for bloco in self.__cenario.mapa:
+
             #Checa se a direita do personagem colide com a esquerda de um bloco
             if self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] >= bloco.hitbox[0] and\
             self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] <= bloco.hitbox[0] + bloco.tamanho_hitbox[0]:
+            
                 #checa o hitbox no eixo y
                 if self.__jogador.hitbox[1] >= bloco.hitbox[1] and self.__jogador.hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1] or\
                 self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] >= bloco.hitbox[1] and\
@@ -62,10 +177,11 @@ class Jogo (IJogo):
                     
                     #quebrar para a direita
                     if self.jogador.is_attack and self.jogador.last_side == 1:
-                        self.__cenario.mapa.remove(bloco)
-                        self.__jogador.pode_mover_direita = True
-                        self.__jogador.pode_mover_esquerda = True
-                        break
+                        is_quebrado = self.__cenario.quebrar(bloco)
+
+                        if is_quebrado:
+                            self.__jogador.pode_mover_direita = True
+                            self.__jogador.pode_mover_esquerda = True
 
                 #reset
                 else:
@@ -81,10 +197,11 @@ class Jogo (IJogo):
 
                     #quebrar para a esquerda
                     if self.jogador.is_attack and self.jogador.last_side == 0:
-                        self.__cenario.mapa.remove(bloco)
-                        self.__jogador.pode_mover_direita = True
-                        self.__jogador.pode_mover_esquerda = True
-                        break
+                        is_quebrado = self.__cenario.quebrar(bloco)
+
+                        if is_quebrado:
+                            self.__jogador.pode_mover_direita = True
+                            self.__jogador.pode_mover_esquerda = True
 
                 #reset
                 else:
@@ -94,6 +211,7 @@ class Jogo (IJogo):
             else:
                 self.__jogador.pode_mover_direita = True
                 self.__jogador.pode_mover_esquerda = True
+       
 
     def atualizar(self):
         pass

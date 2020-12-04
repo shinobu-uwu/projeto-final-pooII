@@ -9,11 +9,26 @@ from src.game.jogo import Jogo
 from src.game.jogador import Jogador
 
 
-bloco = BlocoCenario(2, 3, [640, 390])
-bloco2 = BlocoCenario(2, 3, [690, 390])
-bloco3 = BlocoCenario(2, 3, [740, 390])
-cenario = Cenario(1, [bloco3,bloco], 300)
-#cenario = Cenario(1, [bloco], 300)
+bloco = BlocoCenario(2, 2, [700, 400])
+bloco2 = BlocoCenario(2, 2, [100, 400])
+bloco3 = BlocoCenario(2, 2, [640, 300])
+
+#tam = [22,16]
+#loop para fazer "o chão"
+x = 0
+lista_blocos = []
+
+while x < 1200:
+    bloco = BlocoCenario(2, 2, [x, 500])
+    lista_blocos.append(bloco)
+    x += 22
+
+lista_blocos.append(bloco)
+lista_blocos.append(bloco2)
+lista_blocos.append(bloco3)
+
+cenario = Cenario(1, lista_blocos, 300)
+#cenario = Cenario(1, [bloco3], 300)
 
 jogador = Jogador([300, 360])
 jogo = Jogo(2, 3, jogador, cenario, True)

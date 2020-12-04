@@ -10,6 +10,9 @@ class Score:
     def to_dict(self):
         return self.__tempo
 
+    def to_string(self):
+        return f"{self.__jogador} completou a fase {self.__fase} em {self.__tempo} segundos"
+
     @property
     def jogador(self):
         return self.__jogador
@@ -17,7 +20,3 @@ class Score:
     @property
     def fase(self):
         return self.__fase
-
-    @property
-    def tempo(self):
-        return self.__tempo

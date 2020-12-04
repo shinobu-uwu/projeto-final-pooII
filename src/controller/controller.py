@@ -39,8 +39,7 @@ class Controller:
 
     def leaderboard(self):
         score = self.__dao.melhor_tempo_fase("2")
-        texto = f"{score.jogador} completou a fase {score.fase} em {score.tempo} segundos"
-        self.__central_widget = LeaderboardView([texto])
+        self.__central_widget = LeaderboardView([score.to_string()])
         self.set_central_widget()
         self.__central_widget.sinal_voltar.connect(self.voltar)
 

@@ -24,34 +24,21 @@ class Jogo (IJogo):
         self.__hud=HUD(self.__jogador)
         self.inicia_loop_teste()
 
-    def inicia_loop(self):
-        pygame.display.set_caption("Blockfiesta!")
-        self.__screen = pygame.display.set_mode((1280, 720))
-        self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
-        rodando = True
-        while rodando:
-            self.__clock.tick(33)
-            self.__screen.blit(self.__bg, (0, 0))
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    rodando = False
-
-            self.__cenario.atualizar(self.__screen)
-            self.checar_colisoes()
-            tecla = pygame.key.get_pressed()
-            self.__jogador.atualizar(tecla, self.__screen)
-            self.__hud.atualizar(self.__screen,self.__clock)
-            self.atualizar()
-            pygame.display.update()
-
     def inicia_loop_teste(self):
+        x = 0 
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
         self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
         rodando = True
         while rodando:
+            
+            rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
-            self.__screen.blit(self.__bg, (0, 0))
+            self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
+            if rel_x < 1280:
+                self.__screen.blit(self.__bg, (rel_x,0))
+            x -= 1 
+            print(self.__jogador.posicao[0])
 
             self.jogador.teste_movimento = [0,0]
             self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
@@ -147,7 +134,7 @@ class Jogo (IJogo):
                 self.jogador.hitbox.bottom = bloco.hitbox.top
                 self.__tipos_colisao["top"] = True
 
-        print(self.__tipos_colisao)
+        #print(self.__tipos_colisao)
 
 
     def checar_colisoes_teste(self):

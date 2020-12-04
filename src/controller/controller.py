@@ -3,7 +3,9 @@ from PyQt5.QtWidgets import QApplication
 
 from src.config.menu_config_loader import MenuConfigLoader
 from src.game.sistema import Sistema
+from src.persistencia.dao import DAO
 from src.views.ajuda_view import AjudaView
+from src.views.leaderboard_view import LeaderboardView
 from src.views.main_menu_view import MainMenuView
 from src.views.main_window import MainWindow
 from src.views.selecao_fases_view import SelecaoFasesView
@@ -13,6 +15,7 @@ class Controller:
     def __init__(self):
         self.__sistema = Sistema("Pog")
         self.__config = MenuConfigLoader()
+        self.__dao = DAO()
         self.__app = QApplication(sys.argv)
         self.__window = MainWindow()
         self.__central_widget = MainMenuView()
@@ -23,6 +26,7 @@ class Controller:
 
     def comeca(self):
         self.__central_widget.sinal_jogar.connect(self.jogar)
+        self.__central_widget.sinal_leaderboard.connect(self.leaderboard)
         self.__central_widget.sinal_ajuda.connect(self.ajuda)
         self.__window.show()
         sys.exit(self.__app.exec_())
@@ -33,6 +37,12 @@ class Controller:
         self.__central_widget.sinal_voltar.connect(self.voltar)
         self.__central_widget.sinal_fase.connect(self.selecionar_fase)
 
+    def leaderboard(self):
+        score = self.__dao.melhor_tempo_fase("2")
+        self.__central_widget = LeaderboardView([score.to_string()])
+        self.set_central_widget()
+        self.__central_widget.sinal_voltar.connect(self.voltar)
+
     def ajuda(self):
         self.__central_widget = AjudaView()
         self.__central_widget.sinal_voltar.connect(self.voltar)
@@ -41,6 +51,7 @@ class Controller:
     def voltar(self):
         self.__central_widget = MainMenuView()
         self.__central_widget.sinal_jogar.connect(self.jogar)
+        self.__central_widget.sinal_leaderboard.connect(self.leaderboard)
         self.__central_widget.sinal_ajuda.connect(self.ajuda)
         self.set_central_widget()
 

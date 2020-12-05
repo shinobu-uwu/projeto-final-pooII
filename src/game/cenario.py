@@ -22,7 +22,7 @@ class Cenario(ICenario):
 
     def atualizar(self, screen):
         for bloco in self.__mapa:
-            screen.blit(bloco.sprite, tuple(bloco.posicao))
+            screen.blit(bloco.sprite, (bloco.hitbox.x, bloco.hitbox.y))
             pygame.draw.rect(screen, (255, 0, 0), bloco.hitbox, 2)
 
     @property

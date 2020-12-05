@@ -44,9 +44,14 @@ class Jogo (IJogo):
             self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
 
             if self.jogador.right == True:
-                self.jogador.teste_movimento[0] += 5
+                self.jogador.teste_movimento[0] += 7
             if self.jogador.left == True:
                 self.jogador.teste_movimento[0] -= 5
+
+            self.jogador.hitbox.x -= 2
+            
+            for bloco in self.cenario.mapa:
+                bloco.hitbox.x -= 2
 
             self.jogador.teste_movimento[1] += self.jogador.momentum[1]
             self.jogador.momentum[1] += 6

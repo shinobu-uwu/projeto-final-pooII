@@ -1,6 +1,6 @@
 import os
 import pygame
-from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE
+from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
 
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
@@ -38,7 +38,7 @@ class Jogo (IJogo):
             if rel_x < 1280:
                 self.__screen.blit(self.__bg, (rel_x,0))
             x -= 1 
-            print(self.__jogador.posicao[0])
+            #print(self.__jogador.posicao[0])
 
             self.jogador.teste_movimento = [0,0]
             self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
@@ -92,8 +92,15 @@ class Jogo (IJogo):
                     if event.key == K_LEFT:
                         self.jogador.left = False
 
+
                 if not self.jogador.right and not self.jogador.left:
                     self.jogador.__is_idle = True
+
+            tecla = pygame.key.get_pressed()
+
+            self.jogador.usar(tecla)
+            self.jogador.mudar_item(tecla)
+
                     
             self.__jogador.atualizar_teste(self.__screen)
             self.__cenario.atualizar(self.__screen)
@@ -146,9 +153,14 @@ class Jogo (IJogo):
         lista_colisao = []
         for bloco in self.__cenario.mapa:
             if self.jogador.hitbox.colliderect(bloco.hitbox):
-                #print(bloco.hitbox.x)
-                #print(self.jogador.hitbox.x)
-                lista_colisao.append(bloco)
+                if self.jogador.is_attack == True:
+                    bloco_status = self.cenario.quebrar(bloco)
+                    
+                    if bloco_status == False:
+                        lista_colisao.append(bloco)
+                else:
+                    lista_colisao.append(bloco)
+                
 
         return lista_colisao
 

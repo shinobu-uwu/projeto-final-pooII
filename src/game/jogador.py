@@ -369,7 +369,10 @@ class Jogador(IJogador):
                 self.__jump_count = self.__tamanho_pulo
                 self.__is_fall = False
 
-    def usar(self):
+    def usar(self, tecla):
+        if tecla[pygame.K_e]:
+            self.__is_attack = True
+
         if self.__attack_count >= 11:
             self.__attack_count = 0
             self.__is_attack = False

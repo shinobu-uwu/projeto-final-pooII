@@ -56,4 +56,6 @@ class Controller:
         self.set_central_widget()
 
     def selecionar_fase(self, i):
+        self.__window.close()
         self.__sistema.selecionar_fase(i)
+        

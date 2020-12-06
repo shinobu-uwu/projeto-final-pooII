@@ -31,7 +31,14 @@ class SelecaoFasesView(QWidget):
         botoes = []
         for nome in nome_imagens:
             botao = BotaoFase(nome)
+            i = nome_imagens.index(nome)
             botoes.append(botao)
+        botoes[0].clicked.connect(self.__selecionar_fase1)
+        botoes[1].clicked.connect(self.__selecionar_fase2)
+        botoes[2].clicked.connect(self.__selecionar_fase3)
+        botoes[3].clicked.connect(self.__selecionar_fase4)
+        botoes[4].clicked.connect(self.__selecionar_fase5)
+        botoes[5].clicked.connect(self.__selecionar_fase6)
         fases_layout.addWidget(botoes[0], 0, 0)
         fases_layout.addWidget(botoes[1], 0, 1)
         fases_layout.addWidget(botoes[2], 0, 2)
@@ -46,6 +53,24 @@ class SelecaoFasesView(QWidget):
 
         self.setLayout(self.__layout)
         return self.__layout
+
+    def __selecionar_fase1(self):
+        self.sinal_fase.emit(0)
+
+    def __selecionar_fase2(self):
+        self.sinal_fase.emit(1)
+
+    def __selecionar_fase3(self):
+        self.sinal_fase.emit(2)
+
+    def __selecionar_fase4(self):
+        self.sinal_fase.emit(3)
+
+    def __selecionar_fase5(self):
+        self.sinal_fase.emit(4)
+
+    def __selecionar_fase6(self):
+        self.sinal_fase.emit(5)
 
     def __voltar(self):
         self.sinal_voltar.emit()

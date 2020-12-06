@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QVBoxLayout
 from src.config.menu_config_loader import MenuConfigLoader
 from src.views.widgets.botao_fase import BotaoFase
 from src.views.widgets.botao_padrao import BotaoPadrao
+from src.views.widgets.input_jogador import InputJogador
 from src.views.widgets.titulo_janela import TituloJanela
 
 
@@ -21,6 +22,9 @@ class SelecaoFasesView(QWidget):
     def mostra_view(self):
         titulo = TituloJanela("Selecione a fase")
         titulo.adicionar_ao_layout(self.__layout)
+
+        input_jogador =  InputJogador()
+        input_jogador.adicionar_ao_layout(self.__layout)
 
         fases_layout = QGridLayout()
         nome_imagens = sorted(os.listdir(os.path.join(self.__config.diretorio_assets, "thumbnail fases/")))

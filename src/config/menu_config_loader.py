@@ -77,3 +77,19 @@ class MenuConfigLoader(ConfigLoader, Singleton):
     @property
     def tamanho_fonte_leaderboard(self):
         return self.__config["fonte_leaderboard"]["tamanho"]
+
+    @property
+    def width_input_jogador(self):
+        return self.__config["tamanho_input_jogador"]["width"]
+
+    @property
+    def height_input_jogador(self):
+        return self.__config["tamanho_input_jogador"]["height"]
+
+    @property
+    def fonte_input_jogador(self):
+        return self.__config["fonte_input_jogador"]["fonte"]
+
+    @property
+    def tamanho_fonte_input_jogador(self):
+        return self.__config["fonte_input_jogador"]["tamanho"]

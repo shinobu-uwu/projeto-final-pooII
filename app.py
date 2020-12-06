@@ -29,13 +29,13 @@ lista_blocos.append(bloco2)
 lista_blocos.append(bloco3)
 
 
-cenario = Cenario(1, lista_blocos, 300)
+#cenario = Cenario(1, lista_blocos, 300)
 #cenario = Cenario(1, [bloco3], 300)
 
-jogador = Jogador([300, 360])
-machado = Machado(5,5)
-jogador.adicionar_item(machado)
-jogo = Jogo(2, 3, jogador, cenario, True)
+#jogador = Jogador([300, 360])
+#machado = Machado(5,5)
+#jogador.adicionar_item(machado)
+#jogo = Jogo(2, 3, jogador, cenario, True)
 
-#a = Controller()
-#a.comeca()
+a = Controller()
+a.comeca()

@@ -13,5 +13,9 @@
     "tamanho_leaderboard": {"width": 800,
                             "height": 400},
     "fonte_leaderboard": {"fonte": "ThaleahFat",
-                          "tamanho": 14}
+                          "tamanho": 18},
+    "fonte_input_jogador": {"fonte": "ThaleahFat",
+                            "tamanho": 14},
+    "tamanho_input_jogador": {"width": 400,
+                              "height": 25}
 }

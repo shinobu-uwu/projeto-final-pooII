@@ -68,6 +68,9 @@ class Jogo (IJogo):
             if self.__tipos_colisao["bottom"]:
                 self.jogador.momentum[1] = 1
 
+            if self.__tipos_colisao["top"]:
+                self.jogador.momentum[1] = 1
+
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -133,6 +136,7 @@ class Jogo (IJogo):
         
                 
         #Mover e Testar o y
+
         self.jogador.hitbox.y += self.jogador.teste_movimento[1]
         self.jogador.posicao[1] += self.jogador.teste_movimento[1]
         lista_colisao = self.checar_colisoes_teste()
@@ -143,7 +147,7 @@ class Jogo (IJogo):
                 self.__tipos_colisao["bottom"] = True
 
             elif self.jogador.teste_movimento[1] <  0:
-                self.jogador.hitbox.bottom = bloco.hitbox.top
+                self.jogador.hitbox.top = bloco.hitbox.bottom
                 self.__tipos_colisao["top"] = True
 
         #print(self.__tipos_colisao)

@@ -3,6 +3,7 @@ import json
 import pygame
 from pygame.transform import scale, flip
 
+
 from src.config.config_loader import ConfigLoader
 
 
@@ -24,52 +25,83 @@ class JogadorConfigLoader(ConfigLoader):
     def diretorio_sprites(self):
         #codigo do path do bings - meu pythonpath tem 2 variáveis
         #return "C:/Users/Arthur/Projects/projeto-final-pooII/assets/sprites/"
-        return os.path.join(self.diretorio_assets, "sprites/original/")
+        return os.path.join(self.diretorio_assets, "sprites/")
 
 
 
     def recortar_sprites(self):
-        sprite_idle = pygame.image.load(os.path.join(self.diretorio_sprites, "idle.png"))
-        #sprite_run_left = pygame.image.load(os.path.join(self.diretorio_sprites, "runLeft.png"))
-        sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "runRight.png"))
-        #sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
-        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "attack.png"))
-        sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "jump.png")), self.tamanho)
+
+
+        
+        #sprites martelo ---------------------------------------
+        sprite_idle = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-martelo/idle.png"))
+        sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-martelo/runRight.png"))
+        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-martelo/attack.png"))
+        sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-martelo/jump.png")), self.tamanho)
         sprite_pulo_invertido = flip(sprite_pulo, 1, 0)
-        sprite_queda = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "fall.png")), self.tamanho)
+        sprite_queda = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-martelo/fall.png")), self.tamanho)
         sprite_queda_invertido = flip(sprite_queda, 1, 0)
 
-        sprites_idle = []
-        sprites_idle_invertido = []
-        sprites_run_left = []
-        sprites_run_right = []
-        sprites_attack = []
-        sprites_attack_invertido = []
+        lista_martelo = [sprite_idle, sprite_run_right, sprite_attack, sprite_pulo, sprite_pulo_invertido, sprite_queda]
 
-        #sprites_idle.append(sprite_idle.subsurface(pygame.Rect(0, 0, self.__tamanho_original[0], self.__tamanho_original[1])))
-        for i in range(11):
-            sprites_idle.append(scale(sprite_idle.subsurface(pygame.Rect(78 * i, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
-            sprites_idle_invertido.append(flip(sprites_idle[i], 1, 0))
+        #sprites pa ---------------------------------------
+        sprite_idle = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-pa/idle.png"))
+        sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-pa/runRight.png"))
+        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-pa/attack.png"))
+        sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-pa/jump.png")), self.tamanho)
+        sprite_pulo_invertido = flip(sprite_pulo, 1, 0)
+        sprite_queda = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-pa/fall.png")), self.tamanho)
+        sprite_queda_invertido = flip(sprite_queda, 1, 0)
 
-        for j in range(8):
-            #sprites_run_left.append(scale(sprite_run_left.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
-            sprites_run_right.append(scale(sprite_run_right.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
-            sprites_run_left.append(flip(sprites_run_right[j], 1, 0))    
+        lista_pa = [sprite_idle, sprite_run_right, sprite_attack, sprite_pulo, sprite_pulo_invertido, sprite_queda]
 
-        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(0, 0, 58, 58)), (100, 100)))
-        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(76, 0, 58, 58)), (100, 100)))
-        #sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(129, 0, 53, 53)), (100, 100)))
+        #outros sprites que possuem uma lista
 
-        for k in range(3):
-            sprites_attack.append(scale(sprite_attack.subsurface(pygame.Rect(78*k, 0, self.__tamanho_original[0], self.__tamanho_original[1])),self.tamanho))
+        lista_sprites_temp = [lista_martelo, lista_pa]
+        lista_sprites = []
 
-        sprites_attack_invertido.append(flip(sprites_attack[0],1,0))
-        sprites_attack_invertido.append(flip(sprites_attack[1],1,0))
-        sprites_attack_invertido.append(flip(sprites_attack[2],1,0))
+        #For que itera sobre todas os sprites das listas
+        for m in range(len(lista_sprites_temp)):
+            lista_atual_sprites = lista_sprites_temp[m]
+            
+            sprite_idle_atual = lista_atual_sprites[0]
+            sprite_run_right_atual = lista_atual_sprites[1]
+            sprite_attack_atual = lista_atual_sprites[2]
+            sprite_pulo_atual = lista_atual_sprites[3]
+            sprite_pulo_invertido_atual = lista_atual_sprites[4]
+            sprite_queda_atual = lista_atual_sprites[5]
 
-        return {"left": sprites_run_left, "right": sprites_run_right, "idle": sprites_idle, "idleM": sprites_idle_invertido,
-                "attack": sprites_attack, "attackM": sprites_attack_invertido, "jump": sprite_pulo, "jumpM": sprite_pulo_invertido,
-                "fall": sprite_queda, "fallM": sprite_queda_invertido}
+            sprites_idle = []
+            sprites_idle_invertido = []
+            sprites_run_left = []
+            sprites_run_right = []
+            sprites_attack = []
+            sprites_attack_invertido = []
+
+            for i in range(11):
+                sprites_idle.append(scale(sprite_idle_atual.subsurface(pygame.Rect(78 * i, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
+                sprites_idle_invertido.append(flip(sprites_idle[i], 1, 0))
+
+            for j in range(8):
+                sprites_run_right.append(scale(sprite_run_right_atual.subsurface(pygame.Rect(78 * j, 0, self.__tamanho_original[0], self.__tamanho_original[1])), self.tamanho))
+                sprites_run_left.append(flip(sprites_run_right[j], 1, 0))    
+
+
+            for k in range(3):
+                sprites_attack.append(scale(sprite_attack_atual.subsurface(pygame.Rect(78*k, 0, self.__tamanho_original[0], self.__tamanho_original[1])),self.tamanho))
+
+            sprites_attack_invertido.append(flip(sprites_attack[0],1,0))
+            sprites_attack_invertido.append(flip(sprites_attack[1],1,0))
+            sprites_attack_invertido.append(flip(sprites_attack[2],1,0))
+
+            
+            spriteDic = {"left": sprites_run_left, "right": sprites_run_right, "idle": sprites_idle, "idleM": sprites_idle_invertido,
+                "attack": sprites_attack, "attackM": sprites_attack_invertido, "jump": sprite_pulo_atual, "jumpM": sprite_pulo_invertido_atual,
+                "fall": sprite_queda_atual, "fallM": sprite_queda_invertido}
+
+            lista_sprites.append(spriteDic)
+
+        return lista_sprites
 
     @property
     def massa(self):

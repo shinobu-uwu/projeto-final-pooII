@@ -160,58 +160,58 @@ class Jogador(IJogador):
         if self.__is_attack:
             if self.__last_side == 1:
                 if self.__left:
-                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
                     self.__attack_count += 1
                     self.__last_side = 0
                 else:    
-                    screen.blit(self.__sprites["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
                     self.__attack_count += 1
 
             else:
                 if self.__right:
-                    screen.blit(self.__sprites["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["attack"][self.__attack_count //4], (pos, self.__hitbox.y - 30))
                     self.__last_side = 1
                     self.__attack_count += 1
                 else:
-                    screen.blit(self.__sprites["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["attackM"][self.__attack_count //4], (pos - 30, self.__hitbox.y - 30))
                     self.__attack_count += 1
 
         elif not self.__is_fall and self.__is_jump:
             if self.__last_side == 1:
                 if self.left:
                     self.__last_side = 0
-                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jumpM"], (pos - 30, self.__hitbox.y - 30))
                 else:
-                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jump"], (pos, self.__hitbox.y - 30))
             else:
                 if self.right:
                     self.__last_side = 1
-                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jump"], (pos, self.__hitbox.y - 30))
                 else:
-                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jumpM"], (pos - 30, self.__hitbox.y - 30))
 
         elif self.__is_fall:
             if self.__last_side == 1:
                 if self.left:
                     self.__last_side = 0
-                    screen.blit(self.__sprites["jumpM"], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jumpM"], (pos - 30, self.__hitbox.y - 30))
                 else:
-                    screen.blit(self.__sprites["fall"],(pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["fall"],(pos, self.__hitbox.y - 30))
             else:
                 if self.right:
                     self.__last_side = 0
-                    screen.blit(self.__sprites["jump"], (pos, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["jump"], (pos, self.__hitbox.y - 30))
                 else:
-                    screen.blit(self.__sprites["fallM"], (pos - 30, self.__hitbox.y - 30))
+                    screen.blit(self.__sprites[self.__item_equipado]["fallM"], (pos - 30, self.__hitbox.y - 30))
 
         elif self.__left:
-            screen.blit(self.__sprites["left"][self.__walk_count // 3], (pos - 30, self.__hitbox.y - 30))
+            screen.blit(self.__sprites[self.__item_equipado]["left"][self.__walk_count // 3], (pos - 30, self.__hitbox.y - 30))
             self.__walk_count += 1
             self.__idle_count = 0
             self.__last_side = 0
 
         elif self.__right:
-            screen.blit(self.__sprites["right"][self.__walk_count // 3], (pos, self.__hitbox.y - 30))
+            screen.blit(self.__sprites[self.__item_equipado]["right"][self.__walk_count // 3], (pos, self.__hitbox.y - 30))
             self.__walk_count += 1
             self.__idle_count = 0
             self.__last_side = 1
@@ -220,12 +220,12 @@ class Jogador(IJogador):
             #idle pra esquerda e idle pra direita
             if self.__last_side == 1:
                 #direita
-                screen.blit(self.__sprites["idle"][self.__idle_count // 3], (pos, self.__hitbox.y - 30))
+                screen.blit(self.__sprites[self.__item_equipado]["idle"][self.__idle_count // 3], (pos, self.__hitbox.y - 30))
                 self.__idle_count += 1
 
             else:
                 #esquerda
-                screen.blit(self.__sprites["idleM"][self.__idle_count // 3], (pos - 30, self.__hitbox.y - 30))
+                screen.blit(self.__sprites[self.__item_equipado]["idleM"][self.__idle_count // 3], (pos - 30, self.__hitbox.y - 30))
                 self.__idle_count += 1
 
         """ if self.__right or self.__last_side == 1:

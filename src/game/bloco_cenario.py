@@ -12,6 +12,7 @@ class BlocoCenario(IBlococenario):
         self.__dano = dano
         self.__posicao = posicao
         self.__vida = 18
+        self.__sprite = []
         self.__sprite = pygame.image.load(os.path.join(self.__config.diretorio_assets, "sprites/box.png"))
         self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))
         self.__tamanho_hitbox = (44, 32)

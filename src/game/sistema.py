@@ -4,6 +4,7 @@ from src.game.cenario import Cenario
 from src.game.jogo import Jogo
 from src.game.jogador import Jogador
 from src.game.machado import Machado
+from src.game.pa import Pa
 
 
 class Sistema (ISistema):
@@ -13,7 +14,7 @@ class Sistema (ISistema):
     def selecionar_fase(self, numero_fase):
         bloco = BlocoCenario(2, 2, [700, 400])
         bloco2 = BlocoCenario(2, 2, [800, 460])
-        bloco3 = BlocoCenario(2, 2, [640, 300])
+        bloco3 = BlocoCenario(2, 2, [640, 350])
 
         #tam = [22,16]
         #loop para fazer "o chão"
@@ -35,7 +36,9 @@ class Sistema (ISistema):
 
         jogador = Jogador([300, 360])
         machado = Machado(5,5)
+        pa = Pa(5,5)
         jogador.adicionar_item(machado)
+        jogador.adicionar_item(pa)
         jogo = Jogo(2, 3, jogador, cenario, True)
 
 

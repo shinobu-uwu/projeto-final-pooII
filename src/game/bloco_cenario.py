@@ -12,19 +12,11 @@ class BlocoCenario(IBlococenario):
         self.__dano = dano
         self.__posicao = posicao
         self.__vida = 18
-<<<<<<< HEAD
-        self.__sprite = []
-        self.__sprite = pygame.image.load(os.path.join(self.__config.diretorio_assets, "sprites/box.png"))
-        self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))
-=======
         self.__sprites = self.__config.obter_sprites()
         self.__sprite = self.__sprites["base"]
-        #self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))
->>>>>>> c899e802bfef268eb76d8e59b03620f130455b70
-        self.__tamanho_hitbox = (44, 32)
+        self.__tamanho_hitbox = tuple(self.__config.tamanho)
         self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
 
-    
     def atualizar(self):
         if self.__vida < 4:
            #self.__sprite = pygame.transform.scale(pygame.image.load(os.path.join(self.__config.diretorio_assets, "sprites/box-dmg-3.png")), (44,32))

@@ -15,8 +15,12 @@ class BlocoConfigLoader(ConfigLoader):
             self.__config = json.load(f)
 
     @property
-    def tamanho(self):
+    def tamanho_original(self):
         return tuple(self.__config["tamanho"])
+
+    @property
+    def tamanho(self):
+        return self.__config["tamanho"][0]*2, self.__config["tamanho"][1]*2
 
     @property
     def diretorio_sprites(self):
@@ -24,12 +28,15 @@ class BlocoConfigLoader(ConfigLoader):
 
     def obter_sprites(self):
         
-        sprite_base = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/block.png")),(44,32))
-        sprite_dmg1 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg1.png")),(44,32))
-        sprite_dmg2 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg2.png")),(44,32))
-        sprite_dmg3 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg3.png")),(44,32))
+        sprite_base = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/block.png")), tuple(self.tamanho))
+        sprite_dmg1 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg1.png")), tuple(self.tamanho))
+        sprite_dmg2 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg2.png")), tuple(self.tamanho))
+        sprite_dmg3 = pygame.transform.scale(pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/blockdmg3.png")), tuple(self.tamanho))
         #sprite_dmg1 = pygame.image.load(os.path.join(self.diretorio_sprites, "blockdmg1_",str(self.__material),".png"))
         #sprite_dmg2 = pygame.image.load(os.path.join(self.diretorio_sprites, "blockdmg2_",str(self.__material),".png"))
         #sprite_dmg3 = pygame.image.load(os.path.join(self.diretorio_sprites, "blockdmg3_",str(self.__material),".png"))
 
         return {"base":sprite_base,"dmg1":sprite_dmg1,"dmg2":sprite_dmg2,"dmg3":sprite_dmg3}
+
+    def obter_sprite_original(self):
+        return pygame.image.load(os.path.join(self.diretorio_sprites, f"{self.__material}/block.png"))

@@ -31,7 +31,6 @@ class Jogo (IJogo):
         self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
         rodando = True
         while rodando:
-            
             rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
@@ -52,6 +51,9 @@ class Jogo (IJogo):
             
             for bloco in self.cenario.mapa:
                 bloco.hitbox.x -= 2
+
+            for item in self.__cenario.itens:
+                item.posicao[0] -= 2
 
             self.jogador.teste_movimento[1] += self.jogador.momentum[1]
             self.jogador.momentum[1] += 6

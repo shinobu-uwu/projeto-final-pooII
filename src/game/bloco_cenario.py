@@ -7,16 +7,18 @@ from src.config.bloco_config_loader import BlocoConfigLoader
 
 class BlocoCenario(IBlococenario):
     def __init__(self, material:int,dano:float,posicao:list):
-        self.__config = BlocoConfigLoader(material)
+        self.__config = BlocoConfigLoader()
         self.__material = material
         self.__dano = dano
         self.__posicao = posicao
         self.__vida = 18
-        self.__sprites = self.__config.obter_sprites()
+        self.__sprites = self.__config.obter_sprites(material)
         self.__sprite = self.__sprites["base"]
-        self.__tamanho_hitbox = tuple(self.__config.tamanho)
+        #self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))
+        self.__tamanho_hitbox = (44, 32)
         self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
 
+    
     def atualizar(self):
         if self.__vida < 4:
            #self.__sprite = pygame.transform.scale(pygame.image.load(os.path.join(self.__config.diretorio_assets, "sprites/box-dmg-3.png")), (44,32))
@@ -83,3 +85,11 @@ class BlocoCenario(IBlococenario):
     @vida.setter
     def vida(self, vida):
         self.__vida = vida
+
+    @property
+    def material(self):
+        return self.__material
+
+    @material.setter
+    def material(self, material):
+        self.__material = material

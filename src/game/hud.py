@@ -1,6 +1,7 @@
 from src.game.interfaces.interface_hud import IHud
 from src.game.jogador import Jogador
 import pygame
+from pygame.transform import scale
 from pygame.locals import *
 
 class HUD(IHud):
@@ -16,6 +17,10 @@ class HUD(IHud):
         screen.blit(greenimage,(20+(self.__jogador.item_equipado)*35,55))
         for i in range(0,6):
             screen.blit(self.space,(20+i*35,20))
+            try:
+                screen.blit(scale(self.__jogador.inventario.itens[i].sprite, (30,30)),  (20+i*35,20))
+            except Exception as e:
+                print(e)
 
         text_surface=pygame.font.Font(pygame.font.match_font('arial'),20).render("Tempo"+str(time)+"segs",True,(255,255,255))
         #text_surface=pygame.font.Font(font_name,size).render("Time:"+str(time),True,(255,255,255))

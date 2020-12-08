@@ -115,7 +115,7 @@ class Jogo (IJogo):
             self.__cenario.atualizar(self.__screen)
             
             """self.atualizar() """
-            self.__hud.atualizar(self.__screen,self.__clock)
+            self.__hud.atualizar(self.__screen, int(pygame.time.get_ticks()/1000))
             pygame.display.update()
 
     def mover_teste(self):
@@ -210,13 +210,21 @@ class Jogo (IJogo):
     def checar_colisoes_itens(self):
         lista_colisoes_itens = []
 
-        for bloco in self.__cenario.mapa:
-            for item in self.cenario.itens:
+        for item in self.cenario.itens:
+            for bloco in self.__cenario.mapa:
                     if item.hitbox.colliderect(bloco.hitbox):
                         lista_colisoes_itens.append([item, bloco])
 
+            if item.hitbox.colliderect(self.jogador.hitbox):
+                self.adicionar_item(item)
+                        
+
         return lista_colisoes_itens
 
+
+    def adicionar_item(self, item):
+        self.cenario.remover_item(item)
+        self.jogador.adicionar_item(item)
 
     def atualizar(self):
         pass

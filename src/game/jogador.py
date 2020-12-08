@@ -1,3 +1,4 @@
+from src.game.bloco_item import BlocoItem
 from PyQt5.QtCore import right
 import pygame
 from pygame.locals import *
@@ -240,134 +241,12 @@ class Jogador(IJogador):
         pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
 
-    """ def mover_teste(self,tecla):
-
-        self.__lista_velocidade[0] = 0
-        self.__lista_velocidade[1] = 0
-
-        if self.__right:
-            self.__lista_velocidade[0] += 2
-        
-        elif self.__left:
-            self.__lista_velocidade[0] -= 2
-
-        self.__lista_velocidade[1] += self.__momentum[1]
-
-        self.__momentum[1] += 3
-
-        if self.__momentum[1] > 3:
-            self.__momentum[1] = 3 """
-
-
     def mover(self, tecla):
-        if tecla[pygame.K_RIGHT] and self.__pode_mover_direita:
-            self.__posicao[0] += self.__velocidade
-            self.__right = True
-            self.__left = False
-            self.__hitbox.x = self.__posicao[0]
-            if self.__posicao[0]>1200:
-                self.__posicao[0]=1200
-
-        elif tecla[pygame.K_LEFT] and self.__pode_mover_esquerda:
-            if self.__posicao[0] - self.__velocidade >= 0:
-                """ self.__posicao[0] -= self.__velocidade
-                self.__hitbox.x = self.__posicao[0] """
-                self.__left = True
-                self.__right = False
-            else:
-                self.__posicao[0] = 0
-
-        else:
-            self.__right = False
-            self.__left = False
-            self.__is_idle = True
-            self.__walk_count = 0
-
-        if not self.__is_jump:
-            if tecla[pygame.K_SPACE]:
-                self.__is_jump = True
-                self.__is_idle = False
-                self.__walk_count = 0
-
-        else:
-            self.pular()
-                
-        if not self.__is_attack:
-            if tecla[pygame.K_e]:
-                self.__is_attack = True
-                self.__is_idle = False
-    
-        else:
-            self.usar()
+        pass
 
     def pular(self):
-        if self.__is_jump:
-            forca = (self.__massa * self.__jump_count ** 2) / 2
-            self.__posicao[1] -= forca
-            self.__jump_count -= 1
-            if self.__jump_count == 0:
-                self.__massa = -self.__massa
-                self.__is_fall = True
-            if self.__jump_count < -self.__tamanho_pulo:
-                self.__is_jump = False
-                self.__massa = self.__config.massa
-                self.__jump_count = self.__tamanho_pulo
-                self.__is_fall = False
+        pass
 
-    def mover_teste(self):
-        if self.__right:
-            """ self.__posicao[0] += self.__velocidade
-            self.__right = True
-            self.__left = False
-            self.__hitbox.x = self.__posicao[0]
-            if self.__posicao[0]>1200:
-                self.__posicao[0]=1200 """
-
-        elif self.__left:
-            """ if self.__posicao[0] - self.__velocidade >= 0:
-                self.__posicao[0] -= self.__velocidade
-                self.__hitbox.x = self.__posicao[0]
-                self.__left = True
-                self.__right = False
-            else:
-                self.__posicao[0] = 0 """
-
-        else:
-            self.__right = False
-            self.__left = False
-            self.__is_idle = True
-            self.__walk_count = 0
-
-        if not self.__is_jump:
-            """ if tecla[pygame.K_SPACE]:
-                self.__is_jump = True
-                self.__is_idle = False
-                self.__walk_count = 0 """
-
-        else:
-            self.pular()
-                
-        if not self.__is_attack:
-            """ if tecla[pygame.K_e]:
-                self.__is_attack = True
-                self.__is_idle = False """
-    
-        else:
-            self.usar()
-
-    def pular(self):
-        if self.__is_jump:
-            forca = (self.__massa * self.__jump_count ** 2) / 2
-            self.__posicao[1] -= forca
-            self.__jump_count -= 1
-            if self.__jump_count == 0:
-                self.__massa = -self.__massa
-                self.__is_fall = True
-            if self.__jump_count < -self.__tamanho_pulo:
-                self.__is_jump = False
-                self.__massa = self.__config.massa
-                self.__jump_count = self.__tamanho_pulo
-                self.__is_fall = False
 
     def usar(self, tecla):
         if tecla[pygame.K_e]:
@@ -408,7 +287,18 @@ class Jogador(IJogador):
         if isinstance(item, Item):
             try:
                 i = self.__inventario.itens.index(None)
-                self.__inventario.itens[i] = item
+                add = False
+
+                if isinstance(item, BlocoItem):
+                    for item_inv in self.__inventario.itens:
+                        if isinstance(item_inv, BlocoItem) and item.material == item_inv.material:
+                            item_inv.quantidade += 1
+                            add = True
+                            
+                if not add:
+                    self.__inventario.itens[i] = item
+
+                print(self.__inventario.itens)
             except ValueError:
                 print("Inventário cheio")
         else:

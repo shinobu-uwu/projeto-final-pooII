@@ -31,6 +31,9 @@ class Cenario(ICenario):
         for item in self.__itens:
             screen.blit(item.sprite, (item.hitbox.x, item.hitbox.y))
 
+    def remover_item(self, item):
+        self.__itens.remove(item)
+
     @property
     def fundo(self):
         return self.__fundo

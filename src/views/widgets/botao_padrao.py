@@ -13,6 +13,7 @@ class BotaoPadrao(QPushButton):
         self.setFont(QFont(self.__config.fonte_botoes, self.__config.tamanho_fonte_botoes))
         self.setText(texto)
         self.setCursor(QCursor(Qt.PointingHandCursor))
+        self.setStyleSheet("background-color: white")
 
     def adicionar_ao_layout(self, layout):
         layout.addWidget(self, alignment = Qt.AlignHCenter | Qt.AlignBottom)

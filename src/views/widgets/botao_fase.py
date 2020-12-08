@@ -9,5 +9,5 @@ class BotaoFase(QPushButton):
         self.__config = MenuConfigLoader()
         self.setFixedSize(self.__config.width_fases, self.__config.height_fases)
         self.setStyleSheet("BotaoFase{ " +
-                           f"background-image: url({self.__config.diretorio_assets}/thumbnail fases/{imagem}); border-style: outset; border-color: green; border-radius: 20px; border-width: 6px;" +
-                           "} BotaoFase:hover { border-color: #00A200; } BotaoFase:pressed { border-color: #007000 }")
+                           f"background-image: url({self.__config.diretorio_assets}/thumbnail fases/{imagem}); border-style: outset; border-color: #14AE12; border-radius: 20px; border-width: 6px;" +
+                           "} BotaoFase:hover { border-color: #28C226; } BotaoFase:pressed { border-color: #009A00; }")

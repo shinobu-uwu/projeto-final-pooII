@@ -49,11 +49,14 @@ class Jogo (IJogo):
 
             self.jogador.hitbox.x -= 2
             
+            for item in self.cenario.itens:
+                item.hitbox.x -= 2
+            
             for bloco in self.cenario.mapa:
                 bloco.hitbox.x -= 2
 
             for item in self.__cenario.itens:
-                item.posicao[0] -= 2
+                item.hitbox.y += 8
 
             self.jogador.teste_movimento[1] += self.jogador.momentum[1]
             self.jogador.momentum[1] += 6
@@ -66,6 +69,7 @@ class Jogo (IJogo):
                 self.jogador.is_idle = True
 
             self.mover_teste()
+            self.mover_itens()
 
             if self.__tipos_colisao["bottom"]:
                 self.jogador.momentum[1] = 1
@@ -155,20 +159,63 @@ class Jogo (IJogo):
         #print(self.__tipos_colisao)
 
 
+    def mover_itens(self):
+        lista_colisao_itens = self.checar_colisoes_itens()
+
+        for dupla in lista_colisao_itens:
+            dupla[0].hitbox.y = dupla[1].hitbox.y - 10
+            dupla[0].hitbox.x = dupla[1].hitbox.x
+            #item.hitbox.y = bloco.hitbox.y - 10
+            #item.hitbox.x = bloco.hitbox.x
+
     def checar_colisoes_teste(self):
         lista_colisao = []
         for bloco in self.__cenario.mapa:
+
             if self.jogador.hitbox.colliderect(bloco.hitbox):
-                if self.jogador.is_attack == True:
+                if self.jogador.is_attack == True and self.jogador.hitbox.y != bloco.hitbox.y:
                     bloco_status = self.cenario.quebrar(bloco)
                     
                     if bloco_status == False:
                         lista_colisao.append(bloco)
                 else:
                     lista_colisao.append(bloco)
-                
+            
+            else:
+                media_bloco_x = bloco.hitbox.x + (bloco.hitbox.width/2)
+                media_bloco_y = bloco.hitbox.y + (bloco.hitbox.height/2)
 
+                media_jogador_x = self.jogador.hitbox.x + (self.jogador.hitbox.width/2)
+                media_jogador_y = self.jogador.hitbox.y + (self.jogador.hitbox.height/2)
+
+                if abs(media_bloco_x - media_jogador_x) < 75:
+                    if abs(media_bloco_y - media_jogador_y) < 75:
+
+                        if bloco.posicao[1] < 500:
+                            print(f"x = {abs(media_bloco_x - media_jogador_x)}")
+                            print(f"y = {abs(media_bloco_y - media_jogador_y)}")
+
+                            if self.jogador.hitbox.x < bloco.hitbox.x:
+                                if self.jogador.last_side == 1 and self.jogador.is_attack:
+                                    bloco_status = self.cenario.quebrar(bloco)
+                            
+                            elif self.jogador.hitbox.x > bloco.hitbox.x:
+                                if self.jogador.last_side == 0 and self.jogador.is_attack:
+                                    bloco_status = self.cenario.quebrar(bloco)
+
+            
         return lista_colisao
+
+
+    def checar_colisoes_itens(self):
+        lista_colisoes_itens = []
+
+        for bloco in self.__cenario.mapa:
+            for item in self.cenario.itens:
+                    if item.hitbox.colliderect(bloco.hitbox):
+                        lista_colisoes_itens.append([item, bloco])
+
+        return lista_colisoes_itens
 
     def checar_colisoes(self):
         

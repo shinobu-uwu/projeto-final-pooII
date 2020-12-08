@@ -27,8 +27,10 @@ class Cenario(ICenario):
         for bloco in self.__mapa:
             screen.blit(bloco.sprite, (bloco.hitbox.x, bloco.hitbox.y))
             pygame.draw.rect(screen, (255, 0, 0), bloco.hitbox, 2)
+        
+        print(self.__itens)
         for item in self.__itens:
-            screen.blit(item.sprite, tuple(item.posicao))
+            screen.blit(item.sprite, (item.hitbox.x, item.hitbox.y))
 
     @property
     def fundo(self):

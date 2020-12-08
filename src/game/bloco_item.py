@@ -1,6 +1,6 @@
 from src.config.bloco_config_loader import BlocoConfigLoader
 from src.game.item import Item
-
+import pygame
 
 class BlocoItem(Item):
     def __init__(self, material, posicao):
@@ -8,6 +8,11 @@ class BlocoItem(Item):
         self.__config = BlocoConfigLoader(material)
         self.__sprite = self.__config.obter_sprite_original()
         self.__posicao = posicao
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], 5, 5)
+        
+
+    def atualizar(self):
+        pass
 
     def usar(self):
         pass
@@ -27,3 +32,11 @@ class BlocoItem(Item):
     @property
     def tamanho(self):
         return self.__config.tamanho_original
+
+    @property
+    def hitbox(self):
+        return self.__hitbox
+
+    @hitbox.setter
+    def hitbox(self, hitbox):
+        self.__hitbox = hitbox

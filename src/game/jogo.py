@@ -217,58 +217,6 @@ class Jogo (IJogo):
 
         return lista_colisoes_itens
 
-    def checar_colisoes(self):
-        
-        for bloco in self.__cenario.mapa:
-
-            #Checa se a direita do personagem colide com a esquerda de um bloco
-            if self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] >= bloco.hitbox[0] and\
-            self.__jogador.hitbox[0] + self.__jogador.tamanho_hitbox[0] <= bloco.hitbox[0] + bloco.tamanho_hitbox[0]:
-            
-                #checa o hitbox no eixo y
-                if self.__jogador.hitbox[1] >= bloco.hitbox[1] and self.__jogador.hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1] or\
-                self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] >= bloco.hitbox[1] and\
-                self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1]:
-                    self.__jogador.pode_mover_direita = False
-                    self.__jogador.pode_mover_esquerda = True
-                    
-                    #quebrar para a direita
-                    if self.jogador.is_attack and self.jogador.last_side == 1:
-                        is_quebrado = self.__cenario.quebrar(bloco)
-
-                        if is_quebrado:
-                            self.__jogador.pode_mover_direita = True
-                            self.__jogador.pode_mover_esquerda = True
-
-                #reset
-                else:
-                    self.__jogador.pode_mover_direita = True
-                    self.__jogador.pode_mover_esquerda = True
-            #mesma coisa para direita
-            elif self.__jogador.hitbox[0] <= bloco.hitbox[0] + bloco.tamanho_hitbox[0] and self.__jogador.hitbox[0] >= bloco.hitbox[0]:
-                if self.__jogador.hitbox[1] >= bloco.hitbox[1] and self.__jogador.hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1] or\
-                self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] >= bloco.hitbox[1] and\
-                self.__jogador.hitbox[1] + self.__jogador.tamanho_hitbox[1] <= bloco.hitbox[1] + bloco.tamanho_hitbox[1]:
-                    self.__jogador.pode_mover_esquerda = True
-                    self.__jogador.pode_mover_esquerda = False
-
-                    #quebrar para a esquerda
-                    if self.jogador.is_attack and self.jogador.last_side == 0:
-                        is_quebrado = self.__cenario.quebrar(bloco)
-
-                        if is_quebrado:
-                            self.__jogador.pode_mover_direita = True
-                            self.__jogador.pode_mover_esquerda = True
-
-                #reset
-                else:
-                    self.__jogador.pode_mover_direita = True
-                    self.__jogador.pode_mover_esquerda = True
-            #reset
-            else:
-                self.__jogador.pode_mover_direita = True
-                self.__jogador.pode_mover_esquerda = True
-       
 
     def atualizar(self):
         pass

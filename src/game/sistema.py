@@ -34,13 +34,13 @@ class Sistema (ISistema):
         #bloco2 = BlocoCenario(2, 2, [800, 460])
         bloco3 = BlocoCenario(2, 2, [640, 350])
         bloco4 = BlocoCenario(2, 2, [690, 370])
-
+        bloco5 = BlocoCenario(2,2, [620, 390])
 
         #lista_blocos.append(bloco)
         #lista_blocos.append(bloco2)
         lista_blocos.append(bloco3)
         lista_blocos.append(bloco4)
-        
+        lista_blocos.append(bloco5)
 
         cenario = Cenario(1, lista_blocos, 300)
         #cenario = Cenario(1, [bloco3], 300)

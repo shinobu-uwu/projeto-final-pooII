@@ -28,7 +28,6 @@ class Cenario(ICenario):
             screen.blit(bloco.sprite, (bloco.hitbox.x, bloco.hitbox.y))
             pygame.draw.rect(screen, (255, 0, 0), bloco.hitbox, 2)
         
-        print(self.__itens)
         for item in self.__itens:
             screen.blit(item.sprite, (item.hitbox.x, item.hitbox.y))
 

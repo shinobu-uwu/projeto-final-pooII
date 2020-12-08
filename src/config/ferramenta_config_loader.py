@@ -13,5 +13,5 @@ class FerramentaConfigLoader(ConfigLoader):
         def diretorio_sprites(self):
             return os.path.join(self.diretorio_assets, "sprites/ferramentas")
 
-        def recortar_sprites(self):
+        def recortar_sprites(self, ferramenta):
             #TODO

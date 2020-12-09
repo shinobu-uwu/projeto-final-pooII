@@ -68,7 +68,7 @@ class JogadorConfigLoader(ConfigLoader):
 
         #outros sprites que possuem uma lista
 
-        lista_sprites_temp = [lista_martelo, lista_pa, lista_picareta]
+        lista_sprites_temp = [lista_martelo, lista_pa, lista_picareta, lista_picareta]
         lista_sprites = []
 
         #For que itera sobre todas os sprites das listas

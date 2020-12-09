@@ -55,9 +55,20 @@ class JogadorConfigLoader(ConfigLoader):
 
         lista_pa = [sprite_idle, sprite_run_right, sprite_attack, sprite_pulo, sprite_pulo_invertido, sprite_queda]
 
+        #sprites picareta ---------------------------------------
+        sprite_idle = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-picareta/idle.png"))
+        sprite_run_right = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-picareta/runRight.png"))
+        sprite_attack = pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-picareta/attack.png"))
+        sprite_pulo = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-picareta/jump.png")), self.tamanho)
+        sprite_pulo_invertido = flip(sprite_pulo, 1, 0)
+        sprite_queda = scale(pygame.image.load(os.path.join(self.diretorio_sprites, "sprites-picareta/fall.png")), self.tamanho)
+        sprite_queda_invertido = flip(sprite_queda, 1, 0)
+
+        lista_picareta = [sprite_idle, sprite_run_right, sprite_attack, sprite_pulo, sprite_pulo_invertido, sprite_queda]
+
         #outros sprites que possuem uma lista
 
-        lista_sprites_temp = [lista_martelo, lista_pa]
+        lista_sprites_temp = [lista_martelo, lista_pa, lista_picareta]
         lista_sprites = []
 
         #For que itera sobre todas os sprites das listas

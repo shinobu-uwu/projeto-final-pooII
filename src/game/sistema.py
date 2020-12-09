@@ -5,7 +5,7 @@ from src.game.jogo import Jogo
 from src.game.jogador import Jogador
 from src.game.machado import Machado
 from src.game.pa import Pa
-
+from src.game.picareta import Picareta
 
 class Sistema (ISistema):
     def __init__(self, estado_jogo: str):
@@ -19,22 +19,22 @@ class Sistema (ISistema):
         lista_blocos = []
 
         while x < 12000:
-            bloco = BlocoCenario(1, 0, [x, 500])
+            bloco = BlocoCenario(1,[x, 500])
             lista_blocos.append(bloco)
             x += 44
 
         y = 468
 
         while y > 100:
-            bloco = BlocoCenario(2,2, [800, y])
+            bloco = BlocoCenario(2,[800, y])
             lista_blocos.append(bloco)
             y -= 32
             
-        bloco = BlocoCenario(2, 2, [700, 400])
+        bloco = BlocoCenario(2, [700, 400])
         #bloco2 = BlocoCenario(2, 2, [800, 460])
-        bloco3 = BlocoCenario(2, 2, [640, 350])
-        bloco4 = BlocoCenario(2, 2, [690, 370])
-        bloco5 = BlocoCenario(2,2, [620, 390])
+        bloco3 = BlocoCenario(2, [640, 350])
+        bloco4 = BlocoCenario(2, [690, 370])
+        bloco5 = BlocoCenario(2,  [620, 390])
 
         #lista_blocos.append(bloco)
         #lista_blocos.append(bloco2)
@@ -48,8 +48,10 @@ class Sistema (ISistema):
         jogador = Jogador([300, 360])
         machado = Machado(5,5)
         pa = Pa(5,5)
+        picareta = Picareta(5,5)
         jogador.adicionar_item(machado)
         jogador.adicionar_item(pa)
+        jogador.adicionar_item(picareta)
         jogo = Jogo(2, 3, jogador, cenario, True)
 
 

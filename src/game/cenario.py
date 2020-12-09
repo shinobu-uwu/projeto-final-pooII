@@ -1,6 +1,7 @@
 import pygame
 
 from src.game.bloco_item import BlocoItem
+from src.game.bloco_cenario import BlocoCenario
 from src.game.interfaces.interface_cenario import ICenario
 
 
@@ -33,6 +34,17 @@ class Cenario(ICenario):
 
     def remover_item(self, item):
         self.__itens.remove(item)
+
+    def adicionar_bloco_cenario(self, item: BlocoItem, pos: list):
+        if isinstance(item, BlocoItem):
+                #Remover o item do inventário
+                self.remover_item(item)
+
+                #Criar bloco
+                bloco = BlocoCenario(item.material, [pos[0] + 30, pos[1] + 30])
+
+                #Adicionar o bloco ao cenário
+                self.__mapa.append(bloco)
 
     @property
     def fundo(self):

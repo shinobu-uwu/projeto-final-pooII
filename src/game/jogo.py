@@ -8,6 +8,8 @@ from src.game.cenario import Cenario
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
 from src.game.hud import HUD
+#
+from src.game.bloco_cenario import BlocoCenario
 
 
 class Jogo (IJogo):
@@ -109,6 +111,7 @@ class Jogo (IJogo):
 
             self.jogador.usar(tecla)
             self.jogador.mudar_item(tecla)
+            
 
                     
             self.__jogador.atualizar_teste(self.__screen)
@@ -225,6 +228,14 @@ class Jogo (IJogo):
     def adicionar_item(self, item):
         self.cenario.remover_item(item)
         self.jogador.adicionar_item(item)
+
+    def adicionar_bloco_cenario(self):
+        print("oi")
+        item = self.jogador.item_equipado
+        if self.jogador.is_use:
+            print("oi222")
+            self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y])
+
 
     def atualizar(self):
         pass

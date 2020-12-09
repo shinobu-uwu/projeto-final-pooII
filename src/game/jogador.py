@@ -8,6 +8,7 @@ from src.exceptions.tipo_nao_compativel_exception import TipoNaoCompativelExcept
 from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
 from src.game.item import Item
+from src.game.ferramenta import Ferramenta
 from src.game.bloco_cenario import BlocoCenario
 
 
@@ -37,6 +38,7 @@ class Jogador(IJogador):
         self.__last_side = 1
         self.__is_jump = False
         self.__is_attack = False
+        self.__is_use = False
         self.__is_idle = True
         self.__is_fall = False
         self.__pode_mover_direita = True
@@ -250,8 +252,12 @@ class Jogador(IJogador):
 
     def usar(self, tecla):
         if tecla[pygame.K_e]:
-            self.__is_attack = True
-
+            #Como ele tem a habilidade de colocar blocos, n necessariamente is_attack se torna verdade
+            if isinstance(self.__inventario.itens[self.__item_equipado], Ferramenta):
+                self.__is_attack = True
+            if isinstance(self.__inventario.itens[self.__item_equipado], BlocoItem):
+                self.__is_use = True
+        
         if self.__attack_count >= 11:
             self.__attack_count = 0
             self.__is_attack = False
@@ -267,6 +273,7 @@ class Jogador(IJogador):
                 self.__attack_count = 0
             else:
                 self.__attack_count += 1
+
 
     def mudar_item(self, tecla):
         if tecla[pygame.K_1]:
@@ -471,3 +478,11 @@ class Jogador(IJogador):
     @teste_movimento.setter
     def teste_movimento(self, teste_movimento):
         self.__teste_movimento = teste_movimento
+
+    @property
+    def is_use(self):
+        return self.__is_use
+
+    @is_use.setter
+    def is_use(self, is_use):
+        self.__is_use = is_use

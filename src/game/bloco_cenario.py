@@ -6,12 +6,12 @@ from src.config.bloco_config_loader import BlocoConfigLoader
 
 
 class BlocoCenario(IBlococenario):
-    def __init__(self, material:int,dano:float,posicao:list):
+    def __init__(self, material:int,posicao:list):
         self.__config = BlocoConfigLoader()
         self.__material = material
-        self.__dano = dano
+        self.__dano = self.__config.obter_dados(material,"dano")
+        self.__vida = self.__config.obter_dados(material,"vida")
         self.__posicao = posicao
-        self.__vida = 18
         self.__sprites = self.__config.obter_sprites(material)
         self.__sprite = self.__sprites["base"]
         #self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))

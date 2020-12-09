@@ -46,3 +46,17 @@ class BlocoConfigLoader(ConfigLoader):
 
     def obter_sprite_original(self, material):
         return pygame.image.load(os.path.join(self.diretorio_sprites, f"{material}/block.png"))
+
+    def obter_dados(self, material, dado):
+        #PASTA PARA JSONS COM OS BLOCOS
+        if material == 2:
+            if dado == "dano":
+                return 2
+            elif dado == "vida":
+                return 18
+        elif material == 1:
+            if dado == "dano":
+                return 0
+            elif dado == "vida":
+                return 1
+         

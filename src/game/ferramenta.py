@@ -20,3 +20,4 @@ class Ferramenta(Item, ABC):
     @forca.setter
     def forca(self, forca):
         self.__forca = forca
+

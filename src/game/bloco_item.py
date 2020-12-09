@@ -10,7 +10,6 @@ class BlocoItem(Item):
         self.__sprite = self.__config.obter_sprite_original(self.__material)
         self.__posicao = posicao
         self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], 5, 5)
-        self.__quantidade = 1
         
 
     def atualizar(self):
@@ -51,10 +50,3 @@ class BlocoItem(Item):
     def material(self, material):
         self.__material = material
 
-    @property
-    def quantidade(self):
-        return self.__quantidade
-
-    @quantidade.setter
-    def quantidade(self, quantidade):
-        self.__quantidade = quantidade

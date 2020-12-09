@@ -21,7 +21,7 @@ class Jogo (IJogo):
         self.__vitoria = vitoria
         self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
         self.__clock = pygame.time.Clock()
-        self.__hud=HUD(self.__jogador)
+        self.__hud=HUD()
         self.inicia_loop_teste()
 
     def inicia_loop_teste(self):
@@ -115,7 +115,7 @@ class Jogo (IJogo):
             self.__cenario.atualizar(self.__screen)
             
             """self.atualizar() """
-            self.__hud.atualizar(self.__screen, int(pygame.time.get_ticks()/1000))
+            self.__hud.atualizar(self.__jogador, self.__screen, int(pygame.time.get_ticks()/1000))
             pygame.display.update()
 
     def mover_teste(self):

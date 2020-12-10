@@ -52,9 +52,12 @@ class Cenario(ICenario):
         self.__itens.remove(item)
 
 
-    def adicionar_bloco_cenario(self, item: BlocoItem, pos: list):
+    def adicionar_bloco_cenario(self, item: BlocoItem, pos: list, last_side: int):
         #Criar bloco
-        bloco = BlocoCenario(item.material, [pos[0] + 60, pos[1] + 28])
+        if last_side == 1:
+            bloco = BlocoCenario(item.material, [pos[0] + 60, pos[1] + 28])
+        else:
+            bloco = BlocoCenario(item.material, [pos[0] - 60, pos[1] + 28])
 
         #Adicionar o bloco ao cenário
         self.__mapa.append(bloco)

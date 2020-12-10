@@ -254,7 +254,7 @@ class Jogo (IJogo):
 
             if isinstance(item, BlocoItem):
                 self.jogador.remover_item(item)
-                self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y])
+                self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y], self.jogador.last_side)
                 
 
 

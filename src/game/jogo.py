@@ -1,11 +1,10 @@
 import os
 import pygame
 from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
-
+from src.game.bloco_item import BlocoItem
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
 from src.game.cenario import Cenario
-from src.game.bloco_item import BlocoItem
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
 from src.game.hud import HUD
@@ -107,8 +106,7 @@ class Jogo (IJogo):
                         if self.__tipos_colisao["bottom"]:
                             self.jogador.momentum[1] = -36
                             self.jogador.is_jump = True
-                            self.jogador.is_idle = False
-                    
+                            self.jogador.is_idle = False                                        
                     if event.key == K_e:
                         self.jogador.usar(event.key)
 
@@ -121,12 +119,16 @@ class Jogo (IJogo):
 
                 if not self.jogador.right and not self.jogador.left:
                     self.jogador.__is_idle = True
+            
+            if self.jogador.hitbox.x >= 1248:
+                self.jogador.right = False
 
             tecla = pygame.key.get_pressed()
 
             self.jogador.usar(None)
             self.jogador.mudar_item(tecla)
             self.adicionar_bloco_cenario(tecla)
+            
 
                     
             self.__jogador.atualizar_teste(self.__screen)
@@ -210,8 +212,8 @@ class Jogo (IJogo):
                     if abs(media_bloco_y - media_jogador_y) < 75:
 
                         if bloco.posicao[1] < 500:
-                            #print(f"x = {abs(media_bloco_x - media_jogador_x)}")
-                            #print(f"y = {abs(media_bloco_y - media_jogador_y)}")
+                            print(f"x = {abs(media_bloco_x - media_jogador_x)}")
+                            print(f"y = {abs(media_bloco_y - media_jogador_y)}")
 
                             if self.jogador.hitbox.x < bloco.hitbox.x:
                                 if self.jogador.last_side == 1 and self.jogador.is_attack:

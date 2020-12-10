@@ -97,6 +97,9 @@ class Jogo (IJogo):
                             self.jogador.momentum[1] = -36
                             self.jogador.is_jump = True
                             self.jogador.is_idle = False
+                    
+                    if event.key == K_e:
+                        self.jogador.usar(event.key)
 
                 if event.type == KEYUP:
                     if event.key == K_RIGHT:
@@ -110,7 +113,7 @@ class Jogo (IJogo):
 
             tecla = pygame.key.get_pressed()
 
-            self.jogador.usar(tecla)
+            self.jogador.usar(None)
             self.jogador.mudar_item(tecla)
             self.adicionar_bloco_cenario(tecla)
 

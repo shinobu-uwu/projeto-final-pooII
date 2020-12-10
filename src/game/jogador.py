@@ -250,8 +250,8 @@ class Jogador(IJogador):
         pass
 
 
-    def usar(self, tecla):
-        if tecla[pygame.K_e]:
+    def usar(self, key):
+        if key == pygame.K_e:
             #Como ele tem a habilidade de colocar blocos, n necessariamente is_attack se torna verdade
             if isinstance(self.__inventario.itens[self.__item_equipado], Ferramenta):
                 self.__is_attack = True

@@ -5,6 +5,7 @@ from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.camera import Camera
 from src.game.cenario import Cenario
+from src.game.bloco_item import BlocoItem
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
 from src.game.hud import HUD
@@ -111,7 +112,7 @@ class Jogo (IJogo):
 
             self.jogador.usar(tecla)
             self.jogador.mudar_item(tecla)
-            
+            self.adicionar_bloco_cenario(tecla)
 
                     
             self.__jogador.atualizar_teste(self.__screen)
@@ -195,8 +196,8 @@ class Jogo (IJogo):
                     if abs(media_bloco_y - media_jogador_y) < 75:
 
                         if bloco.posicao[1] < 500:
-                            print(f"x = {abs(media_bloco_x - media_jogador_x)}")
-                            print(f"y = {abs(media_bloco_y - media_jogador_y)}")
+                            #print(f"x = {abs(media_bloco_x - media_jogador_x)}")
+                            #print(f"y = {abs(media_bloco_y - media_jogador_y)}")
 
                             if self.jogador.hitbox.x < bloco.hitbox.x:
                                 if self.jogador.last_side == 1 and self.jogador.is_attack:
@@ -229,12 +230,15 @@ class Jogo (IJogo):
         self.cenario.remover_item(item)
         self.jogador.adicionar_item(item)
 
-    def adicionar_bloco_cenario(self):
-        print("oi")
-        item = self.jogador.item_equipado
-        if self.jogador.is_use:
-            print("oi222")
-            self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y])
+    def adicionar_bloco_cenario(self, tecla):
+        if tecla[K_e]:
+            pos_item = self.jogador.item_equipado
+            item = self.jogador.inventario.itens[pos_item]
+
+            if isinstance(item, BlocoItem):
+                self.jogador.remover_item(item)
+                self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y])
+                
 
 
     def atualizar(self):

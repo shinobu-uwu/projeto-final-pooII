@@ -17,13 +17,14 @@ class Sistema (ISistema):
         #loop para fazer "o chão"
         x = 0
         lista_blocos = []
-
         while x < 12000:
+
             bloco = BlocoCenario(1,[x, 500])
             lista_blocos.append(bloco)
+
             x += 44
 
-        y = 468
+        y = 400
 
         while y > 100:
             bloco = BlocoCenario(2,[800, y])

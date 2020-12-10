@@ -36,10 +36,16 @@ class Jogo (IJogo):
             rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
+
+            print (self.jogador.hitbox[1])
+
+            if self.__jogador.hitbox[1] >= 500 :
+
+                rodando = False
+
             if rel_x < 1280:
                 self.__screen.blit(self.__bg, (rel_x,0))
             x -= 1 
-            #print(self.__jogador.posicao[0])
 
             self.jogador.teste_movimento = [0,0]
             self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
@@ -56,6 +62,9 @@ class Jogo (IJogo):
             
             for bloco in self.cenario.mapa:
                 bloco.hitbox.x -= 2
+                if bloco.hitbox.x <= -44:
+                    self.cenario.remover_bloco_mapa(bloco)
+                    
 
             for item in self.__cenario.itens:
                 item.hitbox.y += 8

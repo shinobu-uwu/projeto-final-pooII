@@ -48,9 +48,7 @@ class BlocoCenario(IBlococenario):
         ##elif self.__vida < 4:
            #self.__sprite = pygame.transform.scale(pygame.image.load(os.path.join(self.__config.diretorio_assets, "sprites/box-dmg-3.png")), (44,32))
            ##self.__sprite=self.__sprites["dmg3"]
-        #screen.blit(self.__sprite, tuple(self.__posicao))
-
-    
+        #screen.blit(self.__sprite, tuple(self.__posicao))    
     def quebrar(self):
         pass
 
@@ -80,15 +78,11 @@ class BlocoCenario(IBlococenario):
 
     @property
     def vida(self):
-        return self.__vida
+        return self.__vida   
 
     @vida.setter
     def vida(self, vida):
         self.__vida = vida
-
-    @property
-    def material(self):
-        return self.__material
 
     @material.setter
     def material(self, material):

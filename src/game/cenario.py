@@ -46,6 +46,9 @@ class Cenario(ICenario):
                 #Adicionar o bloco ao cenário
                 self.__mapa.append(bloco)
 
+    def remover_bloco_mapa(self, bloco):
+        self.__mapa.remove(bloco)
+
     @property
     def fundo(self):
         return self.__fundo

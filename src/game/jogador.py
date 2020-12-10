@@ -250,13 +250,11 @@ class Jogador(IJogador):
         pass
 
 
-    def usar(self, tecla):
-        if tecla[pygame.K_e]:
+    def usar(self, key):
+        if key == pygame.K_e:
             #Como ele tem a habilidade de colocar blocos, n necessariamente is_attack se torna verdade
             if isinstance(self.__inventario.itens[self.__item_equipado], Ferramenta):
                 self.__is_attack = True
-            if isinstance(self.__inventario.itens[self.__item_equipado], BlocoItem):
-                self.__is_use = True
         
         if self.__attack_count >= 11:
             self.__attack_count = 0
@@ -310,6 +308,17 @@ class Jogador(IJogador):
                 print("Inventário cheio")
         else:
             raise TipoNaoCompativelException
+
+    def remover_item(self, item: Item):
+        if item.quantidade > 1:
+            item.quantidade -= 1
+        else:
+            try:
+                self.__inventario.itens.remove(item)
+            except Exception as e:
+                print(e)
+
+
 
     @property
     def morto(self):

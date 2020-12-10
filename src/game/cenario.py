@@ -35,16 +35,13 @@ class Cenario(ICenario):
     def remover_item(self, item):
         self.__itens.remove(item)
 
+
     def adicionar_bloco_cenario(self, item: BlocoItem, pos: list):
-        if isinstance(item, BlocoItem):
-                #Remover o item do inventário
-                self.remover_item(item)
+        #Criar bloco
+        bloco = BlocoCenario(item.material, [pos[0] + 60, pos[1] + 28])
 
-                #Criar bloco
-                bloco = BlocoCenario(item.material, [pos[0] + 30, pos[1] + 30])
-
-                #Adicionar o bloco ao cenário
-                self.__mapa.append(bloco)
+        #Adicionar o bloco ao cenário
+        self.__mapa.append(bloco)
 
     def remover_bloco_mapa(self, bloco):
         self.__mapa.remove(bloco)

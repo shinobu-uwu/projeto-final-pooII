@@ -3,16 +3,32 @@ import pygame
 from src.game.bloco_item import BlocoItem
 from src.game.bloco_cenario import BlocoCenario
 from src.game.interfaces.interface_cenario import ICenario
-
+from src.config.cenario_config_loader import CenarioConfigLoader
 
 class Cenario(ICenario):
-    def __init__(self, fundo, mapa, final:float):
+    def __init__(self, fundo,mapa,final:float):
         self.__fundo = fundo
-        self.__mapa = mapa
+        
         self.__final = final
+        self.__config = CenarioConfigLoader()
+        configmapa=self.__config.obter_mapa(mapa)
+        listablocos=[]
+        for y in range (0,len(configmapa)):
+            for x in range (0,(len(configmapa[y]))):
+                try:
+                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(30)])
+                #if configmapa[y][x]=="1":
+                    #bloco = BlocoCenario(1, [x*33, y*(30)])
+                    listablocos.append(bloco)
+                except FileNotFoundError:
+                    pass
+                #else:
+                #    pass
+        self.__mapa= listablocos
         #itens no chão
         self.__itens = []
         self.__hitbox_blocos = [bloco.hitbox for bloco in self.__mapa]
+
 
     def quebrar(self, bloco):
         if bloco.vida == bloco.dano:

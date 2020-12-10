@@ -25,7 +25,9 @@ class Jogo (IJogo):
         self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
         self.__clock = pygame.time.Clock()
         self.__hud=HUD()
+        self.__blocktimer=pygame.time.get_ticks()
         self.inicia_loop_teste()
+        
 
     def inicia_loop_teste(self):
         x = 0 
@@ -243,7 +245,8 @@ class Jogo (IJogo):
         self.jogador.adicionar_item(item)
 
     def adicionar_bloco_cenario(self, tecla):
-        if tecla[K_e]:
+        if tecla[K_e] and self.__blocktimer<pygame.time.get_ticks()-300:
+            self.__blocktimer=pygame.time.get_ticks()
             pos_item = self.jogador.item_equipado
             item = self.jogador.inventario.itens[pos_item]
 

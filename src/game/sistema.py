@@ -31,19 +31,19 @@ class Sistema (ISistema):
             lista_blocos.append(bloco)
             y -= 32
             
-        bloco = BlocoCenario(2, [700, 400])
+        ##bloco = BlocoCenario(2, [700, 400])
         #bloco2 = BlocoCenario(2, 2, [800, 460])
-        bloco3 = BlocoCenario(2, [640, 350])
-        bloco4 = BlocoCenario(2, [690, 370])
-        bloco5 = BlocoCenario(2,  [620, 390])
-
+        ##bloco3 = BlocoCenario(2, [640, 350])
+        ##bloco4 = BlocoCenario(2, [690, 370])
+        ##bloco5 = BlocoCenario(2,  [620, 390])
+        
         #lista_blocos.append(bloco)
         #lista_blocos.append(bloco2)
-        lista_blocos.append(bloco3)
-        lista_blocos.append(bloco4)
-        lista_blocos.append(bloco5)
+        ##lista_blocos.append(bloco3)
+        ##lista_blocos.append(bloco4)
+        ##lista_blocos.append(bloco5)
 
-        cenario = Cenario(1, lista_blocos, 300)
+        cenario = Cenario(1, "mapa1", 300)
         #cenario = Cenario(1, [bloco3], 300)
 
         jogador = Jogador([300, 360])

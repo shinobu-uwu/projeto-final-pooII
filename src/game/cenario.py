@@ -16,9 +16,9 @@ class Cenario(ICenario):
         for y in range (0,len(configmapa)):
             for x in range (0,(len(configmapa[y]))):
                 try:
-                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(30)])
+                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(33)])
                 #if configmapa[y][x]=="1":
-                    #bloco = BlocoCenario(1, [x*33, y*(30)])
+                    #bloco = BlocoCenario(1, [x*10000, y*(30)])
                     listablocos.append(bloco)
                 except FileNotFoundError:
                     pass

@@ -32,7 +32,11 @@ class Jogo (IJogo):
         x = 0 
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
-        self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, "fundo.jpg"))
+        try:
+            print ((self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
+            self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
+        except FileNotFoundError:
+            self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo5.jpg"))
         rodando = True
         while rodando:
             rel_x = x % self.__bg.get_rect().width

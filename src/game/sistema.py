@@ -45,7 +45,7 @@ class Sistema (ISistema):
         ##lista_blocos.append(bloco5)
         fase_selecionada = "".join(["mapa",str(numero_fase+1)])
         print (fase_selecionada)
-        cenario = Cenario(1, fase_selecionada, 300)
+        cenario = Cenario(numero_fase+1, fase_selecionada, 300)
         #cenario = Cenario(1, [bloco3], 300)
 
         jogador = Jogador([300, 360])

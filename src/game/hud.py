@@ -21,10 +21,11 @@ class HUD(IHud):
         screen.blit(tempo, self.__config.posicao_tempo)
         screen.blit(self.__cursor, (self.__config.posicao_slot[0] + jogador.item_equipado*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots),
                                     self.__config.posicao_slot[1] + self.__config.tamanho_slot[1] + self.__config.espacamento_cursor))
-        for slot in self.__slots:
-            slot.fill(self.__config.cor_slot)
-            screen.blit(slot, (self.__config.posicao_slot[0] + self.__slots.index(slot)*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1]))
-            item = jogador.inventario.itens[i]i
+        for i in range (len(self.__slots)):
+
+            self.__slots[i].fill(self.__config.cor_slot)
+            screen.blit(self.__slots[i], (self.__config.posicao_slot[0] + self.__slots.index(self.__slots[i])*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1]))
+            item = jogador.inventario.itens[i]
             try:
                 #TODO eliminar hard coded references 5 e 8
                 screen.blit(scale(item.sprite, item.tamanho), (5 + self.__config.posicao_slot[0] + i*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1] + 8))

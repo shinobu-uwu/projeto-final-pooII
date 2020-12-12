@@ -15,21 +15,22 @@ class Sistema (ISistema):
 
         #tam = [22,16]
         #loop para fazer "o chão"
-        x = 0
-        lista_blocos = []
-        while x < 12000:
+        ####
+        #x = 0
+        #lista_blocos = []
+        #while x < 12000:
 
-            bloco = BlocoCenario(1,[x, 500])
-            lista_blocos.append(bloco)
+            #bloco = BlocoCenario(1,[x, 500])
+            #lista_blocos.append(bloco)
 
-            x += 44
+            #x += 44
 
-        y = 400
+        #y = 400
 
-        while y > 100:
-            bloco = BlocoCenario(2,[800, y])
-            lista_blocos.append(bloco)
-            y -= 32
+        #while y > 100:
+            #bloco = BlocoCenario(2,[800, y])
+            #lista_blocos.append(bloco)
+            #y -= 32
             
         ##bloco = BlocoCenario(2, [700, 400])
         #bloco2 = BlocoCenario(2, 2, [800, 460])
@@ -42,8 +43,9 @@ class Sistema (ISistema):
         ##lista_blocos.append(bloco3)
         ##lista_blocos.append(bloco4)
         ##lista_blocos.append(bloco5)
-
-        cenario = Cenario(1, "mapa1", 300)
+        fase_selecionada = "".join(["mapa",str(numero_fase+1)])
+        print (fase_selecionada)
+        cenario = Cenario(1, fase_selecionada, 300)
         #cenario = Cenario(1, [bloco3], 300)
 
         jogador = Jogador([300, 360])

@@ -24,13 +24,9 @@ class HUD(IHud):
         for slot in self.__slots:
             slot.fill(self.__config.cor_slot)
             screen.blit(slot, (self.__config.posicao_slot[0] + self.__slots.index(slot)*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1]))
-
-        for item in jogador.inventario.itens:
+            item = jogador.inventario.itens[i]i
             try:
-                screen.blit(scale(item.sprite, item.tamanho), (self.__config.posicao_slot[0] + jogador.inventario.itens.index(item)*
-                                                              (self.__config.tamanho_slot[0] + self.__config.espacamento_slots + self.__config.espacamento_slots//4),
-                                                               self.__config.posicao_slot[1] + self.__config.espacamento_slots//2))
-                #Ele não consegue acessar quantidade do item
-                quantidade = pygame.font.Font(pygame.font.match_font(self.__config.fonte_itens, self.__config.tamanho_fonte_itens).render(str(item.quantidade), True, (self.__config.cor_fonte_itens)))
+                #TODO eliminar hard coded references 5 e 8
+                screen.blit(scale(item.sprite, item.tamanho), (5 + self.__config.posicao_slot[0] + i*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1] + 8))
             except AttributeError:
                 pass

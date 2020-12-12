@@ -49,14 +49,28 @@ class BlocoConfigLoader(ConfigLoader):
 
     def obter_dados(self, material, dado):
         #PASTA PARA JSONS COM OS BLOCOS
-        if material == 2:
-            if dado == "dano":
-                return 2
-            elif dado == "vida":
-                return 18
-        elif material == 1:
-            if dado == "dano":
-                return 0
-            elif dado == "vida":
-                return 1
+        #if material == 2:
+          #  if dado == "dano":
+           #     return 2
+            #elif dado == "vida":
+            #    return 18
+       # elif material == 1:
+        #    if dado == "dano":
+         #       return 0
+          #  elif dado == "vida":
+           #     return 1
+       # elif material == 3:
+        #    if dado == "dano":
+         #       return 0.5
+          #  elif dado == "vida":
+           #     return 18
+    #    elif material == 4:
+     #       if dado == "dano":
+      #          return 0.2
+       #     elif dado == "vida":
+        #        return 15
+        if dado =="dano":
+            return self.__config["dano"][material]
+        elif dado=="vida":
+            return self.__config["vida"][material]
          

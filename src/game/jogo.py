@@ -194,7 +194,7 @@ class Jogo (IJogo):
 
             if self.jogador.hitbox.colliderect(bloco.hitbox):
                 if self.jogador.is_attack == True and self.jogador.hitbox.y != bloco.hitbox.y:
-                    bloco_status = self.cenario.quebrar(bloco)
+                    bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
                     
                     if bloco_status == False:
                         lista_colisao.append(bloco)
@@ -217,11 +217,11 @@ class Jogo (IJogo):
 
                             if self.jogador.hitbox.x < bloco.hitbox.x:
                                 if self.jogador.last_side == 1 and self.jogador.is_attack:
-                                    bloco_status = self.cenario.quebrar(bloco)
+                                    bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
                             
                             elif self.jogador.hitbox.x > bloco.hitbox.x:
                                 if self.jogador.last_side == 0 and self.jogador.is_attack:
-                                    bloco_status = self.cenario.quebrar(bloco)
+                                    bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
 
             
         return lista_colisao

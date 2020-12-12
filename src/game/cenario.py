@@ -30,15 +30,18 @@ class Cenario(ICenario):
         self.__hitbox_blocos = [bloco.hitbox for bloco in self.__mapa]
 
 
-    def quebrar(self, bloco):
-        if bloco.vida == bloco.dano:
-            self.__mapa.remove(bloco)
-            self.__itens.append(BlocoItem(bloco.material, [bloco.hitbox.x + bloco.tamanho_hitbox[0]//2, bloco.hitbox.y + bloco.tamanho_hitbox[1]]))
-            return True
-        else:
-            bloco.vida -= bloco.dano
-            bloco.atualizar()
-            return False
+    def quebrar(self, bloco,ferramenta):
+        try:
+            if bloco.vida <= bloco.dano[ferramenta]:
+                self.__mapa.remove(bloco)
+                self.__itens.append(BlocoItem(bloco.material, [bloco.hitbox.x + bloco.tamanho_hitbox[0]//2, bloco.hitbox.y + bloco.tamanho_hitbox[1]]))
+                return True
+            else:
+                bloco.vida -= bloco.dano[ferramenta]
+                bloco.atualizar()
+                return False
+        except Exception:
+            pass
 
     def atualizar(self, screen):
         for bloco in self.__mapa:

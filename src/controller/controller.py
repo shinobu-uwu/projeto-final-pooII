@@ -38,7 +38,6 @@ class Controller:
         self.__central_widget.sinal_fase.connect(self.selecionar_fase)
 
     def leaderboard(self):
-        score = self.__dao.melhor_tempo_fase("2")
         self.__central_widget = LeaderboardView([score.to_string()])
         self.set_central_widget()
         self.__central_widget.sinal_voltar.connect(self.voltar)
@@ -56,6 +55,6 @@ class Controller:
         self.set_central_widget()
 
     def selecionar_fase(self, i):
-        self.__window.close()
+        self.__window.hide()
         self.__sistema.selecionar_fase(i)
-        
+        self.__window.show()

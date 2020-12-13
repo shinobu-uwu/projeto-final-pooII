@@ -33,7 +33,6 @@ class Jogo (IJogo):
         pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
         try:
-            print ((self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
         except FileNotFoundError:
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo5.jpg"))
@@ -42,8 +41,6 @@ class Jogo (IJogo):
             rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
-
-            print (self.jogador.hitbox[1])
 
             if self.__jogador.hitbox[1] >= 500 :
 
@@ -95,8 +92,23 @@ class Jogo (IJogo):
                 self.jogador.momentum[1] = 1
 
 
+            if self.jogador.hitbox.x >= 1248:
+                self.jogador.right = False
+
+            tecla = pygame.key.get_pressed()
+
+            self.jogador.usar(None)
+            self.jogador.mudar_item(tecla)
+            self.adicionar_bloco_cenario(tecla)
+
+            self.__jogador.atualizar_teste(self.__screen)
+            self.__cenario.atualizar(self.__screen)
+            self.__hud.atualizar(self.__jogador, self.__screen, int(pygame.time.get_ticks()/1000))
+            pygame.display.update()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    pygame.display.quit()
                     rodando = False
 
                 if event.type == KEYDOWN:
@@ -110,7 +122,7 @@ class Jogo (IJogo):
                         if self.__tipos_colisao["bottom"]:
                             self.jogador.momentum[1] = -36
                             self.jogador.is_jump = True
-                            self.jogador.is_idle = False                                        
+                            self.jogador.is_idle = False
                     if event.key == K_e:
                         self.jogador.usar(event.key)
 
@@ -123,24 +135,7 @@ class Jogo (IJogo):
 
                 if not self.jogador.right and not self.jogador.left:
                     self.jogador.__is_idle = True
-            
-            if self.jogador.hitbox.x >= 1248:
-                self.jogador.right = False
 
-            tecla = pygame.key.get_pressed()
-
-            self.jogador.usar(None)
-            self.jogador.mudar_item(tecla)
-            self.adicionar_bloco_cenario(tecla)
-            
-
-                    
-            self.__jogador.atualizar_teste(self.__screen)
-            self.__cenario.atualizar(self.__screen)
-            
-            """self.atualizar() """
-            self.__hud.atualizar(self.__jogador, self.__screen, int(pygame.time.get_ticks()/1000))
-            pygame.display.update()
 
     def mover_teste(self):
         

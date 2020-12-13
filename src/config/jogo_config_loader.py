@@ -24,3 +24,19 @@ class JogoConfigLoader(ConfigLoader):
     @property
     def diretorio_sprites(self):
         return os.path.join(os.getenv('PYTHONPATH'), "assets/sprites")
+
+    @property
+    def tamanho_fonte(self):
+        return self.__config["tamanho_fonte"]
+
+    @property
+    def cor_fonte(self):
+        return self.__config["cor_fonte"]
+
+    @property
+    def fonte(self):
+        return self.__config["fonte"]
+    
+    @property
+    def posicao_texto(self):
+        return self.__config["posicao_texto"]

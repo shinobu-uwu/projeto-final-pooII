@@ -2,6 +2,10 @@
     "tamanho_janela": {
         "width": 1280,
         "height": 720
-    }
+    },
+    "fonte":"tahoma",
+    "cor_fonte": [0,0,0],
+    "posicao_texto":[100,300],
+    "tamanho_fonte":100
 
 }

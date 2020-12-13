@@ -1,15 +1,16 @@
 import os
 import pygame
-from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
-from src.game.bloco_item import BlocoItem
+from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e, K_ESCAPE
+
 from src.config.jogo_config_loader import JogoConfigLoader
+from src.game.bloco_cenario import BlocoCenario
+from src.game.bloco_item import BlocoItem
 from src.game.camera import Camera
 from src.game.cenario import Cenario
+from src.game.hud import HUD
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
-from src.game.hud import HUD
-#
-from src.game.bloco_cenario import BlocoCenario
+from src.game.menu_pause import MenuPause
 
 
 class Jogo (IJogo):
@@ -25,13 +26,12 @@ class Jogo (IJogo):
         self.__clock = pygame.time.Clock()
         self.__hud=HUD()
         self.__blocktimer=pygame.time.get_ticks()
-        self.inicia_loop_teste()
-        
-
-    def inicia_loop_teste(self):
-        x = 0 
-        pygame.display.set_caption("Blockfiesta!")
         self.__screen = pygame.display.set_mode((1280, 720))
+        self.__menu_pause = MenuPause(self.__screen)
+
+    def inicia_loop(self):
+        x = 0
+        pygame.display.set_caption("Blockfiesta!")
         try:
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
         except FileNotFoundError:
@@ -125,6 +125,8 @@ class Jogo (IJogo):
                             self.jogador.is_idle = False
                     if event.key == K_e:
                         self.jogador.usar(event.key)
+                    if event.key == K_ESCAPE:
+                        self.pausar()
 
                 if event.type == KEYUP:
                     if event.key == K_RIGHT:
@@ -254,18 +256,19 @@ class Jogo (IJogo):
             if isinstance(item, BlocoItem):
                 self.jogador.remover_item(item)
                 self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y], self.jogador.last_side)
-                
 
+    def pausar(self):
+        self.__menu_pause.show(self.__screen)
 
     def atualizar(self):
         pass
 
     @property
-    def tempo (self):
+    def tempo(self):
         return self.__tempo
 
     @property
-    def camera (self):
+    def camera(self):
         return self.__camera
 
     @property
@@ -273,10 +276,9 @@ class Jogo (IJogo):
         return self.__jogador
 
     @property
-    def cenario (self):
+    def cenario(self):
         return self.__cenario
 
     @property
-    def vitoria (self):
+    def vitoria(self):
         return self.__vitoria
-

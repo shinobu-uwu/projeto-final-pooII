@@ -54,7 +54,7 @@ class Jogador(IJogador):
         self.__idle_count = 0
         self.__attack_count = 0
         self.__tamanho_hitbox = (self.__config.tamanho[0]/2, self.__config.tamanho[1]/2)
-        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0] - 30, self.__tamanho_hitbox[1])
+        self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0] - 25, self.__tamanho_hitbox[1])
 
     def atualizar(self, tecla, screen):
         self.mover(tecla)

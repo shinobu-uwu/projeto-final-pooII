@@ -18,3 +18,6 @@ class CenarioConfigLoader(ConfigLoader):
         for y in range (0,len(self.__config[mapa])):
             mapablocos.append(list(self.__config[mapa][y]))
         return mapablocos
+
+    def obter_fim(self,mapa):
+        return self.__config["finais"][mapa]

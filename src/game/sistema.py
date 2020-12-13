@@ -14,7 +14,7 @@ class Sistema (ISistema):
     def selecionar_fase(self, numero_fase):
 
         fase_selecionada = "".join(["mapa",str(numero_fase+1)])
-        cenario = Cenario(numero_fase+1, fase_selecionada, 300)
+        cenario = Cenario(numero_fase+1, fase_selecionada)
 
         jogador = Jogador([300, 360])
         machado = Machado(5,5)

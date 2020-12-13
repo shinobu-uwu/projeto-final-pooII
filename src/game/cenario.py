@@ -6,10 +6,10 @@ from src.game.interfaces.interface_cenario import ICenario
 from src.config.cenario_config_loader import CenarioConfigLoader
 
 class Cenario(ICenario):
-    def __init__(self, fundo,mapa,final:float):
+    def __init__(self, fundo,mapa):
         self.__fundo = fundo
         
-        self.__final = final
+        
         self.__config = CenarioConfigLoader()
         configmapa=self.__config.obter_mapa(mapa)
         listablocos=[]
@@ -25,6 +25,7 @@ class Cenario(ICenario):
                 #else:
                 #    pass
         self.__mapa= listablocos
+        self.__final = self.__config.obter_fim(fundo)
         #itens no chão
         self.__itens = []
         self.__hitbox_blocos = [bloco.hitbox for bloco in self.__mapa]

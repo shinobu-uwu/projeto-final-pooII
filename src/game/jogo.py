@@ -41,10 +41,24 @@ class Jogo (IJogo):
             rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
-
+            print (x)
             if self.__jogador.hitbox[1] >= 500 :
+                print ("Morreu")
+                losetext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Você perdeu!", True, self.__config.cor_fonte)
+                self.__screen.blit(losetext, self.__config.posicao_texto)
+                timertexto=pygame.time.get_ticks()
+                while pygame.time.get_ticks()<timertexto+3000:
+                    pygame.display.update()
+                rodando=False
 
-                rodando = False
+            elif self.__jogador.hitbox[1]-x>self.__cenario.final:
+                print ("Ganhou")
+                wintext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Terminou essa fase!", True, self.__config.cor_fonte)
+                self.__screen.blit(wintext, self.__config.posicao_texto)
+                timertexto=pygame.time.get_ticks()
+                while pygame.time.get_ticks()<timertexto+3000:
+                    pygame.display.update()
+                rodando=False
 
             if rel_x < 1280:
                 self.__screen.blit(self.__bg, (rel_x,0))

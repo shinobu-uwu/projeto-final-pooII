@@ -303,7 +303,7 @@ class Jogador(IJogador):
                 if not add:
                     self.__inventario.itens[i] = item
 
-                print(self.__inventario.itens)
+
             except ValueError:
                 print("Inventário cheio")
         else:

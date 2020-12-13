@@ -160,8 +160,6 @@ class Jogo (IJogo):
                 self.jogador.hitbox.left = bloco.hitbox.right
                 self.__tipos_colisao["left"] = True
 
-        
-                
         #Mover e Testar o y
 
         self.jogador.hitbox.y += self.jogador.teste_movimento[1]
@@ -185,7 +183,7 @@ class Jogo (IJogo):
 
         for dupla in lista_colisao_itens:
             dupla[0].hitbox.y = dupla[1].hitbox.y - 10
-            dupla[0].hitbox.x = dupla[1].hitbox.x
+            #dupla[0].hitbox.x = dupla[1].hitbox.x
             #item.hitbox.y = bloco.hitbox.y - 10
             #item.hitbox.x = bloco.hitbox.x
 
@@ -212,17 +210,13 @@ class Jogo (IJogo):
                 if abs(media_bloco_x - media_jogador_x) < 75:
                     if abs(media_bloco_y - media_jogador_y) < 75:
 
-                        if bloco.posicao[1] < 500:
-                            print(f"x = {abs(media_bloco_x - media_jogador_x)}")
-                            print(f"y = {abs(media_bloco_y - media_jogador_y)}")
-
-                            if self.jogador.hitbox.x < bloco.hitbox.x:
-                                if self.jogador.last_side == 1 and self.jogador.is_attack:
-                                    bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
-                            
-                            elif self.jogador.hitbox.x > bloco.hitbox.x:
-                                if self.jogador.last_side == 0 and self.jogador.is_attack:
-                                    bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
+                        if self.jogador.hitbox.x < bloco.hitbox.x:
+                            if self.jogador.last_side == 1 and self.jogador.is_attack:
+                                bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
+                        
+                        elif self.jogador.hitbox.x > bloco.hitbox.x:
+                            if self.jogador.last_side == 0 and self.jogador.is_attack:
+                                bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
 
             
         return lista_colisao

@@ -16,7 +16,7 @@ class Cenario(ICenario):
         for y in range (0,len(configmapa)):
             for x in range (0,(len(configmapa[y]))):
                 try:
-                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(33)])
+                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(36)])
                 #if configmapa[y][x]=="1":
                     #bloco = BlocoCenario(1, [x*10000, y*(30)])
                     listablocos.append(bloco)
@@ -58,9 +58,14 @@ class Cenario(ICenario):
     def adicionar_bloco_cenario(self, item: BlocoItem, pos: list, last_side: int):
         #Criar bloco
         if last_side == 1:
-            bloco = BlocoCenario(item.material, [pos[0] + 60, pos[1] + 28])
+            bloco = BlocoCenario(item.material, [pos[0] + 60, pos[1] + 24])
+            
         else:
-            bloco = BlocoCenario(item.material, [pos[0] - 60, pos[1] + 28])
+            bloco = BlocoCenario(item.material, [pos[0] - 60, pos[1] + 24])
+
+        for bloco_cen in self.__mapa:
+                if bloco.hitbox.colliderect(bloco_cen.hitbox):
+                        bloco.hitbox.y -= 36
 
         #Adicionar o bloco ao cenário
         self.__mapa.append(bloco)

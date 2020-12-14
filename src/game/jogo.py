@@ -35,6 +35,7 @@ class Jogo (IJogo):
         try:
             self.__bg = pygame.image.load(self.cenario.fundo)
         except FileNotFoundError:
+            
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo5.jpg"))
         rodando = True
         while rodando:
@@ -252,13 +253,16 @@ class Jogo (IJogo):
 
     def adicionar_bloco_cenario(self, tecla):
         if tecla[K_e] and self.__blocktimer<pygame.time.get_ticks()-300:
-            self.__blocktimer=pygame.time.get_ticks()
-            pos_item = self.jogador.item_equipado
-            item = self.jogador.inventario.itens[pos_item]
+            try:
+                self.__blocktimer=pygame.time.get_ticks()
+                pos_item = self.jogador.item_equipado
+                item = self.jogador.inventario.itens[pos_item]
 
-            if isinstance(item, BlocoItem):
-                self.jogador.remover_item(item)
-                self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y], self.jogador.last_side)
+                if isinstance(item, BlocoItem):
+                    self.jogador.remover_item(item)
+                    self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y], self.jogador.last_side)
+            except Exception as e:
+                print (e)
 
     def pausar(self):
         self.__menu_pause.show()

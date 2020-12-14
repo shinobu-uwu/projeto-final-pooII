@@ -3,8 +3,8 @@ from src.game.interfaces.interface_picareta import IPicareta
 
 
 class Picareta(Ferramenta, IPicareta):
-    def __init__(self, forca, velocidade_ataque):
-        super().__init__(forca, velocidade_ataque)
+    def __init__(self):
+        super().__init__()
         self.__tipo = "3"
         self.__sprite = self.get_sprites(self.__tipo)
 

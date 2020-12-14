@@ -11,10 +11,10 @@ class IInventario(ABC):
     def itens(self):
         pass
 
-    @property
-    @abstractmethod
-    def capacidade(self):
-        pass
+    #@property
+    #@abstractmethod
+    #def capacidade(self):
+       # pass
 
     @itens.setter
     @abstractmethod

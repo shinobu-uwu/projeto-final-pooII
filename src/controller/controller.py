@@ -13,7 +13,7 @@ from src.views.selecao_fases_view import SelecaoFasesView
 
 class Controller:
     def __init__(self):
-        self.__sistema = Sistema("menu")
+        self.__sistema = Sistema()
         self.__config = MenuConfigLoader()
         self.__dao = DAO()
         self.__app = QApplication(sys.argv)

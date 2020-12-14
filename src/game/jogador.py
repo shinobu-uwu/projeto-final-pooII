@@ -9,7 +9,7 @@ from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
 from src.game.item import Item
 from src.game.ferramenta import Ferramenta
-from src.game.bloco_cenario import BlocoCenario
+
 
 
 class Jogador(IJogador):
@@ -144,7 +144,7 @@ class Jogador(IJogador):
         
 
         self.mudar_item(tecla)
-        pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
+        #pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
     def atualizar_teste(self, screen):
         #O Segredo é sempre ajustar o sprite e NÃO o hitbox
@@ -240,7 +240,7 @@ class Jogador(IJogador):
         
 
         #self.mudar_item(tecla)
-        pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
+        #pygame.draw.rect(screen, (255, 0, 0), self.__hitbox, 2)
 
 
     def mover(self, tecla):

@@ -1,6 +1,6 @@
 {
     "fonte_botoes": {
-        "fonte": "Comic Sans MS",
+        "fonte": "ThaleahFat",
         "tamanho": 96,
         "cor": [0, 100, 0]
     },
@@ -8,7 +8,7 @@
     "cor_fundo_titulo": [0, 123, 97],
     "espacamento": [0, 100],
     "fonte_titulo": {
-        "fonte": "Comic Sans MS",
+        "fonte": "ThaleahFat",
         "tamanho": 112,
         "cor": [0, 100, 0]
     }

@@ -1,5 +1,7 @@
-from PyQt5.Qt import pyqtSignal
-from PyQt5.QtWidgets import QWidget, QVBoxLayout
+import os
+from PyQt5.Qt import pyqtSignal, QPixmap
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel
 
 from src.config.menu_config_loader import MenuConfigLoader
 from src.views.widgets.botao_padrao import BotaoPadrao
@@ -11,14 +13,18 @@ class AjudaView(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.__config = MenuConfigLoader()
         self.__layout = QVBoxLayout()
         self.mostra_view()
 
     def mostra_view(self):
-        titulo = TituloJanela("Controles")
+        titulo = TituloJanela("Ajuda")
         titulo.adicionar_ao_layout(self.__layout)
 
-        #TBD
+        pixmap = QPixmap(os.path.join(self.__config.diretorio_assets, "ajuda.png"))
+        imagem = QLabel()
+        imagem.setPixmap(pixmap)
+        self.__layout.addWidget(imagem, alignment = Qt.AlignCenter)
 
         botao_voltar = BotaoPadrao("Voltar")
         botao_voltar.clicked.connect(self.__voltar)

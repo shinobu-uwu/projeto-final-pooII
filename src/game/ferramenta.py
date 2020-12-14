@@ -5,10 +5,10 @@ import pygame
 
 class Ferramenta(Item, ABC):
     @abstractmethod
-    def __init__(self, forca: float, velocidade_ataque: float):
+    def __init__(self):
         self.__config = FerramentaConfigLoader()
-        self.__forca = forca
-        self.__velocidade_ataque = velocidade_ataque
+        #self.__forca = forca
+        #self.__velocidade_ataque = velocidade_ataque
         self.__tipo = "0"
 
     def get_sprites(self, tipo):
@@ -19,13 +19,13 @@ class Ferramenta(Item, ABC):
         #Cada subclasse irá sobrescrever esse método
         pass
 
-    @property
-    def forca(self):
-        return self.__forca
+    #@property
+    #def forca(self):
+     #   return self.__forca
 
-    @forca.setter
-    def forca(self, forca):
-        self.__forca = forca
+    #@forca.setter
+    #def forca(self, forca):
+     #   self.__forca = forca
 
     @property
     def sprite(self):

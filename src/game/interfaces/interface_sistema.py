@@ -17,7 +17,7 @@ class ISistema (ABC):
     def fechar(self):
         pass
 
-    @property
-    @abstractmethod
-    def estado_jogo(self):
-        pass
+    #@property
+    #@abstractmethod
+    #def estado_jogo(self):
+    #    pass

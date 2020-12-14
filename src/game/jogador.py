@@ -9,7 +9,7 @@ from src.game.inventario import Inventario
 from src.game.interfaces.interface_jogador import IJogador
 from src.game.item import Item
 from src.game.ferramenta import Ferramenta
-from src.game.bloco_cenario import BlocoCenario
+
 
 
 class Jogador(IJogador):

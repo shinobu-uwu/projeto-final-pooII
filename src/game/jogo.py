@@ -5,7 +5,7 @@ from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.bloco_cenario import BlocoCenario
 from src.game.bloco_item import BlocoItem
-from src.game.camera import Camera
+#from src.game.camera import Camera
 from src.game.cenario import Cenario
 from src.game.hud import HUD
 from src.game.interfaces.interface_jogo import IJogo
@@ -14,13 +14,11 @@ from src.game.menu_pause import MenuPause
 
 
 class Jogo (IJogo):
-    def __init__(self, camera: Camera, jogador: Jogador, cenario: Cenario, vitoria: bool):
+    def __init__(self, jogador: Jogador, cenario: Cenario):
         pygame.init()
         self.__config = JogoConfigLoader()
-        self.__camera = camera
         self.__jogador = jogador
         self.__cenario = cenario
-        self.__vitoria = vitoria
         self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
         self.__clock = pygame.time.Clock()
         self.__hud=HUD()
@@ -270,13 +268,7 @@ class Jogo (IJogo):
     def atualizar(self):
         pass
 
-    @property
-    def tempo(self):
-        return self.__tempo
 
-    @property
-    def camera(self):
-        return self.__camera
 
     @property
     def jogador(self):
@@ -286,6 +278,3 @@ class Jogo (IJogo):
     def cenario(self):
         return self.__cenario
 
-    @property
-    def vitoria(self):
-        return self.__vitoria

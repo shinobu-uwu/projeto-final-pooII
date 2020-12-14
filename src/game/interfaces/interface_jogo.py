@@ -6,15 +6,9 @@ class IJogo (ABC):
     def __init__(self):
         pass
     
-    @property
-    @abstractmethod
-    def tempo (self):
-        pass
 
-    @property
-    @abstractmethod
-    def camera (self):
-        pass
+
+
 
     @property
     @abstractmethod
@@ -26,7 +20,3 @@ class IJogo (ABC):
     def cenario (self):
         pass
 
-    @property
-    @abstractmethod
-    def vitoria (self):
-        pass

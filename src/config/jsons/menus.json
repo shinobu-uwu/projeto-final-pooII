@@ -1,9 +1,9 @@
 {
     "tamanho_janela": {"width": 1280,
                        "height": 720},
-    "fonte_titulo": {"fonte": "sourcecodepro",
+    "fonte_titulo": {"fonte": "ThaleahFat",
                      "tamanho": 64},
-    "fonte_botoes": {"fonte": "sourcecodepro",
+    "fonte_botoes": {"fonte": "ThaleahFat",
                      "tamanho": 24},
     "tamanho_botoes": {"width": 600,
                        "height": 90},
@@ -12,12 +12,12 @@
                        "height": 225},
     "tamanho_leaderboard": {"width": 800,
                             "height": 400},
-    "fonte_leaderboard": {"fonte": "sourcecodepro",
+    "fonte_leaderboard": {"fonte": "ThaleahFat",
                           "tamanho": 18},
-    "fonte_input_jogador": {"fonte": "sourcecodepro",
+    "fonte_input_jogador": {"fonte": "ThaleahFat",
                             "tamanho": 14},
     "tamanho_input_jogador": {"width": 400,
                               "height": 25},
-    "fonte_botoes_fase": {"fonte": "sourcecodepro",
+    "fonte_botoes_fase": {"fonte": "ThaleahFat",
                           "tamanho": 32}
 }

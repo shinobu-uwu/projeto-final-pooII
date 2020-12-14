@@ -41,7 +41,7 @@ class Jogo (IJogo):
             rel_x = x % self.__bg.get_rect().width
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
-            print (x)
+
             if self.__jogador.hitbox[1] >= 500 :
                 print ("Morreu")
                 losetext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Você perdeu!", True, self.__config.cor_fonte)
@@ -221,8 +221,19 @@ class Jogo (IJogo):
                 media_jogador_x = self.jogador.hitbox.x + (self.jogador.hitbox.width/2)
                 media_jogador_y = self.jogador.hitbox.y + (self.jogador.hitbox.height/2)
 
-                if abs(media_bloco_x - media_jogador_x) < 75:
-                    if abs(media_bloco_y - media_jogador_y) < 75:
+                #Sistema de vantagens/desvantagens das ferramentas
+                #específco - material -- marreta = todos    /   pa = dano bom menos metal    /   picareta = boa em metal e pedra
+                #geral - area de contato -- marreta = destroi tudo  /   pa = alcance menor  /   picareta = normal
+
+                if self.jogador.item_equipado == 1:
+                    alcance = 75
+                elif self.jogador.item_equipado == 2:
+                    alcance = 120
+                else:
+                    alcance = 95
+
+                if abs(media_bloco_x - media_jogador_x) < alcance:
+                    if abs(media_bloco_y - media_jogador_y) < alcance:
 
                         if self.jogador.hitbox.x < bloco.hitbox.x:
                             if self.jogador.last_side == 1 and self.jogador.is_attack:

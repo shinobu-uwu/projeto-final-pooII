@@ -64,9 +64,17 @@ class Cenario(ICenario):
         else:
             bloco = BlocoCenario(item.material, [pos[0] - 60, pos[1] + 24])
 
-        for bloco_cen in self.__mapa:
-                if bloco.hitbox.colliderect(bloco_cen.hitbox):
-                        bloco.hitbox.y -= 36
+        pos_cen = 0
+        
+        while pos_cen < len(self.__mapa):
+            bloco_cen = self.__mapa[pos_cen]
+
+            if bloco.hitbox.colliderect(bloco_cen.hitbox):
+                bloco.hitbox.y -= 36
+                pos_cen = -1
+
+            pos_cen += 1
+
 
         #Adicionar o bloco ao cenário
         self.__mapa.append(bloco)

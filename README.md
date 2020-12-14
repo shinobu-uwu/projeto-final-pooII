@@ -11,6 +11,12 @@ cd na pasta clonada
 ``` sh
 cd projeto-final-pooII
 ```
+Executar requirements.py
+```sh
+python requirements.py
+```
+Instalar a fonte em assets/font.ttf
+
 Executar
 
 ``` sh

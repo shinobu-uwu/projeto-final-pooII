@@ -24,7 +24,7 @@ class Sistema (ISistema):
         jogador.adicionar_item(machado)
         jogador.adicionar_item(pa)
         jogador.adicionar_item(picareta)
-        jogo = Jogo(2, 3, jogador, cenario, True)
+        jogo = Jogo(3, jogador, cenario, True)
         jogo.inicia_loop()
 
 

@@ -11,8 +11,10 @@ class MenuPause(IMenuPause):
         self.__tema = self.__criar_tema()
         self.__menu = pygame_menu.Menu(self.__screen.get_height(), self.__screen.get_width(), 'Jogo pausado', theme = self.__tema)
         self.__menu.add_button("Continuar", self.continuar)
-        self.__menu.add_button("Menu principal", self.voltar_menu_principal)
+        #self.__menu.add_button("Menu principal", self.voltar_menu_principal)
         self.__menu.add_button("Sair", self.sair_do_jogo)
+        #self.__voltar=False
+
 
     def show(self, screen):
         self.__menu.enable()
@@ -28,8 +30,8 @@ class MenuPause(IMenuPause):
         exit()
 
     def voltar_menu_principal(self):
-        pass
-
+        self.__voltar=True
+        self.hide()
     def __criar_tema(self):
         tema = pygame_menu.themes.Theme(background_color = self.__config.cor_fundo,
                                         title_font = self.__config.fonte_titulo,
@@ -45,3 +47,7 @@ class MenuPause(IMenuPause):
                                         widget_margin = self.__config.espacamento
                                         )
         return tema
+
+    #@property
+    #def voltar(self):
+        #return self.__voltar

@@ -2,9 +2,10 @@ import os
 import json
 
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class JogoConfigLoader(ConfigLoader):
+class JogoConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/jogo.json")
         self.load()
@@ -12,6 +13,18 @@ class JogoConfigLoader(ConfigLoader):
     def load(self):
         with open(self.__path, 'r') as f:
             self.__config = json.load(f)
+
+    def obter_mapa(self, n):
+        return self.__config["mapas"][str(n)]
+
+    def obter_fundo(self, n):
+        return os.path.join(self.diretorio_assets, "fundos", f"fundo{n}.jpg")
+
+    def obter_final(self, n):
+        return self.__config["mapas"][str(n)]["final"]
+
+    def obter_posicao_inicial(self, n):
+        return self.__config["mapas"][str(n)]["posicao_inicial"]
 
     @property
     def width_janela(self):
@@ -23,7 +36,7 @@ class JogoConfigLoader(ConfigLoader):
 
     @property
     def diretorio_sprites(self):
-        return os.path.join(os.getenv('PYTHONPATH'), "assets/sprites")
+        return os.path.join(os.getenv('PYTHONPATH'), "assets", "sprites")
 
     @property
     def tamanho_fonte(self):

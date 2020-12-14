@@ -3,29 +3,23 @@ import pygame
 from src.game.bloco_item import BlocoItem
 from src.game.bloco_cenario import BlocoCenario
 from src.game.interfaces.interface_cenario import ICenario
-from src.config.cenario_config_loader import CenarioConfigLoader
+from src.config.jogo_config_loader import JogoConfigLoader
 
 class Cenario(ICenario):
-    def __init__(self, fundo,mapa):
-        self.__fundo = fundo
-        
-        
-        self.__config = CenarioConfigLoader()
-        configmapa=self.__config.obter_mapa(mapa)
-        listablocos=[]
-        for y in range (0,len(configmapa)):
-            for x in range (0,(len(configmapa[y]))):
+    def __init__(self, mapa):
+        self.__config = JogoConfigLoader()
+        self.__fundo = self.__config.obter_fundo(mapa)
+        self.__mapa = []
+        blocos = self.__config.obter_mapa(mapa)["blocos"]
+        for y in range(len(blocos)):
+            for x in range((len(blocos[y]))):
                 try:
-                    bloco = BlocoCenario(int(configmapa[y][x]), [x*33, y*(36)])
-                #if configmapa[y][x]=="1":
-                    #bloco = BlocoCenario(1, [x*10000, y*(30)])
-                    listablocos.append(bloco)
+                    self.__mapa.append(BlocoCenario(int(blocos[y][x]), [x*33, y*36]))
+                #Se o material for 0 ele não vai encontrar sprite, consequentemente não via criar o bloco
                 except FileNotFoundError:
                     pass
-                #else:
-                #    pass
-        self.__mapa= listablocos
-        self.__final = self.__config.obter_fim(fundo)
+
+        self.__final = self.__config.obter_final(mapa)
         #itens no chão
         self.__itens = []
         self.__hitbox_blocos = [bloco.hitbox for bloco in self.__mapa]

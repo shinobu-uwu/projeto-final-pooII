@@ -1,22 +1,23 @@
-from src.game.interfaces.interface_sistema import ISistema
+from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.bloco_cenario import BlocoCenario
 from src.game.cenario import Cenario
+from src.game.interfaces.interface_sistema import ISistema
 from src.game.jogo import Jogo
 from src.game.jogador import Jogador
 from src.game.machado import Machado
 from src.game.pa import Pa
 from src.game.picareta import Picareta
 
+
 class Sistema (ISistema):
     def __init__(self, estado_jogo):
         self.__estado_jogo = estado_jogo
+        self.__config = JogoConfigLoader()
 
     def selecionar_fase(self, numero_fase):
+        cenario = Cenario(numero_fase + 1)
 
-        fase_selecionada = "".join(["mapa",str(numero_fase+1)])
-        cenario = Cenario(numero_fase+1, fase_selecionada)
-
-        jogador = Jogador([300, 360])
+        jogador = Jogador(self.__config.obter_posicao_inicial(numero_fase + 1))
         machado = Machado(5,5)
         pa = Pa(5,5)
         picareta = Picareta(5,5)

@@ -33,7 +33,7 @@ class Jogo (IJogo):
         x = 0
         pygame.display.set_caption("Blockfiesta!")
         try:
-            self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
+            self.__bg = pygame.image.load(self.cenario.fundo)
         except FileNotFoundError:
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo5.jpg"))
         rodando = True
@@ -148,10 +148,8 @@ class Jogo (IJogo):
                     if event.key == K_LEFT:
                         self.jogador.left = False
 
-
                 if not self.jogador.right and not self.jogador.left:
                     self.jogador.__is_idle = True
-
 
     def mover_teste(self):
         

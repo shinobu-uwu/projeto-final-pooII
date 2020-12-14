@@ -148,7 +148,7 @@ class Jogo (IJogo):
                 losetext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Voce perdeu!", True, self.__config.cor_fonte)
                 self.__screen.blit(losetext, self.__config.posicao_texto)
                 timertexto=pygame.time.get_ticks()
-                while pygame.time.get_ticks()<timertexto+3000:
+                while pygame.time.get_ticks()<timertexto+1500:
                     pygame.display.update()
                 pygame.display.quit()
                 rodando=False
@@ -159,7 +159,7 @@ class Jogo (IJogo):
                 self.__screen.blit(wintext, self.__config.posicao_texto)
                 self.__dao.add(Score(self.__timer/1000, self.__numero_fase, self.__jogador.nome))
                 timertexto=pygame.time.get_ticks()
-                while pygame.time.get_ticks()<timertexto+3000:
+                while pygame.time.get_ticks()<timertexto+1500:
                     pygame.display.update()
                 pygame.display.quit()
                 rodando=False

@@ -16,7 +16,8 @@ class Cenario(ICenario):
                 try:
                     self.__mapa.append(BlocoCenario(int(blocos[y][x]), [x*33, y*36]))
                 #Se o material for 0 ele não vai encontrar sprite, consequentemente não via criar o bloco
-                except FileNotFoundError:
+                except FileNotFoundError as e:
+                    print (e)
                     pass
 
         self.__final = self.__config.obter_final(mapa)

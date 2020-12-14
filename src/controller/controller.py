@@ -44,7 +44,8 @@ class Controller:
             try:
                 scores.append(self.__dao.melhor_tempo_fase(i).to_string())
             #Ignora se for uma lista vazia
-            except ValueError:
+            except ValueError as e:
+                print (e)
                 pass
         self.__central_widget = LeaderboardView(scores)
         self.set_central_widget()

@@ -1,6 +1,7 @@
 import os
 import pygame
 from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e, K_ESCAPE
+
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.bloco_cenario import BlocoCenario
 from src.game.bloco_item import BlocoItem
@@ -142,6 +143,9 @@ class Jogo (IJogo):
                         self.jogador.usar(event.key)
                     if event.key == K_ESCAPE:
                         self.pausar()
+                        if self.__menu_pause.voltar == True:
+                            pygame.display.quit()
+                            rodando = False
 
                 if event.type == KEYUP:
                     if event.key == K_RIGHT:
@@ -153,18 +157,12 @@ class Jogo (IJogo):
                     self.jogador.__is_idle = True
 
     def mover_teste(self):
-        
-        
-        #print(f"POS PLAYER: {self.jogador.hitbox.x} - PRE SOMA")
-
         #Mover e Testar o x
         self.jogador.hitbox.x += self.jogador.teste_movimento[0]
         self.jogador.posicao[0] += self.jogador.teste_movimento[0]
         lista_colisao = self.checar_colisoes_teste()
 
         for bloco in lista_colisao:
-            #print(f"POS BLOCOR:{bloco.hitbox.x} - POS SOMA")
-            #print(f"POS PLAYER:{bloco.hitbox.x} - POS SOMA")
             if self.jogador.teste_movimento[0] > 0:
                 self.jogador.hitbox.right = bloco.hitbox.left
                 self.__tipos_colisao["right"] = True
@@ -172,8 +170,6 @@ class Jogo (IJogo):
             elif self.jogador.teste_movimento[0] < 0:
                 self.jogador.hitbox.left = bloco.hitbox.right
                 self.__tipos_colisao["left"] = True
-
-        #Mover e Testar o y
 
         self.jogador.hitbox.y += self.jogador.teste_movimento[1]
         self.jogador.posicao[1] += self.jogador.teste_movimento[1]
@@ -188,17 +184,11 @@ class Jogo (IJogo):
                 self.jogador.hitbox.top = bloco.hitbox.bottom
                 self.__tipos_colisao["top"] = True
 
-        #print(self.__tipos_colisao)
-
-
     def mover_itens(self):
         lista_colisao_itens = self.checar_colisoes_itens()
 
         for dupla in lista_colisao_itens:
             dupla[0].hitbox.y = dupla[1].hitbox.y - 10
-            #dupla[0].hitbox.x = dupla[1].hitbox.x
-            #item.hitbox.y = bloco.hitbox.y - 10
-            #item.hitbox.x = bloco.hitbox.x
 
     def checar_colisoes_teste(self):
         lista_colisao = []
@@ -241,8 +231,6 @@ class Jogo (IJogo):
                         elif self.jogador.hitbox.x > bloco.hitbox.x:
                             if self.jogador.last_side == 0 and self.jogador.is_attack:
                                 bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)
-
-            
         return lista_colisao
 
 
@@ -256,10 +244,7 @@ class Jogo (IJogo):
 
             if item.hitbox.colliderect(self.jogador.hitbox):
                 self.adicionar_item(item)
-                        
-
         return lista_colisoes_itens
-
 
     def adicionar_item(self, item):
         self.cenario.remover_item(item)
@@ -276,7 +261,7 @@ class Jogo (IJogo):
                 self.cenario.adicionar_bloco_cenario(item, [self.jogador.hitbox.x,self.jogador.hitbox.y], self.jogador.last_side)
 
     def pausar(self):
-        self.__menu_pause.show(self.__screen)
+        self.__menu_pause.show()
 
     def atualizar(self):
         pass

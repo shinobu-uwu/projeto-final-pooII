@@ -27,11 +27,10 @@ class SelecaoFasesView(QWidget):
         input_jogador.adicionar_ao_layout(self.__layout)
 
         fases_layout = QGridLayout()
-        nome_imagens = sorted(os.listdir(os.path.join(self.__config.diretorio_assets, "thumbnail fases/")))
+        nome_imagens = sorted(os.listdir(os.path.join(self.__config.diretorio_assets, "thumbnail fases")))
         botoes = []
         for nome in nome_imagens:
-            botao = BotaoFase(nome)
-            i = nome_imagens.index(nome)
+            botao = BotaoFase(nome, nome_imagens.index(nome) + 1)
             botoes.append(botao)
         botoes[0].clicked.connect(self.__selecionar_fase1)
         botoes[1].clicked.connect(self.__selecionar_fase2)

@@ -18,9 +18,6 @@ class MainMenuView(QWidget):
         self.mostra_view()
 
     def mostra_view(self):
-        #titulo = TituloJanela("Blockfiesta!")
-        #titulo.adicionar_ao_layout(self.__layout)
-
         imagem_central = ImagemCentral()
         imagem_central.adicionar_ao_layout(self.__layout)
 

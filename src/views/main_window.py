@@ -19,5 +19,5 @@ class MainWindow(QMainWindow):
     #janela ser criada com o fundo que queremos
     def paintEvent(self, event):
         painter = QPainter(self)
-        painter.drawPixmap(self.rect(), QPixmap(os.path.join(self.__config.diretorio_assets, "menu principal/fundo.png")))
+        painter.drawPixmap(self.rect(), QPixmap(os.path.join(self.__config.diretorio_assets, "menu principal", "fundo.png")))
         super().paintEvent(event)

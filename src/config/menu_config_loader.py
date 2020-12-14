@@ -7,7 +7,7 @@ from src.config.singleton import Singleton
 
 class MenuConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
-        self.__path = os.path.join(os.path.dirname(__file__), "jsons/menus.json")
+        self.__path = os.path.join(os.path.dirname(__file__), "jsons", "menus.json")
         self.load()
 
     def load(self):
@@ -93,3 +93,11 @@ class MenuConfigLoader(ConfigLoader, Singleton):
     @property
     def tamanho_fonte_input_jogador(self):
         return self.__config["fonte_input_jogador"]["tamanho"]
+
+    @property
+    def fonte_botoes_fase(self):
+        return self.__config["fonte_botoes_fase"]["fonte"]
+    
+    @property
+    def tamanho_fonte_botoes_fase(self):
+        return self.__config["fonte_botoes_fase"]["tamanho"]

@@ -17,5 +17,7 @@
     "fonte_input_jogador": {"fonte": "sourcecodepro",
                             "tamanho": 14},
     "tamanho_input_jogador": {"width": 400,
-                              "height": 25}
+                              "height": 25},
+    "fonte_botoes_fase": {"fonte": "sourcecodepro",
+                          "tamanho": 32}
 }

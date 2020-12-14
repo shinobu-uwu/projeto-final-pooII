@@ -36,10 +36,10 @@ class DAO:
         #pode ser qualquer número suficientemente grande
         minimo = 100000
         for key in self.__cache.keys():
-            candidato_a_minimo = min(self.__cache[key][f"fase{fase}"])
-            if candidato_a_minimo < minimo:
-                jogador = key
-                minimo = candidato_a_minimo
+            for tempo in self.__cache[key][f"fase{fase}"]:
+                if tempo < minimo:
+                    jogador = key
+                    minimo = tempo
         return Score(minimo, fase, jogador)
 
     def atualizar(self):

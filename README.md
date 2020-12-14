@@ -33,3 +33,6 @@ https://www.dafont.com/thaleahfat.font
 
 MinItems(ANoob):
 https://anoob.itch.io/minitems
+
+"Backgrounds for 2D Platformers"(Greggman)
+https://opengameart.org/content/backgrounds-for-2d-platformers

@@ -29,8 +29,8 @@ class DAO:
                 self.__cache[score.jogador] = {}
                 for i in range(1, 7):
                     self.__cache[score.jogador][f"fase{i}"] = []
-                self.__cache[score.jogador][f"fase{score.fase}"].append(score.to_dict())
-                self.__dump()
+            self.__cache[score.jogador][f"fase{score.fase}"].append(score.to_dict())
+            self.__dump()
 
     def melhor_tempo_fase(self, fase):
         #pode ser qualquer número suficientemente grande

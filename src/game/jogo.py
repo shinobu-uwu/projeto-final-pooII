@@ -1,7 +1,6 @@
 import os
 import pygame
 from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e, K_ESCAPE
-
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.bloco_cenario import BlocoCenario
 from src.game.bloco_item import BlocoItem
@@ -14,13 +13,12 @@ from src.game.menu_pause import MenuPause
 
 
 class Jogo (IJogo):
-    def __init__(self,tempo: float, camera: Camera, jogador: Jogador, cenario: Cenario, vitoria: bool):
+    def __init__(self, camera: Camera, jogador: Jogador, cenario: Cenario, vitoria: bool):
         pygame.init()
         self.__config = JogoConfigLoader()
         self.__camera = camera
         self.__jogador = jogador
         self.__cenario = cenario
-        self.__tempo = tempo
         self.__vitoria = vitoria
         self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
         self.__clock = pygame.time.Clock()
@@ -31,6 +29,7 @@ class Jogo (IJogo):
 
     def inicia_loop(self):
         x = 0
+        tempo_inicial= pygame.time.get_ticks()
         pygame.display.set_caption("Blockfiesta!")
         try:
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo{self.__cenario.fundo}.jpg"))
@@ -117,13 +116,15 @@ class Jogo (IJogo):
 
             self.__jogador.atualizar_teste(self.__screen)
             self.__cenario.atualizar(self.__screen)
-            self.__hud.atualizar(self.__jogador, self.__screen, int(pygame.time.get_ticks()/1000))
+            self.__timer=(pygame.time.get_ticks()-tempo_inicial)
+            self.__hud.atualizar(self.__jogador, self.__screen, int((self.__timer)/1000))
             pygame.display.update()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
                     rodando = False
+                    quit()
 
                 if event.type == KEYDOWN:
                     if event.key == K_RIGHT:

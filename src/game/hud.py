@@ -28,6 +28,6 @@ class HUD(IHud):
             item = jogador.inventario.itens[i]
             try:
                 #TODO eliminar hard coded references 5 e 8
-                screen.blit(scale(item.sprite, item.tamanho), (5 + self.__config.posicao_slot[0] + i*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1] + 8))
+                screen.blit(scale(item.sprite, self.__config.tamanho_slot), (self.__config.posicao_slot[0] + i*(self.__config.tamanho_slot[0] + self.__config.espacamento_slots), self.__config.posicao_slot[1]))
             except AttributeError as e:
                 print(e)

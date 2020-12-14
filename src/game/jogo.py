@@ -215,26 +215,26 @@ class Jogo (IJogo):
                     lista_colisao.append(bloco)
             
             else:
-                media_bloco_x = bloco.hitbox.x + (bloco.hitbox.width/2)
-                media_bloco_y = bloco.hitbox.y + (bloco.hitbox.height/2)
+                #media_bloco_x = bloco.hitbox.x + (bloco.hitbox.width/2)
+                #media_bloco_y = bloco.hitbox.y + (bloco.hitbox.height/2)
 
-                media_jogador_x = self.jogador.hitbox.x + (self.jogador.hitbox.width/2)
-                media_jogador_y = self.jogador.hitbox.y + (self.jogador.hitbox.height/2)
+                #media_jogador_x = self.jogador.hitbox.x + (self.jogador.hitbox.width/2)
+                #media_jogador_y = self.jogador.hitbox.y + (self.jogador.hitbox.height/2)
 
                 #Sistema de vantagens/desvantagens das ferramentas
                 #específco - material -- marreta = todos    /   pa = dano bom menos metal    /   picareta = boa em metal e pedra
                 #geral - area de contato -- marreta = destroi tudo  /   pa = alcance menor  /   picareta = normal
 
                 if self.jogador.item_equipado == 1:
-                    alcance = 75
+                    #quanto menor esse número maior é o alcance
+                    alcance = 80
                 elif self.jogador.item_equipado == 2:
-                    alcance = 120
+                    alcance = 140
                 else:
-                    alcance = 95
+                    alcance = 120
 
-                if abs(media_bloco_x - media_jogador_x) < alcance:
-                    if abs(media_bloco_y - media_jogador_y) < alcance:
-
+                #calculo da distância de dois pontos / checar se o bloco está perto o suficiente do player
+                if (((bloco.hitbox.center[0] - self.jogador.hitbox.center[0])**2)  + ((bloco.hitbox.center[1] - self.jogador.hitbox.center[1])**2))**(1/2) < alcance:
                         if self.jogador.hitbox.x < bloco.hitbox.x:
                             if self.jogador.last_side == 1 and self.jogador.is_attack:
                                 bloco_status = self.cenario.quebrar(bloco,self.__jogador.item_equipado)

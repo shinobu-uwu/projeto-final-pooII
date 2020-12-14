@@ -53,3 +53,7 @@ class JogoConfigLoader(ConfigLoader, Singleton):
     @property
     def posicao_texto(self):
         return self.__config["posicao_texto"]
+
+    @property
+    def icone(self):
+        return os.path.join(self.diretorio_assets, "icon", "icon.png")

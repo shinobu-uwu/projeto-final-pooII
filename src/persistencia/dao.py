@@ -42,6 +42,9 @@ class DAO:
                 minimo = candidato_a_minimo
         return Score(minimo, fase, jogador)
 
+    def atualizar(self):
+        self.__load()
+
     @property
     def cache(self):
         return self.__cache

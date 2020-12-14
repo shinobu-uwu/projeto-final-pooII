@@ -17,12 +17,12 @@ class BotaoFase(QPushButton):
         # Windows sendo windows...
         if platform == "win32":
             self.setStyleSheet("""BotaoFase{ border-style: outset; background-color: #14AE12;
-            border-color: #14AE12; border-radius: 20px; border-width: 6px; } 
+            border-color: #14AE12; border-radius: 20px; border-width: 6px; font-color: black;}
             BotaoFase:hover { border-color: #28C226; background-color: #28C226; }
             BotaoFase:pressed { border-color: #009A00; background-color: #009A00; }""")
         else:
             self.setStyleSheet("BotaoFase{ " +
-                           f"background-image: url({self.__diretorio});" + 
-                           "border-style: outset; border-color: #14AE12; border-radius: 20px; border-width: 6px;" +
+                           f"background-image: url({self.__diretorio}); " +
+                           "color: darkgreen; border-style: outset; border-color: #14AE12; border-radius: 20px; border-width: 6px; " +
                            "} BotaoFase:hover { border-color: #28C226; } BotaoFase:pressed { border-color: #009A00; }")
 

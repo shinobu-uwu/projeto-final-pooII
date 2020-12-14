@@ -13,6 +13,7 @@ class ScrollableLeaderboard(QListWidget):
             self.addItem(item)
         self.setFixedSize(self.__config.width_leaderboard, self.__config.height_leaderboard)
         self.setFont(QFont(self.__config.fonte_leaderboard, self.__config.tamanho_fonte_leaderboard))
+        self.setSelectionRectVisible(False)
 
     def adicionar_item(self, item):
         self.addItem(item)

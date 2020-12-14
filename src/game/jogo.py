@@ -5,17 +5,19 @@ from pygame.constants import KEYDOWN, K_LEFT, KEYUP, K_RIGHT, K_UP, K_SPACE, K_e
 from src.config.jogo_config_loader import JogoConfigLoader
 from src.game.bloco_cenario import BlocoCenario
 from src.game.bloco_item import BlocoItem
-#from src.game.camera import Camera
 from src.game.cenario import Cenario
 from src.game.hud import HUD
 from src.game.interfaces.interface_jogo import IJogo
 from src.game.jogador import Jogador
 from src.game.menu_pause import MenuPause
+from src.game.score import Score
+from src.persistencia.dao import DAO
 
 
 class Jogo (IJogo):
-    def __init__(self, jogador: Jogador, cenario: Cenario):
+    def __init__(self, numero_fase: int, jogador: Jogador, cenario: Cenario):
         pygame.init()
+        self.__numero_fase = numero_fase
         self.__config = JogoConfigLoader()
         self.__jogador = jogador
         self.__cenario = cenario
@@ -25,15 +27,17 @@ class Jogo (IJogo):
         self.__blocktimer=pygame.time.get_ticks()
         self.__screen = pygame.display.set_mode((1280, 720))
         self.__menu_pause = MenuPause(self.__screen)
+        self.__dao = DAO()
 
     def inicia_loop(self):
         x = 0
         tempo_inicial= pygame.time.get_ticks()
         pygame.display.set_caption("Blockfiesta!")
+        pygame.display.set_icon(pygame.image.load(self.__config.icone))
         try:
             self.__bg = pygame.image.load(self.cenario.fundo)
         except FileNotFoundError:
-            
+
             self.__bg = pygame.image.load(os.path.join(self.__config.diretorio_sprites, f"fundo5.jpg"))
         rodando = True
         while rodando:
@@ -41,27 +45,10 @@ class Jogo (IJogo):
             self.__clock.tick(33)
             self.__screen.blit(self.__bg, (rel_x - self.__bg.get_rect().width, 0))
 
-            if self.__jogador.hitbox[1] >= 500 :
-                print ("Morreu")
-                losetext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Você perdeu!", True, self.__config.cor_fonte)
-                self.__screen.blit(losetext, self.__config.posicao_texto)
-                timertexto=pygame.time.get_ticks()
-                while pygame.time.get_ticks()<timertexto+3000:
-                    pygame.display.update()
-                rodando=False
-
-            elif self.__jogador.hitbox[1]-x>self.__cenario.final:
-                print ("Ganhou")
-                wintext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Terminou essa fase!", True, self.__config.cor_fonte)
-                self.__screen.blit(wintext, self.__config.posicao_texto)
-                timertexto=pygame.time.get_ticks()
-                while pygame.time.get_ticks()<timertexto+3000:
-                    pygame.display.update()
-                rodando=False
 
             if rel_x < 1280:
                 self.__screen.blit(self.__bg, (rel_x,0))
-            x -= 1 
+            x -= 1
 
             self.jogador.teste_movimento = [0,0]
             self.__tipos_colisao = {"top": False, "bottom": False, "right": False, "left": False}
@@ -72,15 +59,15 @@ class Jogo (IJogo):
                 self.jogador.teste_movimento[0] -= 5
 
             self.jogador.hitbox.x -= 2
-            
+
             for item in self.cenario.itens:
                 item.hitbox.x -= 2
-            
+
             for bloco in self.cenario.mapa:
                 bloco.hitbox.x -= 2
                 if bloco.hitbox.x <= -44:
                     self.cenario.remover_bloco_mapa(bloco)
-                    
+
 
             for item in self.__cenario.itens:
                 item.hitbox.y += 8
@@ -155,6 +142,28 @@ class Jogo (IJogo):
                 if not self.jogador.right and not self.jogador.left:
                     self.jogador.__is_idle = True
 
+            #Checa se o jogador perdeu ou ganhou e termina o jogo
+            if self.__jogador.hitbox[1] >= 500 :
+                print ("Morreu")
+                losetext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Voce perdeu!", True, self.__config.cor_fonte)
+                self.__screen.blit(losetext, self.__config.posicao_texto)
+                timertexto=pygame.time.get_ticks()
+                while pygame.time.get_ticks()<timertexto+3000:
+                    pygame.display.update()
+                pygame.display.quit()
+                rodando=False
+
+            elif self.__jogador.hitbox[1]-x>self.__cenario.final:
+                print ("Ganhou")
+                wintext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Voce ganhou!", True, self.__config.cor_fonte)
+                self.__screen.blit(wintext, self.__config.posicao_texto)
+                self.__dao.add(Score(self.__timer/1000, self.__numero_fase, self.__jogador.nome))
+                timertexto=pygame.time.get_ticks()
+                while pygame.time.get_ticks()<timertexto+3000:
+                    pygame.display.update()
+                pygame.display.quit()
+                rodando=False
+
     def mover_teste(self):
         #Mover e Testar o x
         self.jogador.hitbox.x += self.jogador.teste_movimento[0]
@@ -165,7 +174,7 @@ class Jogo (IJogo):
             if self.jogador.teste_movimento[0] > 0:
                 self.jogador.hitbox.right = bloco.hitbox.left
                 self.__tipos_colisao["right"] = True
-            
+
             elif self.jogador.teste_movimento[0] < 0:
                 self.jogador.hitbox.left = bloco.hitbox.right
                 self.__tipos_colisao["left"] = True

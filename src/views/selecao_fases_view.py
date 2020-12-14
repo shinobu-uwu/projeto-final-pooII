@@ -10,7 +10,7 @@ from src.views.widgets.titulo_janela import TituloJanela
 
 
 class SelecaoFasesView(QWidget):
-    sinal_fase = pyqtSignal(int)
+    sinal_fase = pyqtSignal(str, int)
     sinal_voltar = pyqtSignal()
 
     def __init__(self):
@@ -23,8 +23,8 @@ class SelecaoFasesView(QWidget):
         titulo = TituloJanela("Selecione a fase")
         titulo.adicionar_ao_layout(self.__layout)
 
-        input_jogador =  InputJogador()
-        input_jogador.adicionar_ao_layout(self.__layout)
+        self.__input_jogador =  InputJogador()
+        self.__input_jogador.adicionar_ao_layout(self.__layout)
 
         fases_layout = QGridLayout()
         nome_imagens = sorted(os.listdir(os.path.join(self.__config.diretorio_assets, "thumbnail fases")))
@@ -54,22 +54,31 @@ class SelecaoFasesView(QWidget):
         return self.__layout
 
     def __selecionar_fase1(self):
-        self.sinal_fase.emit(0)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 0)
 
     def __selecionar_fase2(self):
-        self.sinal_fase.emit(1)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 1)
 
     def __selecionar_fase3(self):
-        self.sinal_fase.emit(2)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 2)
 
     def __selecionar_fase4(self):
-        self.sinal_fase.emit(3)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 3)
 
     def __selecionar_fase5(self):
-        self.sinal_fase.emit(4)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 4)
 
     def __selecionar_fase6(self):
-        self.sinal_fase.emit(5)
+        self.sinal_fase.emit(self.__obter_nome_jogador(), 5)
+
+    def __obter_nome_jogador(self):
+        try:
+            nome = self.__input_jogador.text()
+            assert nome is not ''
+        except AssertionError:
+            return "Jogador desconhecido"
+        else:
+            return nome
 
     def __voltar(self):
         self.sinal_voltar.emit()

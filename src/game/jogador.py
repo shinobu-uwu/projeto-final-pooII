@@ -13,8 +13,9 @@ from src.game.ferramenta import Ferramenta
 
 
 class Jogador(IJogador):
-    def __init__(self, posicao_inicial: list):
+    def __init__(self, nome: str, posicao_inicial: list):
         self.__config = JogadorConfigLoader()
+        self.__nome = nome
         self.__morto = False
         self.__inventario = Inventario()
         self.__velocidade = self.__config.velocidade
@@ -495,3 +496,7 @@ class Jogador(IJogador):
     @is_use.setter
     def is_use(self, is_use):
         self.__is_use = is_use
+
+    @property
+    def nome(self):
+        return self.__nome

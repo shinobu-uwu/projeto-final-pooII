@@ -3,9 +3,10 @@ import os
 from os.path import abspath, dirname
 
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class MenuPauseConfigLoader(ConfigLoader):
+class MenuPauseConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = os.path.join(abspath(dirname(__file__)), "jsons", "menu_pause.json")
         self.load()

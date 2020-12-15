@@ -3,9 +3,10 @@ import os
 import pygame
 
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class BlocoConfigLoader(ConfigLoader):
+class BlocoConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/blocos.json")
         self.load()

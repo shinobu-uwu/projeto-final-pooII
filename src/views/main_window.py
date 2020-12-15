@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMainWindow
 from src.config.menu_config_loader import MenuConfigLoader
 
 
+# A janela principal herda de QMainWindow
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -13,7 +14,7 @@ class MainWindow(QMainWindow):
         #Configurações da janela
         self.setStyleSheet(self.__config.stylesheet)
         self.setFixedSize(self.__config.width_janela, self.__config.height_janela)
-        self.setWindowIcon(QIcon(os.path.join(self.__config.diretorio_assets, "icon/icon.png")))
+        self.setWindowIcon(QIcon(os.path.join(self.__config.diretorio_assets, "icon","icon.png")))
         self.setWindowTitle("Blockfiesta!")
 
     #Reescrever o paintEvent da classe QMainWindow, para a

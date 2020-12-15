@@ -5,9 +5,10 @@ from pygame.transform import scale, flip
 
 
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class JogadorConfigLoader(ConfigLoader):
+class JogadorConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/jogador.json")
         self.load()

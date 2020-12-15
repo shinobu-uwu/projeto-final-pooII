@@ -2,9 +2,10 @@ import json
 import os
 
 from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
 
 
-class HUDConfigLoader(ConfigLoader):
+class HUDConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         self.__path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "jsons/hud.json")
         self.load()

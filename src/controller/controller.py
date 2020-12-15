@@ -11,6 +11,10 @@ from src.views.main_window import MainWindow
 from src.views.selecao_fases_view import SelecaoFasesView
 
 
+# O controller cria o sistema do jogo e a janela principal da GUI e manuseia eles,
+# também há uma instância do DAO, que cuida da persistência.
+# Quando o controller troca de uma view para outra ele também cuida de conectar os sinais
+# emitidos pela view às funções apropriadas
 class Controller:
     def __init__(self):
         self.__sistema = Sistema()
@@ -24,6 +28,8 @@ class Controller:
     def set_central_widget(self):
         self.__window.setCentralWidget(self.__central_widget)
 
+    # Quando o aplicativo é iniciado o controller seta o widget central para o menu principal,
+    # que é uma view
     def comeca(self):
         self.__central_widget.sinal_jogar.connect(self.jogar)
         self.__central_widget.sinal_leaderboard.connect(self.leaderboard)
@@ -31,12 +37,15 @@ class Controller:
         self.__window.show()
         sys.exit(self.__app.exec_())
 
+    # Controller muda a view para seleção de fases
     def jogar(self):
         self.__central_widget = SelecaoFasesView()
         self.set_central_widget()
         self.__central_widget.sinal_voltar.connect(self.voltar)
         self.__central_widget.sinal_fase.connect(self.selecionar_fase)
 
+    # O controller carrega os melhores tempos das fases através do DAO e passa
+    # para a view exibí-los
     def leaderboard(self):
         self.__dao.atualizar()
         scores = []
@@ -44,8 +53,7 @@ class Controller:
             try:
                 scores.append(self.__dao.melhor_tempo_fase(i).to_string())
             #Ignora se for uma lista vazia
-            except ValueError as e:
-                print (e)
+            except ValueError:
                 pass
         self.__central_widget = LeaderboardView(scores)
         self.set_central_widget()
@@ -63,6 +71,8 @@ class Controller:
         self.__central_widget.sinal_ajuda.connect(self.ajuda)
         self.set_central_widget()
 
+    # Quando o jogo é inciado o controller faz a janela principal desaparecer
+    # e quando o loop do jogo termina faz ela reaparecer de onde estava
     def selecionar_fase(self, nome, i):
         self.__window.hide()
         self.__sistema.selecionar_fase(nome, i)

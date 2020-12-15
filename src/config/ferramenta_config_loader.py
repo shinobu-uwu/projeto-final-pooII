@@ -1,13 +1,16 @@
 import os
 import json
 import pygame
-from pygame.transform import scale, flip
-from src.config.config_loader import ConfigLoader
 
-class FerramentaConfigLoader(ConfigLoader):
+from src.config.config_loader import ConfigLoader
+from src.config.singleton import Singleton
+
+
+class FerramentaConfigLoader(ConfigLoader, Singleton):
     def __init__(self):
         super().__init__()
         self.__tamanho = [30,30]
+        self.load()
 
     def load(self):
         pass

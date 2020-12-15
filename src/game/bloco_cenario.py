@@ -17,7 +17,7 @@ class BlocoCenario(IBlococenario):
         #self.__sprite = pygame.transform.scale(self.__sprite, (44, 32))
         self.__tamanho_hitbox = (44, 32)
         self.__hitbox = pygame.Rect(self.__posicao[0], self.__posicao[1], self.__tamanho_hitbox[0], self.__tamanho_hitbox[1])
-
+        
     
     def atualizar(self):
         if self.__vida < 4:

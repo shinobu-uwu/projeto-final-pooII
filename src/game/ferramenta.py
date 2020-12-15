@@ -3,6 +3,9 @@ from src.game.item import Item
 from src.config.ferramenta_config_loader import FerramentaConfigLoader
 import pygame
 
+#USO DE HERANÇA: Ferramenta herda tanto de item (pois Ferramenta é um dos tipos de Item que será inserido no Inventário) e de ABC.
+#  Tanto Ferramenta e Item são considerados classes abstratas.
+
 class Ferramenta(Item, ABC):
     @abstractmethod
     def __init__(self):
@@ -18,14 +21,6 @@ class Ferramenta(Item, ABC):
     def usar(self):
         #Cada subclasse irá sobrescrever esse método
         pass
-
-    #@property
-    #def forca(self):
-     #   return self.__forca
-
-    #@forca.setter
-    #def forca(self, forca):
-     #   self.__forca = forca
 
     @property
     def sprite(self):

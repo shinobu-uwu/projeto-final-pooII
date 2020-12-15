@@ -13,7 +13,7 @@ from src.game.menu_pause import MenuPause
 from src.game.score import Score
 from src.persistencia.dao import DAO
 
-
+#HERANÇA:Jogo herda da interface IJogo
 class Jogo (IJogo):
     def __init__(self, numero_fase: int, jogador: Jogador, cenario: Cenario):
         pygame.init()
@@ -158,6 +158,8 @@ class Jogo (IJogo):
                 wintext = pygame.font.Font(pygame.font.match_font(self.__config.fonte), self.__config.tamanho_fonte).render(f"Voce ganhou!", True, self.__config.cor_fonte)
                 self.__screen.blit(wintext, self.__config.posicao_texto)
                 self.__dao.add(Score(self.__timer/1000, self.__numero_fase, self.__jogador.nome))
+                #USO DE PERSISTENCIA: Após o término de fase,o Data-Access Object do objeto Jogo será utilizado para salvar o tempo recorde,
+                # se aplicável,no arquivos scores.json
                 timertexto=pygame.time.get_ticks()
                 while pygame.time.get_ticks()<timertexto+1500:
                     pygame.display.update()

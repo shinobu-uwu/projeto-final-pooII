@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-
+#HERANÇA:Jogo herdará da classe abstrata IJOGO
 class IJogo (ABC):
     @abstractmethod
     def __init__(self):

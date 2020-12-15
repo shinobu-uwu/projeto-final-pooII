@@ -254,6 +254,9 @@ class Jogador(IJogador):
     def usar(self, key):
         if key == pygame.K_e:
             #Como ele tem a habilidade de colocar blocos, n necessariamente is_attack se torna verdade
+
+            #Utilidade da herança de ferramenta: Será conferido a instância de uma ferramenta como item equipado
+            #Assim,poderá ser definido se o jogador está em estado de ataque
             if isinstance(self.__inventario.itens[self.__item_equipado], Ferramenta):
                 self.__is_attack = True
         
@@ -270,6 +273,7 @@ class Jogador(IJogador):
                 print("Sem Item")
                 self.__is_attack = False
                 self.__attack_count = 0
+                #Uso de exceções,usado para otimizar o processo de uso dos itens.
             else:
                 self.__attack_count += 1
 
@@ -318,6 +322,7 @@ class Jogador(IJogador):
                 self.__inventario.itens.remove(item)
             except Exception as e:
                 print(e)
+                
 
 
 

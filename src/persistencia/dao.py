@@ -25,12 +25,17 @@ class DAO:
 
     def add(self, score: Score):
         if isinstance(score, Score):
+            print ('isinstance')
             if score.jogador not in self.__cache.keys():
+                print ('Dentro do if')
                 self.__cache[score.jogador] = {}
                 for i in range(1, 7):
+                    print ('Fazendo laço for')
                     self.__cache[score.jogador][f"fase{i}"] = []
             self.__cache[score.jogador][f"fase{score.fase}"].append(score.to_dict())
             self.__dump()
+            #Persistência: Este Data-Access Object realizará a comparação da pontuação recebida com os recordes e,se necessária,
+            # guardará o novo recorde de tempo da fase em um arquivo json.
 
     def melhor_tempo_fase(self, fase):
         #pode ser qualquer número suficientemente grande
